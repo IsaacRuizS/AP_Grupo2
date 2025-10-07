@@ -1,0 +1,6 @@
+D:\Documents\U\2025 III\Progra\Projects\AP.Core\AP.Models\bin\Debug\AP.Models.dll
+D:\Documents\U\2025 III\Progra\Projects\AP.Core\AP.Models\bin\Debug\AP.Models.pdb
+D:\Documents\U\2025 III\Progra\Projects\AP.Core\AP.Models\obj\Debug\AP.Models.csproj.AssemblyReference.cache
+D:\Documents\U\2025 III\Progra\Projects\AP.Core\AP.Models\obj\Debug\AP.Models.csproj.CoreCompileInputs.cache
+D:\Documents\U\2025 III\Progra\Projects\AP.Core\AP.Models\obj\Debug\AP.Models.dll
+D:\Documents\U\2025 III\Progra\Projects\AP.Core\AP.Models\obj\Debug\AP.Models.pdb

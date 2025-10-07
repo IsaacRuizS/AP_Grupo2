@@ -1,0 +1,12 @@
+D:\Documents\U\2025 III\Progra\Projects\AP.Core\AP.Data\obj\Debug\AP.Data.csproj.AssemblyReference.cache
+D:\Documents\U\2025 III\Progra\Projects\AP.Core\AP.Data\obj\Debug\AP.Data.csproj.CoreCompileInputs.cache
+D:\Documents\U\2025 III\Progra\Projects\AP.Core\AP.Data\bin\Debug\AP.Data.dll.config
+D:\Documents\U\2025 III\Progra\Projects\AP.Core\AP.Data\bin\Debug\AP.Data.dll
+D:\Documents\U\2025 III\Progra\Projects\AP.Core\AP.Data\bin\Debug\AP.Data.pdb
+D:\Documents\U\2025 III\Progra\Projects\AP.Core\AP.Data\bin\Debug\EntityFramework.dll
+D:\Documents\U\2025 III\Progra\Projects\AP.Core\AP.Data\bin\Debug\EntityFramework.SqlServer.dll
+D:\Documents\U\2025 III\Progra\Projects\AP.Core\AP.Data\bin\Debug\EntityFramework.xml
+D:\Documents\U\2025 III\Progra\Projects\AP.Core\AP.Data\bin\Debug\EntityFramework.SqlServer.xml
+D:\Documents\U\2025 III\Progra\Projects\AP.Core\AP.Data\obj\Debug\AP.Data.csproj.Up2Date
+D:\Documents\U\2025 III\Progra\Projects\AP.Core\AP.Data\obj\Debug\AP.Data.dll
+D:\Documents\U\2025 III\Progra\Projects\AP.Core\AP.Data\obj\Debug\AP.Data.pdb

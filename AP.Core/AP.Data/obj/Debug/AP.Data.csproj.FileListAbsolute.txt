@@ -10,3 +10,15 @@ D:\Documents\U\2025 III\Progra\Projects\AP.Core\AP.Data\bin\Debug\EntityFramewor
 D:\Documents\U\2025 III\Progra\Projects\AP.Core\AP.Data\obj\Debug\AP.Data.csproj.Up2Date
 D:\Documents\U\2025 III\Progra\Projects\AP.Core\AP.Data\obj\Debug\AP.Data.dll
 D:\Documents\U\2025 III\Progra\Projects\AP.Core\AP.Data\obj\Debug\AP.Data.pdb
+C:\Users\fauri\Documents\!c-sharp-clones\AP_Grupo2\AP.Core\AP.Data\bin\Debug\AP.Data.dll.config
+C:\Users\fauri\Documents\!c-sharp-clones\AP_Grupo2\AP.Core\AP.Data\bin\Debug\AP.Data.dll
+C:\Users\fauri\Documents\!c-sharp-clones\AP_Grupo2\AP.Core\AP.Data\bin\Debug\AP.Data.pdb
+C:\Users\fauri\Documents\!c-sharp-clones\AP_Grupo2\AP.Core\AP.Data\bin\Debug\EntityFramework.dll
+C:\Users\fauri\Documents\!c-sharp-clones\AP_Grupo2\AP.Core\AP.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\fauri\Documents\!c-sharp-clones\AP_Grupo2\AP.Core\AP.Data\bin\Debug\EntityFramework.xml
+C:\Users\fauri\Documents\!c-sharp-clones\AP_Grupo2\AP.Core\AP.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\fauri\Documents\!c-sharp-clones\AP_Grupo2\AP.Core\AP.Data\obj\Debug\AP.Data.csproj.AssemblyReference.cache
+C:\Users\fauri\Documents\!c-sharp-clones\AP_Grupo2\AP.Core\AP.Data\obj\Debug\AP.Data.csproj.CoreCompileInputs.cache
+C:\Users\fauri\Documents\!c-sharp-clones\AP_Grupo2\AP.Core\AP.Data\obj\Debug\AP.Data.csproj.CopyComplete
+C:\Users\fauri\Documents\!c-sharp-clones\AP_Grupo2\AP.Core\AP.Data\obj\Debug\AP.Data.dll
+C:\Users\fauri\Documents\!c-sharp-clones\AP_Grupo2\AP.Core\AP.Data\obj\Debug\AP.Data.pdb

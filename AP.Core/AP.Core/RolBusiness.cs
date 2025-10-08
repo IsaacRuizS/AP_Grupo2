@@ -43,5 +43,14 @@ namespace AP.Core
                 ? _repositoryRol.GetAll()
                 : new List<Roles>() { _repositoryRol.GetById(id) };
         }
+
+        public IEnumerable<Roles> FilterByString(string value)
+        {
+            var valueToLower = value.ToLower();
+
+            var filtered = GetRols(0).Where(x => x.RoleName.ToLower().Contains(valueToLower)).ToList();
+
+            return filtered;
+        }
     }
 }

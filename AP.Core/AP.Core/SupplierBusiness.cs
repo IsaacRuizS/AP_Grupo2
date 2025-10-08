@@ -43,5 +43,15 @@ namespace AP.Core
                 ? _repositorySupplier.GetAll()
                 : new List<Suppliers>() { _repositorySupplier.GetById(id) };
         }
+
+        public IEnumerable<Suppliers> FilterByString(string value)
+        {
+            var valueToLower = value.ToLower();
+
+            var filtered = GetSuppliers(0).Where(x => x.SupplierName.ToLower().Contains(valueToLower) || x.ContactName.ToLower().Contains(valueToLower) || x.ContactTitle.ToString().ToLower().Contains(valueToLower)
+            || x.Phone.ToString().ToLower().Contains(valueToLower) || x.Address.ToLower().Contains(valueToLower) || x.City.ToLower().Contains(valueToLower) || x.Country.ToLower().Contains(valueToLower) || x.LastModified.ToString().ToLower().Contains(valueToLower) || x.ModifiedBy.ToLower().Contains(valueToLower)).ToList();
+
+            return filtered;
+        }
     }
 }

@@ -9,7 +9,7 @@ using AP.Core;
 
 namespace AP.MVC.Controllers
 {
-    public class RolesController : Controller
+    public class RolesController : ControllerBase
     {
         private readonly RolBusiness _roleBusiness;
 
@@ -132,6 +132,13 @@ namespace AP.MVC.Controllers
             // Elimina el rol
             _roleBusiness.Delete(id);
             return RedirectToAction("Index");
+        }
+
+        // GET: Roles/FilterByString/{str}
+        public ActionResult FilterByString(string value)
+        {
+            var roles = RolBusiness.FilterByString(value);
+            return View("Index", roles.ToList());
         }
     }
 }

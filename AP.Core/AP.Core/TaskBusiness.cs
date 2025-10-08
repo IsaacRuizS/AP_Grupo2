@@ -43,5 +43,18 @@ namespace AP.Core
                 ? _repositoryTask.GetAll()
                 : new List<Tasks>() { _repositoryTask.GetById(id) };
         }
+
+        public IEnumerable<Tasks> FilterByString(string value)
+        {
+            var valueToLower = value.ToLower();
+
+            var filtered = GetTasks(0).Where(x => x.Name.ToLower().Contains(valueToLower) || x.Description.ToLower().Contains(valueToLower)
+            || x.Status.ToString().ToLower().Contains(valueToLower) || x.ModifiedBy.ToLower().Contains(valueToLower)
+            || x.LastModified.ToString().ToLower().Contains(valueToLower) || x.DueDate.ToString().ToLower().Contains(valueToLower)
+            || x.CreatedAt.ToString().ToLower().Contains(valueToLower)
+            ).ToList();
+
+            return filtered;
+        }
     }
 }

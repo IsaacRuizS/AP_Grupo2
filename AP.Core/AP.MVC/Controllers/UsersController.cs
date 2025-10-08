@@ -9,7 +9,7 @@ using AP.Core;
 
 namespace AP.MVC.Controllers
 {
-    public class UsersController : Controller
+    public class UsersController : ControllerBase
     {
         private readonly UserBusiness _userBusiness;
 
@@ -132,6 +132,13 @@ namespace AP.MVC.Controllers
             // Elimina el usuario
             _userBusiness.Delete(id);
             return RedirectToAction("Index");
+        }
+
+        // GET: Users/FilterByString/{str}
+        public ActionResult FilterByString(string value)
+        {
+            var users = UserBusiness.FilterByString(value);
+            return View("Index", users.ToList());
         }
     }
 }

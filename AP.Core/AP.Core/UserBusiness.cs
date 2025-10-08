@@ -43,5 +43,17 @@ namespace AP.Core
                 ? _repositoryUser.GetAll()
                 : new List<Users>() { _repositoryUser.GetById(id) };
         }
+
+        public IEnumerable<Users> FilterByString(string value)
+        {
+            var valueToLower = value.ToLower();
+
+            var filtered = GetUsers(0).Where(x => x.Username.ToLower().Contains(valueToLower) || x.Email.ToLower().Contains(valueToLower) || x.PasswordHash.ToString().ToLower().Contains(valueToLower)
+            || x.CreatedAt.ToString().ToLower().Contains(valueToLower) || x.ModifiedBy.ToLower().Contains(valueToLower)
+            || x.IsActive.ToString().ToLower().Contains(valueToLower) || x.LastModified.ToString().ToLower().Contains(valueToLower)
+            ).ToList();
+
+            return filtered;
+        }
     }
 }

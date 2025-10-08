@@ -6,9 +6,18 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div class="d-flex justify-content-between">
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    @using (Html.BeginForm("FilterByString", "Suppliers", FormMethod.Get))
+    {
+        <div class="d-flex pb-2">
+            <input class="form-control" type="text" name="value" placeholder="Buscar" />
+            <button type="submit" class="btn btn-primary ms-2">Buscar</button>
+        </div>
+    }
+</div>
 <table class="table table-responsive table-bordered table-dark table-striped table-primary">
     <tr>
         <th>

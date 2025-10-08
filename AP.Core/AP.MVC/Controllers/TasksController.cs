@@ -9,7 +9,7 @@ using AP.Core;
 
 namespace AP.MVC.Controllers
 {
-    public class TasksController : Controller
+    public class TasksController : ControllerBase
     {
         private readonly TaskBusiness _taskBusiness;
 
@@ -133,5 +133,14 @@ namespace AP.MVC.Controllers
             _taskBusiness.Delete(id);
             return RedirectToAction("Index");
         }
+
+        // GET: Tasks/FilterByString/{str}
+        public ActionResult FilterByString(string value)
+        {
+            var tasks = TaskBusiness.FilterByString(value);
+            return View("Index", tasks.ToList());
+        }
+
+
     }
 }

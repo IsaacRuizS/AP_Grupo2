@@ -9,7 +9,7 @@ using AP.Core;
 
 namespace AP.MVC.Controllers
 {
-    public class SuppliersController : Controller
+    public class SuppliersController : ControllerBase
     {
         private readonly SupplierBusiness _supplierBusiness;
 
@@ -133,6 +133,13 @@ namespace AP.MVC.Controllers
             // Elimina el proveedor
             _supplierBusiness.Delete(id);
             return RedirectToAction("Index");
+        }
+
+        // GET: Suppliers/FilterByString/{str}
+        public ActionResult FilterByString(string value)
+        {
+            var suppliers = SupplierBusiness.FilterByString(value);
+            return View("Index", suppliers.ToList());
         }
     }
 }

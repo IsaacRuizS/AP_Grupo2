@@ -43,5 +43,17 @@ namespace AP.Core
                 ? _repositoryInventory.GetAll()
                 : new List<Inventory>() { _repositoryInventory.GetById(id) };
         }
+
+        public IEnumerable<Inventory> FilterByString(string value)
+        {
+
+            var valueToLower = value.ToLower();
+
+            var filtered = GetInventory(0).Where(x => x.InventoryID.ToString().ToLower().Contains(valueToLower) || x.UnitPrice.ToString().ToLower().Contains(valueToLower)
+            || x.UnitsInStock.ToString().ToLower().Contains(valueToLower) || x.LastUpdated.ToString().ToLower().Contains(valueToLower) || x.DateAdded.ToString().ToLower().Contains(valueToLower)
+            || x.ModifiedBy.ToString().ToLower().Contains(valueToLower)).ToList();
+
+            return filtered;
+        }
     }
 }

@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace AP.MVC.Controllers
 {
-    public class CategoriesController : Controller
+    public class CategoriesController : ControllerBase
     {
         private readonly CategoryBusiness _categoryBusiness;
 
@@ -116,6 +116,13 @@ namespace AP.MVC.Controllers
         {
             _categoryBusiness.Delete(id);
             return RedirectToAction("Index");
+        }
+
+        // GET: Categories/FilterByString/{str}
+        public ActionResult FilterByString(string value)
+        {
+            var categories = CategoryBusiness.FilterByString(value);
+            return View("Index", categories.ToList());
         }
 
     }

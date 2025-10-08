@@ -43,5 +43,16 @@ namespace AP.Core
                 ? _repositoryNotification.GetAll()
                 : new List<Notifications>() { _repositoryNotification.GetById(id) };
         }
+
+        public IEnumerable<Notifications> FilterByString(string value)
+        {
+
+            var valueToLower = value.ToLower();
+
+            var filtered = GetNotifications(0).Where(x => x.message.ToLower().Contains(valueToLower) || x.id.ToString().ToLower().Contains(valueToLower)
+            || x.user_id.ToString().ToLower().Contains(valueToLower) || x.created_at.ToString().ToLower().Contains(valueToLower)).ToList();
+
+            return filtered;
+        }
     }
 }

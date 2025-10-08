@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace AP.MVC.Controllers
 {
-    public class ComponentsController : Controller
+    public class ComponentsController : ControllerBase
     {
         private readonly ComponentBusiness _componentBusiness;
 
@@ -116,6 +116,13 @@ namespace AP.MVC.Controllers
         {
             _componentBusiness.Delete(id);
             return RedirectToAction("Index");
+        }
+
+        // GET: Components/FilterByString/{str}
+        public ActionResult FilterByString(string value)
+        {
+            var components = ComponentBusiness.FilterByString(value);
+            return View("Index", components.ToList());
         }
     }
 }

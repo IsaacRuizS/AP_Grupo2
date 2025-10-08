@@ -43,5 +43,16 @@ namespace AP.Core
                 ? _repositoryCategory.GetAll()
                 : new List<Categories>() { _repositoryCategory.GetById(id) };
         }
+
+        public IEnumerable<Categories> FilterByString(string value)
+        {
+
+            var valueToLower = value.ToLower();
+
+            var filtered = GetCategories(0).Where(x => (x.CategoryName != null && x.CategoryName.ToLower().Contains(valueToLower)) || (x.Description != null && x.Description.ToLower().Contains(valueToLower)) || x.CategoryID.ToString().ToLower().Contains(valueToLower) ||
+                 (x.LastModified != null && x.LastModified.ToString().ToLower().Contains(valueToLower)) || (x.ModifiedBy != null && x.ModifiedBy.ToLower().Contains(valueToLower))).ToList();
+
+            return filtered;
+        }
     }
 }

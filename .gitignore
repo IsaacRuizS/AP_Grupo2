@@ -3,6 +3,10 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# Ignorar archivos de configuración locales
+**/App.config
+**/Web.config
+
 # User-specific files
 *.rsuser
 *.suo
@@ -349,3 +353,4 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 .DS_Store
+

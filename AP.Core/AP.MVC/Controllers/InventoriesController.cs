@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace AP.MVC.Controllers
 {
-    public class InventoriesController : Controller
+    public class InventoriesController : ControllerBase
     {
         private readonly InventoryBusiness _inventoryBusiness;
 
@@ -116,6 +116,13 @@ namespace AP.MVC.Controllers
         {
             _inventoryBusiness.Delete(id);
             return RedirectToAction("Index");
+        }
+
+        // GET: Inventories/FilterByString/{str}
+        public ActionResult FilterByString(string value)
+        {
+            var inventories = InventoryBusiness.FilterByString(value);
+            return View("Index", inventories.ToList());
         }
     }
 }

@@ -9,7 +9,7 @@ using AP.Core;
 
 namespace AP.MVC.Controllers
 {
-    public class NotificationsController : Controller
+    public class NotificationsController : ControllerBase
     {
         private readonly NotificationBusiness _notificationBusiness;
 
@@ -132,6 +132,14 @@ namespace AP.MVC.Controllers
             // Elimina la notificación
             _notificationBusiness.Delete(id);
             return RedirectToAction("Index");
+        }
+
+
+        // GET: Notifications/FilterByString/{str}
+        public ActionResult FilterByString(string value)
+        {
+            var notifications = NotificationBusiness.FilterByString(value);
+            return View("Index", notifications.ToList());
         }
     }
 }

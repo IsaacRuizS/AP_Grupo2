@@ -12,3 +12,17 @@ D:\Documents\U\2025 III\Progra\Projects\AP.Core\AP.Core\bin\Debug\AP.Data.dll.co
 D:\Documents\U\2025 III\Progra\Projects\AP.Core\AP.Core\bin\Debug\AP.Models.pdb
 D:\Documents\U\2025 III\Progra\Projects\AP.Core\AP.Core\bin\Debug\EntityFramework.xml
 D:\Documents\U\2025 III\Progra\Projects\AP.Core\AP.Core\obj\Debug\AP.Core.csproj.Up2Date
+D:\Documents\U\2025 III\Progra\Projects\Git\AP_Grupo2\AP.Core\AP.Core\bin\Debug\AP.Core.dll
+D:\Documents\U\2025 III\Progra\Projects\Git\AP_Grupo2\AP.Core\AP.Core\bin\Debug\AP.Core.pdb
+D:\Documents\U\2025 III\Progra\Projects\Git\AP_Grupo2\AP.Core\AP.Core\bin\Debug\AP.Data.dll
+D:\Documents\U\2025 III\Progra\Projects\Git\AP_Grupo2\AP.Core\AP.Core\bin\Debug\AP.Models.dll
+D:\Documents\U\2025 III\Progra\Projects\Git\AP_Grupo2\AP.Core\AP.Core\bin\Debug\EntityFramework.dll
+D:\Documents\U\2025 III\Progra\Projects\Git\AP_Grupo2\AP.Core\AP.Core\bin\Debug\AP.Data.pdb
+D:\Documents\U\2025 III\Progra\Projects\Git\AP_Grupo2\AP.Core\AP.Core\bin\Debug\AP.Data.dll.config
+D:\Documents\U\2025 III\Progra\Projects\Git\AP_Grupo2\AP.Core\AP.Core\bin\Debug\AP.Models.pdb
+D:\Documents\U\2025 III\Progra\Projects\Git\AP_Grupo2\AP.Core\AP.Core\bin\Debug\EntityFramework.xml
+D:\Documents\U\2025 III\Progra\Projects\Git\AP_Grupo2\AP.Core\AP.Core\obj\Debug\AP.Core.csproj.AssemblyReference.cache
+D:\Documents\U\2025 III\Progra\Projects\Git\AP_Grupo2\AP.Core\AP.Core\obj\Debug\AP.Core.csproj.CoreCompileInputs.cache
+D:\Documents\U\2025 III\Progra\Projects\Git\AP_Grupo2\AP.Core\AP.Core\obj\Debug\AP.Core.csproj.Up2Date
+D:\Documents\U\2025 III\Progra\Projects\Git\AP_Grupo2\AP.Core\AP.Core\obj\Debug\AP.Core.dll
+D:\Documents\U\2025 III\Progra\Projects\Git\AP_Grupo2\AP.Core\AP.Core\obj\Debug\AP.Core.pdb

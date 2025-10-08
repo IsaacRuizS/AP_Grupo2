@@ -43,5 +43,15 @@ namespace AP.Core
                 ? _repositoryComponent.GetAll()
                 : new List<Components>() { _repositoryComponent.GetById(id) };
         }
+
+        public IEnumerable<Components> FilterByString(string value)
+        {
+
+            var valueToLower = value.ToLower();
+
+            var filtered = GetComponents(0).Where(x => x.name.ToLower().Contains(valueToLower) || x.content.ToLower().Contains(valueToLower) || x.ID.ToString().ToLower().Contains(valueToLower)).ToList();
+
+            return filtered;
+        }
     }
 }

@@ -26,3 +26,17 @@ C:\Users\fauri\Documents\!c-sharp-clones\AP_Grupo2\AP.Core\AP.Core\obj\Debug\AP.
 C:\Users\fauri\Documents\!c-sharp-clones\AP_Grupo2\AP.Core\AP.Core\obj\Debug\AP.Core.csproj.CopyComplete
 C:\Users\fauri\Documents\!c-sharp-clones\AP_Grupo2\AP.Core\AP.Core\obj\Debug\AP.Core.dll
 C:\Users\fauri\Documents\!c-sharp-clones\AP_Grupo2\AP.Core\AP.Core\obj\Debug\AP.Core.pdb
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Core\obj\Debug\AP.Core.dll
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Core\obj\Debug\AP.Core.pdb
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Core\bin\Debug\AP.Core.dll
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Core\bin\Debug\AP.Core.pdb
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Core\bin\Debug\AP.Data.dll
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Core\bin\Debug\AP.Models.dll
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Core\bin\Debug\EntityFramework.dll
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Core\bin\Debug\AP.Data.pdb
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Core\bin\Debug\AP.Data.dll.config
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Core\bin\Debug\AP.Models.pdb
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Core\bin\Debug\EntityFramework.xml
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Core\obj\Debug\AP.Core.csproj.AssemblyReference.cache
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Core\obj\Debug\AP.Core.csproj.CoreCompileInputs.cache
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Core\obj\Debug\AP.Core.csproj.Up2Date

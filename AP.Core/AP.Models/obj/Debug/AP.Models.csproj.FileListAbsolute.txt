@@ -10,3 +10,9 @@ C:\Users\fauri\Documents\!c-sharp-clones\AP_Grupo2\AP.Core\AP.Models\obj\Debug\A
 C:\Users\fauri\Documents\!c-sharp-clones\AP_Grupo2\AP.Core\AP.Models\obj\Debug\AP.Models.csproj.CoreCompileInputs.cache
 C:\Users\fauri\Documents\!c-sharp-clones\AP_Grupo2\AP.Core\AP.Models\obj\Debug\AP.Models.dll
 C:\Users\fauri\Documents\!c-sharp-clones\AP_Grupo2\AP.Core\AP.Models\obj\Debug\AP.Models.pdb
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Models\bin\Debug\AP.Models.dll
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Models\bin\Debug\AP.Models.pdb
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Models\obj\Debug\AP.Models.csproj.AssemblyReference.cache
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Models\obj\Debug\AP.Models.csproj.CoreCompileInputs.cache
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Models\obj\Debug\AP.Models.dll
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Models\obj\Debug\AP.Models.pdb

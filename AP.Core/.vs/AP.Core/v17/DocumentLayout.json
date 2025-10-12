@@ -1,54 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Documents\\U\\2025 III\\Progra\\Projects\\Git\\AP_Grupo2\\AP.Core\\",
+  "WorkspaceRootPath": "C:\\Users\\Cuent\\source\\repos\\IsaacRuizS\\AP_Grupo2\\AP.Core\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C19834A0-427F-4A92-A149-AD1714F017F3}|AP.MVC\\AP.MVC.csproj|d:\\documents\\u\\2025 iii\\progra\\projects\\git\\ap_grupo2\\ap.core\\ap.mvc\\controllers\\notificationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C19834A0-427F-4A92-A149-AD1714F017F3}|AP.MVC\\AP.MVC.csproj|solutionrelative:ap.mvc\\controllers\\notificationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C19834A0-427F-4A92-A149-AD1714F017F3}|AP.MVC\\AP.MVC.csproj|d:\\documents\\u\\2025 iii\\progra\\projects\\git\\ap_grupo2\\ap.core\\ap.mvc\\controllers\\inventoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C19834A0-427F-4A92-A149-AD1714F017F3}|AP.MVC\\AP.MVC.csproj|solutionrelative:ap.mvc\\controllers\\inventoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C19834A0-427F-4A92-A149-AD1714F017F3}|AP.MVC\\AP.MVC.csproj|d:\\documents\\u\\2025 iii\\progra\\projects\\git\\ap_grupo2\\ap.core\\ap.mvc\\controllers\\componentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C19834A0-427F-4A92-A149-AD1714F017F3}|AP.MVC\\AP.MVC.csproj|solutionrelative:ap.mvc\\controllers\\componentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C19834A0-427F-4A92-A149-AD1714F017F3}|AP.MVC\\AP.MVC.csproj|d:\\documents\\u\\2025 iii\\progra\\projects\\git\\ap_grupo2\\ap.core\\ap.mvc\\controllers\\categoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C19834A0-427F-4A92-A149-AD1714F017F3}|AP.MVC\\AP.MVC.csproj|solutionrelative:ap.mvc\\controllers\\categoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C19834A0-427F-4A92-A149-AD1714F017F3}|AP.MVC\\AP.MVC.csproj|d:\\documents\\u\\2025 iii\\progra\\projects\\git\\ap_grupo2\\ap.core\\ap.mvc\\views\\categories\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{C19834A0-427F-4A92-A149-AD1714F017F3}|AP.MVC\\AP.MVC.csproj|solutionrelative:ap.mvc\\views\\categories\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DC1726EA-2B94-4B61-8549-D18394E462A4}|AP.Core\\AP.Core.csproj|d:\\documents\\u\\2025 iii\\progra\\projects\\git\\ap_grupo2\\ap.core\\ap.core\\categorybusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DC1726EA-2B94-4B61-8549-D18394E462A4}|AP.Core\\AP.Core.csproj|solutionrelative:ap.core\\categorybusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F3516E98-D4AB-4B7F-BFD4-2A8F54D7701C}|AP.Data\\AP.Data.csproj|d:\\documents\\u\\2025 iii\\progra\\projects\\git\\ap_grupo2\\ap.core\\ap.data\\entities\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F3516E98-D4AB-4B7F-BFD4-2A8F54D7701C}|AP.Data\\AP.Data.csproj|solutionrelative:ap.data\\entities\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F3516E98-D4AB-4B7F-BFD4-2A8F54D7701C}|AP.Data\\AP.Data.csproj|d:\\documents\\u\\2025 iii\\progra\\projects\\git\\ap_grupo2\\ap.core\\ap.data\\categories.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F3516E98-D4AB-4B7F-BFD4-2A8F54D7701C}|AP.Data\\AP.Data.csproj|solutionrelative:ap.data\\categories.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DC1726EA-2B94-4B61-8549-D18394E462A4}|AP.Core\\AP.Core.csproj|d:\\documents\\u\\2025 iii\\progra\\projects\\git\\ap_grupo2\\ap.core\\ap.core\\productbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DC1726EA-2B94-4B61-8549-D18394E462A4}|AP.Core\\AP.Core.csproj|solutionrelative:ap.core\\productbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DC1726EA-2B94-4B61-8549-D18394E462A4}|AP.Core\\AP.Core.csproj|d:\\documents\\u\\2025 iii\\progra\\projects\\git\\ap_grupo2\\ap.core\\ap.core\\notificationbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DC1726EA-2B94-4B61-8549-D18394E462A4}|AP.Core\\AP.Core.csproj|solutionrelative:ap.core\\notificationbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DC1726EA-2B94-4B61-8549-D18394E462A4}|AP.Core\\AP.Core.csproj|d:\\documents\\u\\2025 iii\\progra\\projects\\git\\ap_grupo2\\ap.core\\ap.core\\componentbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{DC1726EA-2B94-4B61-8549-D18394E462A4}|AP.Core\\AP.Core.csproj|c:\\users\\cuent\\source\\repos\\isaacruizs\\ap_grupo2\\ap.core\\ap.core\\componentbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DC1726EA-2B94-4B61-8549-D18394E462A4}|AP.Core\\AP.Core.csproj|solutionrelative:ap.core\\componentbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C19834A0-427F-4A92-A149-AD1714F017F3}|AP.MVC\\AP.MVC.csproj|d:\\documents\\u\\2025 iii\\progra\\projects\\git\\ap_grupo2\\ap.core\\ap.mvc\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C19834A0-427F-4A92-A149-AD1714F017F3}|AP.MVC\\AP.MVC.csproj|solutionrelative:ap.mvc\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DC1726EA-2B94-4B61-8549-D18394E462A4}|AP.Core\\AP.Core.csproj|c:\\users\\cuent\\source\\repos\\isaacruizs\\ap_grupo2\\ap.core\\ap.core\\categorybusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC1726EA-2B94-4B61-8549-D18394E462A4}|AP.Core\\AP.Core.csproj|solutionrelative:ap.core\\categorybusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -58,162 +18,40 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 2,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\Documents\\U\\2025 III\\Progra\\Projects\\Git\\AP_Grupo2\\AP.Core\\AP.MVC\\Views\\Categories\\Index.cshtml",
-              "RelativeDocumentMoniker": "AP.MVC\\Views\\Categories\\Index.cshtml",
-              "ToolTip": "D:\\Documents\\U\\2025 III\\Progra\\Projects\\Git\\AP_Grupo2\\AP.Core\\AP.MVC\\Views\\Categories\\Index.cshtml",
-              "RelativeToolTip": "AP.MVC\\Views\\Categories\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAA4AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-08T00:49:54.285Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Categories.cs",
-              "DocumentMoniker": "D:\\Documents\\U\\2025 III\\Progra\\Projects\\Git\\AP_Grupo2\\AP.Core\\AP.Data\\Categories.cs",
-              "RelativeDocumentMoniker": "AP.Data\\Categories.cs",
-              "ToolTip": "D:\\Documents\\U\\2025 III\\Progra\\Projects\\Git\\AP_Grupo2\\AP.Core\\AP.Data\\Categories.cs",
-              "RelativeToolTip": "AP.Data\\Categories.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABoAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T00:48:19.586Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Category.cs",
-              "DocumentMoniker": "D:\\Documents\\U\\2025 III\\Progra\\Projects\\Git\\AP_Grupo2\\AP.Core\\AP.Data\\Entities\\Category.cs",
-              "RelativeDocumentMoniker": "AP.Data\\Entities\\Category.cs",
-              "ToolTip": "D:\\Documents\\U\\2025 III\\Progra\\Projects\\Git\\AP_Grupo2\\AP.Core\\AP.Data\\Entities\\Category.cs",
-              "RelativeToolTip": "AP.Data\\Entities\\Category.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T00:48:18.66Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "CategoryBusiness.cs",
-              "DocumentMoniker": "D:\\Documents\\U\\2025 III\\Progra\\Projects\\Git\\AP_Grupo2\\AP.Core\\AP.Core\\CategoryBusiness.cs",
-              "RelativeDocumentMoniker": "AP.Core\\CategoryBusiness.cs",
-              "ToolTip": "D:\\Documents\\U\\2025 III\\Progra\\Projects\\Git\\AP_Grupo2\\AP.Core\\AP.Core\\CategoryBusiness.cs",
-              "RelativeToolTip": "AP.Core\\CategoryBusiness.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAAADAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T00:31:45.61Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ProductBusiness.cs",
-              "DocumentMoniker": "D:\\Documents\\U\\2025 III\\Progra\\Projects\\Git\\AP_Grupo2\\AP.Core\\AP.Core\\ProductBusiness.cs",
-              "RelativeDocumentMoniker": "AP.Core\\ProductBusiness.cs",
-              "ToolTip": "D:\\Documents\\U\\2025 III\\Progra\\Projects\\Git\\AP_Grupo2\\AP.Core\\AP.Core\\ProductBusiness.cs",
-              "RelativeToolTip": "AP.Core\\ProductBusiness.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAQwDMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T00:31:41.094Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "NotificationsController.cs",
-              "DocumentMoniker": "D:\\Documents\\U\\2025 III\\Progra\\Projects\\Git\\AP_Grupo2\\AP.Core\\AP.MVC\\Controllers\\NotificationsController.cs",
-              "RelativeDocumentMoniker": "AP.MVC\\Controllers\\NotificationsController.cs",
-              "ToolTip": "D:\\Documents\\U\\2025 III\\Progra\\Projects\\Git\\AP_Grupo2\\AP.Core\\AP.MVC\\Controllers\\NotificationsController.cs",
-              "RelativeToolTip": "AP.MVC\\Controllers\\NotificationsController.cs",
-              "ViewState": "AgIAAHIAAAAAAAAAAAAuwIwAAAAdAAAAAAAAAA==",
+              "Title": "ComponentBusiness.cs",
+              "DocumentMoniker": "C:\\Users\\Cuent\\source\\repos\\IsaacRuizS\\AP_Grupo2\\AP.Core\\AP.Core\\ComponentBusiness.cs",
+              "RelativeDocumentMoniker": "AP.Core\\ComponentBusiness.cs",
+              "ToolTip": "C:\\Users\\Cuent\\source\\repos\\IsaacRuizS\\AP_Grupo2\\AP.Core\\AP.Core\\ComponentBusiness.cs",
+              "RelativeToolTip": "AP.Core\\ComponentBusiness.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAwwAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T00:27:06.737Z",
+              "WhenOpened": "2025-10-12T02:53:18.544Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "InventoriesController.cs",
-              "DocumentMoniker": "D:\\Documents\\U\\2025 III\\Progra\\Projects\\Git\\AP_Grupo2\\AP.Core\\AP.MVC\\Controllers\\InventoriesController.cs",
-              "RelativeDocumentMoniker": "AP.MVC\\Controllers\\InventoriesController.cs",
-              "ToolTip": "D:\\Documents\\U\\2025 III\\Progra\\Projects\\Git\\AP_Grupo2\\AP.Core\\AP.MVC\\Controllers\\InventoriesController.cs",
-              "RelativeToolTip": "AP.MVC\\Controllers\\InventoriesController.cs",
-              "ViewState": "AgIAAGwAAAAAAAAAAAAuwHsAAAAbAAAAAAAAAA==",
+              "Title": "CategoryBusiness.cs",
+              "DocumentMoniker": "C:\\Users\\Cuent\\source\\repos\\IsaacRuizS\\AP_Grupo2\\AP.Core\\AP.Core\\CategoryBusiness.cs",
+              "RelativeDocumentMoniker": "AP.Core\\CategoryBusiness.cs",
+              "ToolTip": "C:\\Users\\Cuent\\source\\repos\\IsaacRuizS\\AP_Grupo2\\AP.Core\\AP.Core\\CategoryBusiness.cs",
+              "RelativeToolTip": "AP.Core\\CategoryBusiness.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T00:27:02.6Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ComponentsController.cs",
-              "DocumentMoniker": "D:\\Documents\\U\\2025 III\\Progra\\Projects\\Git\\AP_Grupo2\\AP.Core\\AP.MVC\\Controllers\\ComponentsController.cs",
-              "RelativeDocumentMoniker": "AP.MVC\\Controllers\\ComponentsController.cs",
-              "ToolTip": "D:\\Documents\\U\\2025 III\\Progra\\Projects\\Git\\AP_Grupo2\\AP.Core\\AP.MVC\\Controllers\\ComponentsController.cs",
-              "RelativeToolTip": "AP.MVC\\Controllers\\ComponentsController.cs",
-              "ViewState": "AgIAAGgAAAAAAAAAAAAAwHsAAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T00:26:21.708Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CategoriesController.cs",
-              "DocumentMoniker": "D:\\Documents\\U\\2025 III\\Progra\\Projects\\Git\\AP_Grupo2\\AP.Core\\AP.MVC\\Controllers\\CategoriesController.cs",
-              "RelativeDocumentMoniker": "AP.MVC\\Controllers\\CategoriesController.cs",
-              "ToolTip": "D:\\Documents\\U\\2025 III\\Progra\\Projects\\Git\\AP_Grupo2\\AP.Core\\AP.MVC\\Controllers\\CategoriesController.cs",
-              "RelativeToolTip": "AP.MVC\\Controllers\\CategoriesController.cs",
-              "ViewState": "AgIAAGgAAAAAAAAAAAAAwHwAAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T00:25:17.511Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "ComponentBusiness.cs",
-              "DocumentMoniker": "D:\\Documents\\U\\2025 III\\Progra\\Projects\\Git\\AP_Grupo2\\AP.Core\\AP.Core\\ComponentBusiness.cs",
-              "RelativeDocumentMoniker": "AP.Core\\ComponentBusiness.cs",
-              "ToolTip": "D:\\Documents\\U\\2025 III\\Progra\\Projects\\Git\\AP_Grupo2\\AP.Core\\AP.Core\\ComponentBusiness.cs",
-              "RelativeToolTip": "AP.Core\\ComponentBusiness.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAqwDYAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T00:31:50.178Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "NotificationBusiness.cs",
-              "DocumentMoniker": "D:\\Documents\\U\\2025 III\\Progra\\Projects\\Git\\AP_Grupo2\\AP.Core\\AP.Core\\NotificationBusiness.cs",
-              "RelativeDocumentMoniker": "AP.Core\\NotificationBusiness.cs",
-              "ToolTip": "D:\\Documents\\U\\2025 III\\Progra\\Projects\\Git\\AP_Grupo2\\AP.Core\\AP.Core\\NotificationBusiness.cs",
-              "RelativeToolTip": "AP.Core\\NotificationBusiness.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAgwC4AAABGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T00:35:06.116Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "ProductsController.cs",
-              "DocumentMoniker": "D:\\Documents\\U\\2025 III\\Progra\\Projects\\Git\\AP_Grupo2\\AP.Core\\AP.MVC\\Controllers\\ProductsController.cs",
-              "RelativeDocumentMoniker": "AP.MVC\\Controllers\\ProductsController.cs",
-              "ToolTip": "D:\\Documents\\U\\2025 III\\Progra\\Projects\\Git\\AP_Grupo2\\AP.Core\\AP.MVC\\Controllers\\ProductsController.cs",
-              "RelativeToolTip": "AP.MVC\\Controllers\\ProductsController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T00:25:07.221Z",
+              "WhenOpened": "2025-10-12T02:43:50.646Z",
               "EditorCaption": ""
             }
           ]

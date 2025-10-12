@@ -9,6 +9,17 @@ using System.Threading.Tasks;
 
 namespace AP.Core
 {
+
+    //TODO: Principio utilizados: S-O-I
+    //S: (Single Responsibility Principle)
+    // Por qué? Acá la clase se encarga únicamente de hacer el CRUD mediante las clases de SaveOrUpdate, Delete,
+    // GetComponents. Además del filtro de datos de la tarea 2 parte 1
+    // O:(Open/Closed Principle)
+    // Por qué? Porque la clase está abierta a que se agreguen nuevas funcioanlidades de ser neceasrio, pero sus metodos
+    //principales del CRUD no necesitan ser modificados
+    // I: (Interface Segregation Principle)
+    // Por qué? La clase trae a la interfaz IRepositoryProduct, que igual a las demás interfaces, traen metodos de RepositoryBase.
+
     public class ProductBusiness
     {
 

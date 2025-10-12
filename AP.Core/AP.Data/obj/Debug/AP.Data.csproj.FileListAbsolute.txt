@@ -22,3 +22,15 @@ C:\Users\fauri\Documents\!c-sharp-clones\AP_Grupo2\AP.Core\AP.Data\obj\Debug\AP.
 C:\Users\fauri\Documents\!c-sharp-clones\AP_Grupo2\AP.Core\AP.Data\obj\Debug\AP.Data.csproj.CopyComplete
 C:\Users\fauri\Documents\!c-sharp-clones\AP_Grupo2\AP.Core\AP.Data\obj\Debug\AP.Data.dll
 C:\Users\fauri\Documents\!c-sharp-clones\AP_Grupo2\AP.Core\AP.Data\obj\Debug\AP.Data.pdb
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Data\obj\Debug\AP.Data.dll
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Data\obj\Debug\AP.Data.pdb
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Data\bin\Debug\AP.Data.dll.config
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Data\bin\Debug\AP.Data.dll
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Data\bin\Debug\AP.Data.pdb
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Data\bin\Debug\EntityFramework.dll
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Data\bin\Debug\EntityFramework.xml
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Data\obj\Debug\AP.Data.csproj.AssemblyReference.cache
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Data\obj\Debug\AP.Data.csproj.CoreCompileInputs.cache
+C:\Users\Cuent\source\repos\IsaacRuizS\AP_Grupo2\AP.Core\AP.Data\obj\Debug\AP.Data.csproj.Up2Date

@@ -9,9 +9,13 @@ using System.Threading.Tasks;
 
 namespace AP.Core
 {
+    //TODO: Principio utilizado: S (Single Responsibility Principle) 
+    // Por qué? Acá la clase se encarga únicamente de hacer el CRUD 
     public class CategoryBusiness
     {
-
+        //TODO: Principio utilizado: I: (Interface Segregation Principle)
+        // Por qué? La clase trae una interfaz concreta (IRepositoryCategory)
+        // que a su vez trae los metodos de RepositoryBase.
         private readonly IRepositoryCategory _repositoryCategory;
 
         public CategoryBusiness()

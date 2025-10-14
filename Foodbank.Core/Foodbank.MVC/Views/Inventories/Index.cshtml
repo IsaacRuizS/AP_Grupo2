@@ -1,0 +1,72 @@
+﻿@model IEnumerable<AP.Data.Inventory>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div class="d-flex justify-content-between">
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    @using (Html.BeginForm("FilterByString", "Inventories", FormMethod.Get))
+    {
+        <div class="d-flex pb-2">
+            <input class="form-control" type="text" name="value" placeholder="Buscar" />
+            <button type="submit" class="btn btn-primary ms-2">Buscar</button>
+        </div>
+    }
+</div>
+<table class="table table-responsive table-bordered table-dark table-striped table-primary">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitsInStock)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastUpdated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateAdded)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedBy)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitsInStock)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastUpdated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateAdded)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedBy)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.InventoryID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.InventoryID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.InventoryID })
+        </td>
+    </tr>
+}
+
+</table>

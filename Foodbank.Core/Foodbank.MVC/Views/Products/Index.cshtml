@@ -1,0 +1,85 @@
+﻿@model IEnumerable<AP.Data.Products>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div class="d-flex justify-content-between">
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    @using (Html.BeginForm("FilterByString", "Products", FormMethod.Get))
+    {
+        <div class="d-flex pb-2">
+            <input class="form-control" type="text" name="value" placeholder="Buscar" />
+            <button type="submit" class="btn btn-primary ms-2">Buscar</button>
+        </div>
+    }
+</div>
+
+<table class="table table-responsive table-bordered table-dark table-striped table-primary">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastModified)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Categories.CategoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Inventory.ModifiedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Suppliers.SupplierName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rating)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastModified)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Categories.CategoryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Inventory.ModifiedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Suppliers.SupplierName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ProductID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ProductID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ProductID })
+        </td>
+    </tr>
+}
+
+</table>

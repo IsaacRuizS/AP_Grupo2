@@ -28,4 +28,14 @@ namespace AP.Data
         public virtual Inventory Inventory { get; set; }
         public virtual Suppliers Suppliers { get; set; }
     }
+    //TODO: Principios utilizados: S - O - I
+    // S: (Single Responsibility Principle)
+    // Por qué? La clase Products tiene la única responsabilidad de representar la entidad "Producto",
+    // con sus atributos y relaciones con otras tablas (Categorías, Inventario y Proveedores).
+    // O: (Open/Closed Principle)
+    // Por qué? Está abierta a extensión (por ejemplo, agregar propiedades o métodos de validación),
+    // sin necesidad de modificar su definición base.
+    // I: (Interface Segregation Principle)
+    // Por qué? Puede implementar en el futuro interfaces específicas (como IProductEntity o IAuditable)
+    // sin depender de métodos innecesarios que no correspondan al contexto de un producto.
 }

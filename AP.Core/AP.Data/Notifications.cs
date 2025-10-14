@@ -20,4 +20,14 @@ namespace AP.Data
         public Nullable<bool> is_read { get; set; }
         public Nullable<System.DateTime> created_at { get; set; }
     }
+    //TODO: Principios utilizados: S - O - I
+    // S: (Single Responsibility Principle)
+    // Por qué? La clase Notifications representa únicamente la estructura de una notificación en el sistema,
+    // sin incluir lógica adicional.
+    // O: (Open/Closed Principle)
+    // Por qué? Puede extenderse fácilmente para agregar nuevos campos o comportamientos sin modificar la clase base,
+    // por ejemplo, agregando un método de marcado o categorías de notificación.
+    // I: (Interface Segregation Principle)
+    // Por qué? Podría implementar interfaces específicas como INotificationEntity,
+    // enfocadas únicamente en los métodos que una notificación debe cumplir.
 }

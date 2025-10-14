@@ -17,4 +17,14 @@ namespace AP.Data
         public int RoleID { get; set; }
         public string RoleName { get; set; }
     }
+    //TODO: Principios utilizados: S - O - I
+    // S: (Single Responsibility Principle)
+    // Por qué? La clase Roles se dedica únicamente a representar los roles dentro del sistema,
+    // sin manejar lógica adicional.
+    // O: (Open/Closed Principle)
+    // Por qué? Es posible extender la clase para añadir nuevas propiedades o funcionalidades
+    // (por ejemplo, permisos o jerarquías) sin modificar su implementación base.
+    // I: (Interface Segregation Principle)
+    // Por qué? Podría implementar interfaces enfocadas como IRoleEntity o IDescribable,
+    // garantizando que solo dependa de métodos relevantes para su propósito.
 }

@@ -8,6 +8,25 @@ using System.Threading.Tasks;
 
 namespace AP.Data.Repository
 {
+    //TODO: Principios utilizados: S - O - L - I
+    // S: (Single Responsibility Principle)
+    // Por qué? Cada clase de repositorio (como RepositoryUser, RepositoryTask, etc.) tiene una sola responsabilidad: 
+    // gestionar las operaciones CRUD de su entidad correspondiente (Users, Tasks, etc.). 
+    // No mezclan otras lógicas de negocio, cumpliendo con la responsabilidad única.
+    // O: (Open/Closed Principle)
+    // Por qué? El patrón genérico RepositoryBase<T> permite extender el comportamiento 
+    // creando nuevas clases específicas (RepositoryUser, RepositoryProduct, etc.) 
+    // sin modificar el código existente del repositorio base. 
+    // Está abierta a extensión pero cerrada a modificación.
+    // L: (Liskov Substitution Principle)
+    // Por qué? Las clases derivadas (por ejemplo, RepositoryUser) pueden sustituir al tipo base (RepositoryBase<T>) 
+    // sin alterar el correcto funcionamiento del programa, ya que heredan y mantienen el mismo contrato 
+    // de comportamiento definido por la interfaz IRepositoryBase<T>.
+    // I: (Interface Segregation Principle)
+    // Por qué? Cada interfaz (IRepositoryUser, IRepositoryTask, IRepositoryProduct, etc.) 
+    // está especializada en una entidad concreta y hereda solo los métodos necesarios del repositorio base, 
+    // evitando que las clases implementen métodos que no necesitan. 
+    // Esto divide las interfaces grandes en interfaces más pequeñas y enfocadas.
     public interface IRepositoryBase<T> where T : class
     {
         IEnumerable<T> GetAll();

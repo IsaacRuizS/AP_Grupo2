@@ -31,4 +31,14 @@ namespace AP.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Products> Products { get; set; }
     }
+    //TODO: Principios utilizados: S - O - I
+    // S: (Single Responsibility Principle)
+    // Por qué? La clase Inventory se dedica exclusivamente a representar los datos relacionados con el inventario,
+    // como existencias, precios y fechas.
+    // O: (Open/Closed Principle)
+    // Por qué? Puede extenderse mediante herencia o clases parciales para agregar nueva funcionalidad
+    // (por ejemplo, cálculos de stock o auditoría) sin alterar la estructura actual.
+    // I: (Interface Segregation Principle)
+    // Por qué? Podría implementar interfaces como IInventoryEntity o ITrackable,
+    // que permitan una segregación de responsabilidades sin sobrecargar la clase.
 }

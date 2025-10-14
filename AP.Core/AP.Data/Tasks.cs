@@ -23,4 +23,14 @@ namespace AP.Data
         public Nullable<System.DateTime> LastModified { get; set; }
         public string ModifiedBy { get; set; }
     }
+    //TODO: Principios utilizados: S - O - I
+    // S: (Single Responsibility Principle)
+    // Por qué? La clase Tasks se encarga únicamente de representar la estructura y datos de una tarea.
+    // No tiene responsabilidades adicionales (como manejar lógica de negocio o persistencia).
+    // O: (Open/Closed Principle)
+    // Por qué? Está abierta a extensión a través de clases parciales o herencia,
+    // lo que permite agregar nuevas funcionalidades sin modificar el código base.
+    // I: (Interface Segregation Principle)
+    // Por qué? Si se implementaran interfaces específicas como ITaskEntity o IAuditable,
+    // solo se incluirían los métodos que correspondan al comportamiento de una tarea, sin sobrecargar la clase.
 }

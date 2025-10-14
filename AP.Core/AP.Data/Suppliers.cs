@@ -34,4 +34,14 @@ namespace AP.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Products> Products { get; set; }
     }
+    //TODO: Principios utilizados: S - O - I
+    // S: (Single Responsibility Principle)
+    // Por qué? La clase Suppliers tiene la única responsabilidad de modelar un proveedor,
+    // incluyendo su información de contacto y la relación con sus productos.
+    // O: (Open/Closed Principle)
+    // Por qué? Se puede extender agregando nuevas propiedades o métodos (por ejemplo, cálculos o validaciones)
+    // mediante clases parciales o herencia, sin modificar la estructura principal.
+    // I: (Interface Segregation Principle)
+    // Por qué? La clase podría implementar interfaces específicas como ISupplierEntity o IAuditable,
+    // sin necesidad de incluir comportamientos que no correspondan a un proveedor.
 }

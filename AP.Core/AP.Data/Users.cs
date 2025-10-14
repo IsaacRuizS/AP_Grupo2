@@ -24,4 +24,15 @@ namespace AP.Data
         public string ModifiedBy { get; set; }
         public Nullable<int> RoleID { get; set; }
     }
+
+    //TODO: Principios utilizados: S - O - I
+    // S: (Single Responsibility Principle)
+    // Por qué? La clase Users tiene una única responsabilidad: representar la entidad "Usuario" del modelo de datos.
+    // No realiza lógica adicional ni mezcla operaciones de negocio o presentación.
+    // O: (Open/Closed Principle)
+    // Por qué? Si se desea extender la funcionalidad (por ejemplo, agregar validaciones o métodos adicionales),
+    // puede hacerse mediante una clase parcial o una extensión sin modificar esta definición original.
+    // I: (Interface Segregation Principle)
+    // Por qué? La clase puede implementar en el futuro una interfaz específica (como IUserEntity)
+    // que defina únicamente los métodos necesarios para usuarios, sin obligarla a usar métodos no relevantes.
 }

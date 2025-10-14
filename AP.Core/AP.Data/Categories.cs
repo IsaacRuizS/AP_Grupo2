@@ -29,4 +29,14 @@ namespace AP.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Products> Products { get; set; }
     }
+    //TODO: Principios utilizados: S - O - I
+    // S: (Single Responsibility Principle)
+    // Por qué? La clase Categories tiene una única responsabilidad: modelar la entidad de categoría
+    // y su relación con los productos correspondientes.
+    // O: (Open/Closed Principle).
+    // Por qué? Es posible extenderla (por ejemplo, agregando jerarquías de categorías o descripciones extendidas)
+    // sin modificar su código base.
+    // I: (Interface Segregation Principle)
+    // Por qué? Podría implementar una interfaz específica como ICategoryEntity,
+    // garantizando que solo contenga las propiedades o métodos que correspondan a una categoría.
 }

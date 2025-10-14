@@ -18,4 +18,15 @@ namespace AP.Data
         public string name { get; set; }
         public string content { get; set; }
     }
+
+    //TODO: Principios utilizados: S - O - I
+    // S: (Single Responsibility Principle)
+    // Por qué? La clase Components se encarga únicamente de representar un componente,
+    // definiendo sus atributos básicos como ID, nombre y contenido.
+    // O: (Open/Closed Principle)
+    // Por qué? Está abierta a futuras extensiones (por ejemplo, agregar campos adicionales o relaciones),
+    // sin modificar su implementación base.
+    // I: (Interface Segregation Principle)
+    // Por qué? Podría implementar interfaces que definan comportamientos específicos de componentes,
+    // manteniendo una estructura limpia y modular.
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="47c1980b41194b4eb5f8de71307f180e" Name="Diagram1">
+        <EntityTypeShape EntityType="FoodbankModel.FoodItem" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodbankModel.Role" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodbankModel.UserRole" Width="1.5" PointX="6" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodbankModel.User" Width="1.5" PointX="3.75" PointY="9.5" IsExpanded="true" />
+        <AssociationConnector Association="FoodbankModel.FK__FoodItems__RoleI__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodbankModel.FK__UserRoles__RoleI__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodbankModel.FK__UserRoles__UserI__48CFD27E" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

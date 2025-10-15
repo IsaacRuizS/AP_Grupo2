@@ -10,6 +10,7 @@ namespace FB.Data.Repository
     {
         public RepositoryFoodItem() : base()
         {
+
         }
     }
 }

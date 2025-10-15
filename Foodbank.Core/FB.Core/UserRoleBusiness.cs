@@ -14,15 +14,18 @@ namespace FB.Core
             _repositoryUserRole = new RepositoryUserRole();
         }
 
-        //Upsert (Update / Insert)
-        public bool SaveOrUpdate(UserRole user)
+        public bool Update(UserRole user)
         {
 
-            if (user.UserId <= 0 && user.RoleId <= 0)
-                _repositoryUserRole.Add(user);
-            else
-                _repositoryUserRole.Update(user);
+            _repositoryUserRole.Update(user);
 
+            return true;
+        }
+
+        public bool Save(UserRole user)
+        {
+            _repositoryUserRole.Add(user);
+         
             return true;
         }
 

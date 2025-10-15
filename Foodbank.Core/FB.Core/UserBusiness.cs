@@ -28,7 +28,7 @@ namespace FB.Core
 
         public bool Delete(int id)
         {
-            _repositoryUser.Delete(id);
+            _repositoryUser.DeleteUserWithRoles(id);// call the modified method to delete the roles firts
             return true;
         }
 

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FB.Core;
+using FB.Data;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -6,18 +8,16 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using FB.Data;
 
 namespace FB.MVC.Controllers
 {
-    public class UsersController : Controller
+    public class UsersController : ControllerBase
     {
-        private FoodbankEntities db = new FoodbankEntities();
 
         // GET: Users
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+            return View(UserBusiness.GetUsers(0));
         }
 
         // GET: Users/Details/5
@@ -27,7 +27,9 @@ namespace FB.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
+
+            User user = (User)UserBusiness.GetUsers((int)id).FirstOrDefault();
+
             if (user == null)
             {
                 return HttpNotFound();
@@ -50,8 +52,10 @@ namespace FB.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Users.Add(user);
-                db.SaveChanges();
+                user.CreatedAt = DateTime.Now;
+                user.LastLogin = DateTime.Now;
+
+                UserBusiness.SaveOrUpdate(user);
                 return RedirectToAction("Index");
             }
 
@@ -65,7 +69,7 @@ namespace FB.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
+            User user = (User)UserBusiness.GetUsers((int)id).FirstOrDefault();
             if (user == null)
             {
                 return HttpNotFound();
@@ -82,8 +86,18 @@ namespace FB.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
+                //tomar el created y login del usuario
+                /*User baseUser = (User)UserBusiness.GetUsers((int)user.UserId).FirstOrDefault();
+                if (baseUser != null)
+                {
+                    user.CreatedAt = baseUser.CreatedAt;
+                    user.LastLogin = baseUser.LastLogin;
+
+                }*/
+
+                UserBusiness.SaveOrUpdate(user);
+
+
                 return RedirectToAction("Index");
             }
             return View(user);
@@ -96,7 +110,7 @@ namespace FB.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
+            User user = (User)UserBusiness.GetUsers((int)id).FirstOrDefault();
             if (user == null)
             {
                 return HttpNotFound();
@@ -109,19 +123,8 @@ namespace FB.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            User user = db.Users.Find(id);
-            db.Users.Remove(user);
-            db.SaveChanges();
+            bool isDeleted = UserBusiness.Delete(id);
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

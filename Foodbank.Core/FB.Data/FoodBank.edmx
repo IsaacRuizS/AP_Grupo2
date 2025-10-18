@@ -56,7 +56,7 @@
           <Property Name="CreatedAt" Type="datetime" Nullable="false" />
           <Property Name="LastLogin" Type="datetime" />
         </EntityType>
-        <Association Name="FK__FoodItems__RoleI__46E78A0C">
+        <Association Name="FK__FoodItems__RoleI__59063A47">
           <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
           <End Role="FoodItems" Type="Self.FoodItems" Multiplicity="*" />
           <ReferentialConstraint>
@@ -68,7 +68,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UserRoles__RoleI__47DBAE45">
+        <Association Name="FK__UserRoles__RoleI__59FA5E80">
           <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
           <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
           <ReferentialConstraint>
@@ -80,7 +80,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UserRoles__UserI__48CFD27E">
+        <Association Name="FK__UserRoles__UserI__5AEE82B9">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
           <ReferentialConstraint>
@@ -97,15 +97,15 @@
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__FoodItems__RoleI__46E78A0C" Association="Self.FK__FoodItems__RoleI__46E78A0C">
+          <AssociationSet Name="FK__FoodItems__RoleI__59063A47" Association="Self.FK__FoodItems__RoleI__59063A47">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="FoodItems" EntitySet="FoodItems" />
           </AssociationSet>
-          <AssociationSet Name="FK__UserRoles__RoleI__47DBAE45" Association="Self.FK__UserRoles__RoleI__47DBAE45">
+          <AssociationSet Name="FK__UserRoles__RoleI__59FA5E80" Association="Self.FK__UserRoles__RoleI__59FA5E80">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="UserRoles" EntitySet="UserRoles" />
           </AssociationSet>
-          <AssociationSet Name="FK__UserRoles__UserI__48CFD27E" Association="Self.FK__UserRoles__UserI__48CFD27E">
+          <AssociationSet Name="FK__UserRoles__UserI__5AEE82B9" Association="Self.FK__UserRoles__UserI__5AEE82B9">
             <End Role="Users" EntitySet="Users" />
             <End Role="UserRoles" EntitySet="UserRoles" />
           </AssociationSet>
@@ -136,7 +136,7 @@
           <Property Name="DateAdded" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="RoleId" Type="Int32" />
-          <NavigationProperty Name="Role" Relationship="Self.FK__FoodItems__RoleI__46E78A0C" FromRole="FoodItems" ToRole="Roles" />
+          <NavigationProperty Name="Role" Relationship="Self.FK__FoodItems__RoleI__59063A47" FromRole="FoodItems" ToRole="Roles" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -145,8 +145,8 @@
           <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="FoodItems" Relationship="Self.FK__FoodItems__RoleI__46E78A0C" FromRole="Roles" ToRole="FoodItems" />
-          <NavigationProperty Name="UserRoles" Relationship="Self.FK__UserRoles__RoleI__47DBAE45" FromRole="Roles" ToRole="UserRoles" />
+          <NavigationProperty Name="FoodItems" Relationship="Self.FK__FoodItems__RoleI__59063A47" FromRole="Roles" ToRole="FoodItems" />
+          <NavigationProperty Name="UserRoles" Relationship="Self.FK__UserRoles__RoleI__59FA5E80" FromRole="Roles" ToRole="UserRoles" />
         </EntityType>
         <EntityType Name="UserRole">
           <Key>
@@ -156,8 +156,8 @@
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="RoleId" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Role" Relationship="Self.FK__UserRoles__RoleI__47DBAE45" FromRole="UserRoles" ToRole="Roles" />
-          <NavigationProperty Name="User" Relationship="Self.FK__UserRoles__UserI__48CFD27E" FromRole="UserRoles" ToRole="Users" />
+          <NavigationProperty Name="Role" Relationship="Self.FK__UserRoles__RoleI__59FA5E80" FromRole="UserRoles" ToRole="Roles" />
+          <NavigationProperty Name="User" Relationship="Self.FK__UserRoles__UserI__5AEE82B9" FromRole="UserRoles" ToRole="Users" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -170,9 +170,9 @@
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastLogin" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="UserRoles" Relationship="Self.FK__UserRoles__UserI__48CFD27E" FromRole="Users" ToRole="UserRoles" />
+          <NavigationProperty Name="UserRoles" Relationship="Self.FK__UserRoles__UserI__5AEE82B9" FromRole="Users" ToRole="UserRoles" />
         </EntityType>
-        <Association Name="FK__FoodItems__RoleI__46E78A0C">
+        <Association Name="FK__FoodItems__RoleI__59063A47">
           <End Role="Roles" Type="Self.Role" Multiplicity="0..1" />
           <End Role="FoodItems" Type="Self.FoodItem" Multiplicity="*" />
           <ReferentialConstraint>
@@ -184,7 +184,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UserRoles__RoleI__47DBAE45">
+        <Association Name="FK__UserRoles__RoleI__59FA5E80">
           <End Role="Roles" Type="Self.Role" Multiplicity="1" />
           <End Role="UserRoles" Type="Self.UserRole" Multiplicity="*" />
           <ReferentialConstraint>
@@ -196,7 +196,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UserRoles__UserI__48CFD27E">
+        <Association Name="FK__UserRoles__UserI__5AEE82B9">
           <End Role="Users" Type="Self.User" Multiplicity="1" />
           <End Role="UserRoles" Type="Self.UserRole" Multiplicity="*" />
           <ReferentialConstraint>
@@ -213,15 +213,15 @@
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
           <EntitySet Name="Users" EntityType="Self.User" />
-          <AssociationSet Name="FK__FoodItems__RoleI__46E78A0C" Association="Self.FK__FoodItems__RoleI__46E78A0C">
+          <AssociationSet Name="FK__FoodItems__RoleI__59063A47" Association="Self.FK__FoodItems__RoleI__59063A47">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="FoodItems" EntitySet="FoodItems" />
           </AssociationSet>
-          <AssociationSet Name="FK__UserRoles__RoleI__47DBAE45" Association="Self.FK__UserRoles__RoleI__47DBAE45">
+          <AssociationSet Name="FK__UserRoles__RoleI__59FA5E80" Association="Self.FK__UserRoles__RoleI__59FA5E80">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="UserRoles" EntitySet="UserRoles" />
           </AssociationSet>
-          <AssociationSet Name="FK__UserRoles__UserI__48CFD27E" Association="Self.FK__UserRoles__UserI__48CFD27E">
+          <AssociationSet Name="FK__UserRoles__UserI__5AEE82B9" Association="Self.FK__UserRoles__UserI__5AEE82B9">
             <End Role="Users" EntitySet="Users" />
             <End Role="UserRoles" EntitySet="UserRoles" />
           </AssociationSet>

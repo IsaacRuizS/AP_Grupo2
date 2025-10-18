@@ -15,9 +15,31 @@ namespace FB.MVC.Controllers
         private FoodbankEntities db = new FoodbankEntities();
 
         // GET: FoodItems
-        public ActionResult Index()
+        public ActionResult Index(string roleName)
         {
-            var foodItems = db.FoodItems.Include(f => f.Role);
+            
+            ViewBag.RoleList = new SelectList(db.Roles.OrderBy(r => r.RoleName).ToList(), "RoleName", "RoleName", roleName);
+
+            var foodItems = db.FoodItems.Include(f => f.Role).AsQueryable();
+
+            // Aca se busca por rol, se llama desde el dropdown en el
+            // views>index.cshtml>@Html.DropDownList
+            if (!string.IsNullOrEmpty(roleName))
+            {
+                if (roleName.Equals("Admin", StringComparison.OrdinalIgnoreCase))
+                { 
+                }
+                else if (roleName.Equals("Manager", StringComparison.OrdinalIgnoreCase))
+                {
+                    foodItems = foodItems.Where(f => f.Role.RoleName == "Manager" || f.Role.RoleName == "Viewer");
+                }
+                else if (roleName.Equals("Viewer", StringComparison.OrdinalIgnoreCase))
+                {
+                    foodItems = foodItems.Where(f => f.Role.RoleName == "Viewer");
+                }
+              
+            }
+
             return View(foodItems.ToList());
         }
 

@@ -20,14 +20,14 @@ namespace FB.MVC.Controllers
             return View(userRoles.ToList());
         }
 
-        // GET: UserRoles/Details/5
-        public ActionResult Details(int? id)
+        // GET: UserRoles/Details?userId=1&roleId=2
+        public ActionResult Details(int? userId, int? roleId)
         {
-            if (id == null)
+            if (userId == null || roleId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserRole userRole = UserRoleBusiness.GetUserRoles((int)id).FirstOrDefault();
+            UserRole userRole = UserRoleBusiness.GetUserRole((int)userId, (int)roleId);
             if (userRole == null)
             {
                 return HttpNotFound();
@@ -44,8 +44,6 @@ namespace FB.MVC.Controllers
         }
 
         // POST: UserRoles/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "UserId,RoleId,Description")] UserRole userRole)
@@ -61,14 +59,14 @@ namespace FB.MVC.Controllers
             return View(userRole);
         }
 
-        // GET: UserRoles/Edit/5
-        public ActionResult Edit(int? id)
+        // GET: UserRoles/Edit?userId=1&roleId=2
+        public ActionResult Edit(int? userId, int? roleId)
         {
-            if (id == null)
+            if (userId == null || roleId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserRole userRole = UserRoleBusiness.GetUserRoles((int)id).FirstOrDefault();
+            UserRole userRole = UserRoleBusiness.GetUserRole((int)userId, (int)roleId);
             if (userRole == null)
             {
                 return HttpNotFound();
@@ -78,9 +76,7 @@ namespace FB.MVC.Controllers
             return View(userRole);
         }
 
-        // POST: UserRoles/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: UserRoles/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "UserId,RoleId,Description")] UserRole userRole)
@@ -95,14 +91,14 @@ namespace FB.MVC.Controllers
             return View(userRole);
         }
 
-        // GET: UserRoles/Delete/5
-        public ActionResult Delete(int? id)
+        // GET: UserRoles/Delete?userId=1&roleId=2
+        public ActionResult Delete(int? userId, int? roleId)
         {
-            if (id == null)
+            if (userId == null || roleId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserRole userRole = UserRoleBusiness.GetUserRoles((int)id).FirstOrDefault();
+            UserRole userRole = UserRoleBusiness.GetUserRole((int)userId, (int)roleId);
             if (userRole == null)
             {
                 return HttpNotFound();
@@ -110,12 +106,12 @@ namespace FB.MVC.Controllers
             return View(userRole);
         }
 
-        // POST: UserRoles/Delete/5
+        // POST: UserRoles/Delete
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int userId, int roleId)
         {
-            UserRoleBusiness.Delete(id);
+            UserRoleBusiness.Delete(userId, roleId);
             return RedirectToAction("Index");
         }
     }

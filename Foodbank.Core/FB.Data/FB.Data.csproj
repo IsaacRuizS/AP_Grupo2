@@ -59,23 +59,23 @@
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\UserRole.cs" />
     <Compile Include="Entities\User.cs" />
-    <Compile Include="FoodBank.Context.cs">
+    <Compile Include="Foodbank.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>FoodBank.Context.tt</DependentUpon>
+      <DependentUpon>Foodbank.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="FoodBank.cs">
+    <Compile Include="Foodbank.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>FoodBank.tt</DependentUpon>
+      <DependentUpon>Foodbank.tt</DependentUpon>
     </Compile>
-    <Compile Include="FoodBank.Designer.cs">
+    <Compile Include="Foodbank.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>FoodBank.edmx</DependentUpon>
+      <DependentUpon>Foodbank.edmx</DependentUpon>
     </Compile>
     <Compile Include="FoodItem.cs">
-      <DependentUpon>FoodBank.tt</DependentUpon>
+      <DependentUpon>Foodbank.tt</DependentUpon>
     </Compile>
     <Compile Include="Repositories\RepositoryFoodItems.cs" />
     <Compile Include="Repositories\RepositoryUserRole.cs" />
@@ -84,23 +84,23 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Role.cs">
-      <DependentUpon>FoodBank.tt</DependentUpon>
+      <DependentUpon>Foodbank.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
-      <DependentUpon>FoodBank.tt</DependentUpon>
+      <DependentUpon>Foodbank.tt</DependentUpon>
     </Compile>
     <Compile Include="UserRole.cs">
-      <DependentUpon>FoodBank.tt</DependentUpon>
+      <DependentUpon>Foodbank.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
-    <EntityDeploy Include="FoodBank.edmx">
+    <EntityDeploy Include="Foodbank.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>FoodBank.Designer.cs</LastGenOutput>
+      <LastGenOutput>Foodbank.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="FoodBank.edmx.diagram">
-      <DependentUpon>FoodBank.edmx</DependentUpon>
+    <None Include="App.Config" />
+    <None Include="Foodbank.edmx.diagram">
+      <DependentUpon>Foodbank.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -108,15 +108,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="FoodBank.Context.tt">
+    <Content Include="Foodbank.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>FoodBank.edmx</DependentUpon>
-      <LastGenOutput>FoodBank.Context.cs</LastGenOutput>
+      <DependentUpon>Foodbank.edmx</DependentUpon>
+      <LastGenOutput>Foodbank.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="FoodBank.tt">
+    <Content Include="Foodbank.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>FoodBank.edmx</DependentUpon>
-      <LastGenOutput>FoodBank.cs</LastGenOutput>
+      <DependentUpon>Foodbank.edmx</DependentUpon>
+      <LastGenOutput>Foodbank.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

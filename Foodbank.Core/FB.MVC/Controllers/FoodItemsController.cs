@@ -1,44 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
+using FB.Core;
 using FB.Data;
 
 namespace FB.MVC.Controllers
 {
-    public class FoodItemsController : Controller
+    public class FoodItemsController : ControllerBase
     {
         private FoodbankEntities db = new FoodbankEntities();
 
         // GET: FoodItems
         public ActionResult Index(string roleName)
         {
-            
             ViewBag.RoleList = new SelectList(db.Roles.OrderBy(r => r.RoleName).ToList(), "RoleName", "RoleName", roleName);
 
-            var foodItems = db.FoodItems.Include(f => f.Role).AsQueryable();
-
-            // Aca se busca por rol, se llama desde el dropdown en el
-            // views>index.cshtml>@Html.DropDownList
-            if (!string.IsNullOrEmpty(roleName))
-            {
-                if (roleName.Equals("Admin", StringComparison.OrdinalIgnoreCase))
-                { 
-                }
-                else if (roleName.Equals("Manager", StringComparison.OrdinalIgnoreCase))
-                {
-                    foodItems = foodItems.Where(f => f.Role.RoleName == "Manager" || f.Role.RoleName == "Viewer");
-                }
-                else if (roleName.Equals("Viewer", StringComparison.OrdinalIgnoreCase))
-                {
-                    foodItems = foodItems.Where(f => f.Role.RoleName == "Viewer");
-                }
-              
-            }
+            var foodItems = FoodItemBusiness.GetFoodItemsByRole(roleName);
 
             return View(foodItems.ToList());
         }
@@ -50,7 +29,9 @@ namespace FB.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            FoodItem foodItem = db.FoodItems.Find(id);
+
+            FoodItem foodItem = (FoodItem)FoodItemBusiness.GetFoodItems((int)id).FirstOrDefault();
+
             if (foodItem == null)
             {
                 return HttpNotFound();
@@ -66,16 +47,14 @@ namespace FB.MVC.Controllers
         }
 
         // POST: FoodItems/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "FoodItemID,Name,Category,Brand,Description,Price,Unit,QuantityInStock,ExpirationDate,IsPerishable,CaloriesPerServing,Ingredients,Barcode,Supplier,DateAdded,IsActive,RoleId")] FoodItem foodItem)
         {
             if (ModelState.IsValid)
             {
-                db.FoodItems.Add(foodItem);
-                db.SaveChanges();
+                foodItem.DateAdded = DateTime.Now;
+                FoodItemBusiness.SaveOrUpdate(foodItem);
                 return RedirectToAction("Index");
             }
 
@@ -90,7 +69,9 @@ namespace FB.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            FoodItem foodItem = db.FoodItems.Find(id);
+
+            FoodItem foodItem = (FoodItem)FoodItemBusiness.GetFoodItems((int)id).FirstOrDefault();
+
             if (foodItem == null)
             {
                 return HttpNotFound();
@@ -100,16 +81,13 @@ namespace FB.MVC.Controllers
         }
 
         // POST: FoodItems/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "FoodItemID,Name,Category,Brand,Description,Price,Unit,QuantityInStock,ExpirationDate,IsPerishable,CaloriesPerServing,Ingredients,Barcode,Supplier,DateAdded,IsActive,RoleId")] FoodItem foodItem)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(foodItem).State = EntityState.Modified;
-                db.SaveChanges();
+                FoodItemBusiness.SaveOrUpdate(foodItem);
                 return RedirectToAction("Index");
             }
             ViewBag.RoleId = new SelectList(db.Roles, "RoleId", "RoleName", foodItem.RoleId);
@@ -123,7 +101,9 @@ namespace FB.MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            FoodItem foodItem = db.FoodItems.Find(id);
+
+            FoodItem foodItem = (FoodItem)FoodItemBusiness.GetFoodItems((int)id).FirstOrDefault();
+
             if (foodItem == null)
             {
                 return HttpNotFound();
@@ -136,9 +116,7 @@ namespace FB.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            FoodItem foodItem = db.FoodItems.Find(id);
-            db.FoodItems.Remove(foodItem);
-            db.SaveChanges();
+            bool isDeleted = FoodItemBusiness.Delete(id);
             return RedirectToAction("Index");
         }
 

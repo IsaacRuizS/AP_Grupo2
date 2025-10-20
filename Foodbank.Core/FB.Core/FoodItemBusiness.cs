@@ -1,12 +1,13 @@
 ﻿using FB.Data;
 using FB.Data.Repository;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FB.Core
 {
     public class FoodItemBusiness
     {
-
         private readonly IRepositoryFoodItem _repositoryFoodItem;
 
         public FoodItemBusiness()
@@ -14,29 +15,59 @@ namespace FB.Core
             _repositoryFoodItem = new RepositoryFoodItem();
         }
 
-        //Upsert (Update / Insert)
-        public bool SaveOrUpdate(FoodItem user)
+        // Upsert (Update / Insert)
+        public static bool SaveOrUpdate(FoodItem foodItem)
         {
+            var repository = new RepositoryFoodItem();
 
-            if (user.FoodItemID <= 0)
-                _repositoryFoodItem.Add(user);
+            if (foodItem.FoodItemID <= 0)
+                repository.Add(foodItem);
             else
-                _repositoryFoodItem.Update(user);
+                repository.Update(foodItem);
 
             return true;
         }
 
-        public bool Delete(int id)
+        public static bool Delete(int id)
         {
-            _repositoryFoodItem.Delete(id);
+            var repository = new RepositoryFoodItem();
+            repository.Delete(id);
             return true;
         }
 
-        public IEnumerable<FoodItem> GetFoodItems(int id)
+        public static IEnumerable<FoodItem> GetFoodItems(int id)
         {
+            var repository = new RepositoryFoodItem();
+
             return id <= 0
-                ? _repositoryFoodItem.GetAll()
-                : new List<FoodItem>() { _repositoryFoodItem.GetById(id) };
+                ? repository.GetAll()
+                : new List<FoodItem>() { repository.GetById(id) };
+        }
+
+        public static IEnumerable<FoodItem> GetFoodItemsByRole(string roleName)
+        {
+            var repository = new RepositoryFoodItem();
+            var foodItems = repository.GetAllWithRole();
+
+            if (string.IsNullOrEmpty(roleName))
+            {
+                return foodItems;
+            }
+
+            if (roleName.Equals("Admin", StringComparison.OrdinalIgnoreCase))
+            {
+                return foodItems;
+            }
+            else if (roleName.Equals("Manager", StringComparison.OrdinalIgnoreCase))
+            {
+                return foodItems.Where(f => f.Role.RoleName == "Manager" || f.Role.RoleName == "Viewer");
+            }
+            else if (roleName.Equals("Viewer", StringComparison.OrdinalIgnoreCase))
+            {
+                return foodItems.Where(f => f.Role.RoleName == "Viewer");
+            }
+
+            return foodItems;
         }
     }
 }

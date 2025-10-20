@@ -12,12 +12,14 @@ namespace FB.MVC.Controllers
         protected readonly UserBusiness UserBusiness;
         protected readonly UserRoleBusiness UserRoleBusiness;
         protected readonly RoleBusiness RoleBusiness;
+        protected readonly FoodItemBusiness FoodItemBusiness;
 
         public ControllerBase()
         {
             UserBusiness = new UserBusiness();
             UserRoleBusiness = new UserRoleBusiness();
             RoleBusiness = new RoleBusiness();
+            FoodItemBusiness = new FoodItemBusiness();
         }
 
     }

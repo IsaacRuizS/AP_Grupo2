@@ -196,12 +196,12 @@
     <Content Include="Views\FoodItems\Details.cshtml" />
     <Content Include="Views\FoodItems\Edit.cshtml" />
     <Content Include="Views\FoodItems\Index.cshtml" />
-    <Content Include="web.config" />
+    <Content Include="Web.config" />
     <None Include="web.Debug.config">
-      <DependentUpon>web.config</DependentUpon>
+      <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="web.Release.config">
-      <DependentUpon>web.config</DependentUpon>
+      <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

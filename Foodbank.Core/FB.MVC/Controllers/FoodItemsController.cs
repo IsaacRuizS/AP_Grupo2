@@ -5,21 +5,23 @@ using System.Net;
 using System.Web.Mvc;
 using FB.Core;
 using FB.Data;
+using FB.Data.Entities;
 
 namespace FB.MVC.Controllers
 {
     public class FoodItemsController : ControllerBase
     {
-        private FoodbankEntities db = new FoodbankEntities();
-
         // GET: FoodItems
-        public ActionResult Index(string roleName)
+        public ActionResult Index(FoodItemsFilterViewModel filter)
         {
-            ViewBag.RoleList = new SelectList(db.Roles.OrderBy(r => r.RoleName).ToList(), "RoleName", "RoleName", roleName);
+            IEnumerable<Role> roles = RoleBusiness.GetRoles(0);
 
-            var foodItems = FoodItemBusiness.GetFoodItemsByRole(roleName);
+            ViewBag.RoleList = new SelectList(roles, "RoleName", "RoleName", filter.RoleName);
+            
+            if (filter.RoleName != null)
+                return View(FoodItemBusiness.GetFoodItemsByFilter(filter));
 
-            return View(foodItems.ToList());
+            return View(FoodItemBusiness.GetFoodItems(0));
         }
 
         // GET: FoodItems/Details/5
@@ -42,7 +44,8 @@ namespace FB.MVC.Controllers
         // GET: FoodItems/Create
         public ActionResult Create()
         {
-            ViewBag.RoleId = new SelectList(db.Roles, "RoleId", "RoleName");
+            IEnumerable<Role> roles = RoleBusiness.GetRoles(0);
+            ViewBag.RoleId = new SelectList(roles, "RoleId", "RoleName");
             return View();
         }
 
@@ -58,7 +61,9 @@ namespace FB.MVC.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.RoleId = new SelectList(db.Roles, "RoleId", "RoleName", foodItem.RoleId);
+            IEnumerable<Role> roles = RoleBusiness.GetRoles(0);
+
+            ViewBag.RoleId = new SelectList(roles, "RoleId", "RoleName", foodItem.RoleId);
             return View(foodItem);
         }
 
@@ -76,7 +81,10 @@ namespace FB.MVC.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.RoleId = new SelectList(db.Roles, "RoleId", "RoleName", foodItem.RoleId);
+
+            IEnumerable<Role> roles = RoleBusiness.GetRoles(0);
+
+            ViewBag.RoleId = new SelectList(roles, "RoleId", "RoleName", foodItem.RoleId);
             return View(foodItem);
         }
 
@@ -90,7 +98,10 @@ namespace FB.MVC.Controllers
                 FoodItemBusiness.SaveOrUpdate(foodItem);
                 return RedirectToAction("Index");
             }
-            ViewBag.RoleId = new SelectList(db.Roles, "RoleId", "RoleName", foodItem.RoleId);
+
+            IEnumerable<Role> roles = RoleBusiness.GetRoles(0);
+
+            ViewBag.RoleId = new SelectList(roles, "RoleId", "RoleName", foodItem.RoleId);
             return View(foodItem);
         }
 
@@ -120,13 +131,5 @@ namespace FB.MVC.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

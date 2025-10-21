@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Entities\FoodItem.cs" />
+    <Compile Include="Entities\FoodItemsFilterViewModel.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\UserRole.cs" />
     <Compile Include="Entities\User.cs" />

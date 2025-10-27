@@ -8,37 +8,10 @@
             <i class="fa-solid fa-xmark text-white"></i>
         </button>
     </div>
+    <input id="filtrarMapa" type="text" class="form-control mb-2" placeholder="Buscar por ubicación o nombre">
     <div id="map"></div>
-
+     
     <script>
-
-        /*
-      // Inicializar el mapa
-      const map = L.map('map').setView([9.8612, -83.9207], 13); // Coordenadas de Costa Rica
-
-      // Agregar capa de tiles
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
-      }).addTo(map);
-
-      // Agregar un marcador
-      L.marker([9.8612, -83.9207]).addTo(map)
-        .bindPopup('¡Hola desde Cartago!')
-            .openPopup();
-
-
-        */
-
-
-
-
-
-
-        /* eslint-disable no-undef */
-        /**
-         * sidebar replacing popup
-         */
-
         // config map
         let config = {
             minZoom: 10,
@@ -86,9 +59,13 @@
         let latlngs = [];
 
         // function to add markers to map
-        fetchData("/Content/places.json")
+        const renderMap = (textToSearch) => {
+            fetchData("/Content/places.json")
             .then((data) => {
                 // create markers width "marker-options-id"
+                document.getElementsByClassName('leaflet-marker-pane')[0].innerHTML = "" //limpiamos los markups del mapa
+                data = data.filter(restaurant => (restaurant.title.includes(textToSearch) || restaurant.small.includes(textToSearch)));
+
                 data.map((marker) => {
                     featureGroups.push(
                         L.marker(marker.coords, {
@@ -105,7 +82,7 @@
 
                 // add polyline to map
 
-                /* COMENTAR ESTE BLOQUE */
+                /* COMENTAR ESTE BLOQUE (genera líneas que conectan los nodos)*/
                 /*L.polyline(latlngs, {
                     color: "red",
                     weight: 2,
@@ -145,15 +122,10 @@
                     });
                 }
             });
+        }
+        renderMap("");
 
         // --------------------------------------------------
-        // close when click esc
-        document.addEventListener("keydown", function (event) {
-            // close sidebar when press esc
-            if (event.key === "Escape") {
-                closeSidebar();
-            }
-        });
 
         // close sidebar when click on close button
         buttonClose.addEventListener("click", () => {
@@ -232,5 +204,14 @@
                 paddingTopLeft: [coords ? sidebar : 0, 10],
             });
         }
+
+        // ---------------------------------------------------------------------
+
+        let inputFiltrarMapa = document.getElementById("filtrarMapa");
+
+        inputFiltrarMapa.addEventListener('keyup', function (event) {
+            let textToSearch = event.target.value;
+            renderMap(textToSearch);
+        });
     </script>
 </main>

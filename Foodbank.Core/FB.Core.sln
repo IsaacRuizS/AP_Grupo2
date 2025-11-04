@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FB.Models", "FB.Models\FB.M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FB.Data", "FB.Data\FB.Data.csproj", "{F3516E98-D4AB-4B7F-BFD4-2A8F54D7701C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FB.Login", "FB.Login\FB.Login.csproj", "{EF47A4AA-B786-41BE-8A8A-5B942561A264}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{F3516E98-D4AB-4B7F-BFD4-2A8F54D7701C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3516E98-D4AB-4B7F-BFD4-2A8F54D7701C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3516E98-D4AB-4B7F-BFD4-2A8F54D7701C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF47A4AA-B786-41BE-8A8A-5B942561A264}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF47A4AA-B786-41BE-8A8A-5B942561A264}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF47A4AA-B786-41BE-8A8A-5B942561A264}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF47A4AA-B786-41BE-8A8A-5B942561A264}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

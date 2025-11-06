@@ -3,31 +3,215 @@
 }
 
 <main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-    </section>
-
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </section>
+    <div class="sidebar">
+        <button aria-label="close sidebar" type="button" class="close-button">
+            <i class="fa-solid fa-xmark text-white"></i>
+        </button>
     </div>
+    <input id="filtrarMapa" type="text" class="form-control mb-2" placeholder="Buscar por ubicación o nombre">
+    <div id="map"></div>
+     
+    <script>
+        // config map
+        let config = {
+            minZoom: 10,
+            maxZoom: 18,
+        };
+        // magnification with which the map will start
+        const zoom = 16;
+        // co-ordinates
+
+        const lat = 9.8612;
+        const lng = -83.9207;
+
+        // calling map
+        const map = L.map("map", config).setView([lat, lng], zoom);
+
+        // Used to load and display tile layers on the map
+        // Most tile servers require attribution, which you can set under `Layer`
+
+        //https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}
+        //https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png
+        //https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png
+        L.tileLayer("https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png", {
+            attribution:
+                '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        }).addTo(map);
+
+        // ------------------------------------------------------------
+        // async function to get data from json
+        async function fetchData(url) {
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                return data;
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        // --------------------------------------------------
+        // button to close sidebar
+        const buttonClose = document.querySelector(".close-button");
+
+        let featureGroups = [];
+        let groupBounds;
+        let latlngs = [];
+
+        // function to add markers to map
+        const renderMap = (textToSearch) => {
+            fetchData("/Content/places.json")
+            .then((data) => {
+                // create markers width "marker-options-id"
+                document.getElementsByClassName('leaflet-marker-pane')[0].innerHTML = "" //limpiamos los markups del mapa
+                data = data.filter(restaurant => (restaurant.title.includes(textToSearch) || restaurant.small.includes(textToSearch)));
+
+                data.map((marker) => {
+                    featureGroups.push(
+                        L.marker(marker.coords, {
+                            icon: L.divIcon({
+                                className: "leaflet-marker-icon",
+                                iconSize: L.point(30, 30),
+                                popupAnchor: [3, -5],
+                            }),
+                            "marker-options-id": marker.id,
+                        })
+                    );
+                    latlngs.push(marker.coords);
+                });
+
+                // add polyline to map
+
+                /* COMENTAR ESTE BLOQUE (genera líneas que conectan los nodos)*/
+                /*L.polyline(latlngs, {
+                    color: "red",
+                    weight: 2,
+                }).addTo(map);*/
+
+                return data;
+            })
+            .then((data) => {
+                // create feature group
+                // add markers to map
+                featureGroups.map((marker) => {
+                    marker.addTo(map);
+                });
+
+                // create feature group with markers
+                groupBounds = new L.featureGroup(featureGroups);
+
+                // fitBounds of feature group to map
+                map.fitBounds(groupBounds.getBounds(), {
+                    padding: [50, 50],
+                });
+
+                // add event listener to markers to open sidebar
+                groupBounds.on("click", function (e) {
+                    if (e.layer instanceof L.Marker) {
+                        showSidebarWidthText(e.layer.options["marker-options-id"]);
+                    }
+                });
+
+                // add comment to sodebar depending on marker id
+                function showSidebarWidthText(id) {
+                    data.filter((marker) => {
+                        if (marker.id === id) {
+                            document.body.classList.add("active-sidebar");
+                            addContentToSidebar(marker);
+                        }
+                    });
+                }
+            });
+        }
+        renderMap("");
+
+        // --------------------------------------------------
+
+        // close sidebar when click on close button
+        buttonClose.addEventListener("click", () => {
+            // close sidebar when click on close button
+            closeSidebar();
+        });
+
+        // close sidebar when click outside
+        // document.addEventListener("click", (e) => {
+        //   const target = e.target;
+        //   if (
+        //     !target.closest(".sidebar") &&
+        //     !target.classList.contains("leaflet-marker-icon")
+        //   ) {
+        //     closeSidebar();
+        //   }
+        // });
+
+        // --------------------------------------------------
+        // close sidebar
+
+        function closeSidebar() {
+            // remove class active-sidebar
+            document.body.classList.remove("active-sidebar");
+
+            // bounds map to default
+            boundsMap();
+        }
+
+        // --------------------------------------------------
+        // add content to sidebar
+
+        function addContentToSidebar(marker) {
+            const { id, title, small, description, img, coords } = marker;
+            const smallInfo = small !== undefined ? `<small>${small}</small>` : "";
+
+            // create sidebar content
+            const sidebarTemplate = `
+                <article class="sidebar-content">
+                    <h1>${title}</h1>
+                    <div class="info-content">
+                    <img class="img-zoom" src="${img.src}" alt="${img.alt}">
+                    ${smallInfo}
+                    <div class="info-description">${description}</div>
+                    </div>
+                </article>
+            `;
+
+            const sidebar = document.querySelector(".sidebar");
+            const sidebarContent = document.querySelector(".sidebar-content");
+
+            // always remove content before adding new one
+            sidebarContent?.remove();
+            
+            // add content to sidebar
+            sidebar.insertAdjacentHTML("beforeend", sidebarTemplate);
+
+            // set bounds depending on marker coords
+            boundsMap(coords);
+        }
+
+        // --------------------------------------------------
+        // bounds map when sidebar is open
+        function boundsMap(coords) {
+            const sidebar = document.querySelector(".sidebar").offsetWidth;
+
+            const marker = L.marker(coords);
+            const group = L.featureGroup([marker]);
+
+            // bounds depending on whether we have a marker or not
+            const bounds = coords ? group.getBounds() : groupBounds.getBounds();
+
+            // set bounds of map depending on sidebar
+            // width and feature group bounds
+            map.fitBounds(bounds, {
+                paddingTopLeft: [coords ? sidebar : 0, 10],
+            });
+        }
+
+        // ---------------------------------------------------------------------
+
+        let inputFiltrarMapa = document.getElementById("filtrarMapa");
+
+        inputFiltrarMapa.addEventListener('keyup', function (event) {
+            let textToSearch = event.target.value;
+            renderMap(textToSearch);
+        });
+    </script>
 </main>

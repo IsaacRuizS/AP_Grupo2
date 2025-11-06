@@ -1,0 +1,222 @@
+[
+  {
+    "id": 1,
+    "coords": [9.9334, -84.0895],
+    "title": "Restaurante Grano de Oro - <span>Alta Cocina</span>",
+    "small": "Calle 30, Paseo Colón, San José",
+    "img": {
+      "src": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800",
+      "alt": "Restaurante Grano de Oro"
+    },
+    "description": "<p>Elegante restaurante ubicado en un hotel boutique, famoso por su cocina gourmet y su ambiente romántico. Reconocido internacionalmente por su excelencia culinaria.</p><p>Especializado en cocina internacional con toques tropicales. Cuenta con un patio interior encantador perfecto para cenas especiales. Calificación: 4.7/5 - Rango de precio: $$$</p>"
+  },
+  {
+    "id": 2,
+    "coords": [9.9355, -84.0877],
+    "title": "La Esquina de Buenos Aires - <span>Parrilla Argentina</span>",
+    "small": "Calle 11, San José Centro",
+    "img": {
+      "src": "https://images.unsplash.com/photo-1544025162-d76694265947?w=800",
+      "alt": "La Esquina de Buenos Aires"
+    },
+    "description": "<p>Parrilla argentina reconocida por sus cortes de carne premium y su extensa carta de vinos importados directamente de Argentina.</p><p>Los platos estrella incluyen el bife de chorizo, entraña y provoleta. Ambiente cálido y acogedor que te transporta a Buenos Aires. Calificación: 4.6/5 - Rango de precio: $$$ - Teléfono: +506 2223-1909</p>"
+  },
+  {
+    "id": 3,
+    "coords": [9.9312, -84.0786],
+    "title": "Café Mundo - <span>Fusión Mediterránea</span>",
+    "small": "Barrio Otoya, San José",
+    "img": {
+      "src": "https://images.unsplash.com/photo-1552566626-52f8b828add9?w=800",
+      "alt": "Café Mundo"
+    },
+    "description": "<p>Ambiente bohemio con terraza al aire libre, ideal para disfrutar de comida mediterránea con toque costarricense. Ubicado en una hermosa casa antigua.</p><p>El menú incluye desde pastas hasta mariscos frescos. Popular entre artistas y estudiantes por su ambiente relajado. Calificación: 4.5/5 - Rango de precio: $$ - Teléfono: +506 2222-6190</p>"
+  },
+  {
+    "id": 4,
+    "coords": [9.9281, -84.0907],
+    "title": "Soda Tapia - <span>Comida Típica</span>",
+    "small": "La Sabana, San José",
+    "img": {
+      "src": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800",
+      "alt": "Soda Tapia"
+    },
+    "description": "<p>Soda tradicional tica que sirve casados, gallos y comida típica desde hace más de 50 años. Una institución en San José para probar la auténtica comida costarricense.</p><p>Famosa por sus desayunos abundantes y el gallo pinto. Precios económicos y porciones generosas. Calificación: 4.4/5 - Rango de precio: $ - Teléfono: +506 2222-6734</p>"
+  },
+  {
+    "id": 5,
+    "coords": [9.9337, -84.0765],
+    "title": "Restaurante Tin Jo - <span>Cocina Asiática</span>",
+    "small": "Calle 11, Avenida 6-8, San José",
+    "img": {
+      "src": "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800",
+      "alt": "Restaurante Tin Jo"
+    },
+    "description": "<p>Restaurante de cocina asiática fusión con platos tailandeses, chinos, japoneses e indios. Uno de los mejores restaurantes asiáticos de Centroamérica.</p><p>Destacan el pad thai, curry verde y sushi rolls creativos. Opciones vegetarianas y veganas disponibles. Calificación: 4.6/5 - Rango de precio: $$ - Teléfono: +506 2221-7605</p>"
+  },
+  {
+    "id": 6,
+    "coords": [9.9401, -84.0912],
+    "title": "Park Café - <span>Alta Cocina Francesa</span>",
+    "small": "Sabana Norte, San José",
+    "img": {
+      "src": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800",
+      "alt": "Park Café"
+    },
+    "description": "<p>Alta cocina francesa en una mansión histórica, considerado uno de los mejores restaurantes de Centroamérica. Experiencia gastronómica de clase mundial.</p><p>Menú degustación con maridaje de vinos. Requiere reservación con anticipación. Calificación: 4.8/5 - Rango de precio: $$$$ - Teléfono: +506 2290-6324</p>"
+  },
+  {
+    "id": 7,
+    "coords": [9.9298, -84.0834],
+    "title": "Machu Picchu - <span>Cocina Peruana</span>",
+    "small": "Calle 32, Paseo Colón, San José",
+    "img": {
+      "src": "https://images.unsplash.com/photo-1534352956036-cd81e27dd615?w=800",
+      "alt": "Machu Picchu"
+    },
+    "description": "<p>Auténtica comida peruana con ceviches, causas y platos tradicionales de la gastronomía andina. El sabor del Perú en Costa Rica.</p><p>No te pierdas el ceviche mixto y el lomo saltado. Pisco sours preparados de forma tradicional. Calificación: 4.5/5 - Rango de precio: $$ - Teléfono: +506 2222-7384</p>"
+  },
+  {
+    "id": 8,
+    "coords": [9.9287, -84.0796],
+    "title": "Restaurante Silvestre - <span>Mediterráneo Contemporáneo</span>",
+    "small": "Barrio Escalante, San José",
+    "img": {
+      "src": "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=800",
+      "alt": "Restaurante Silvestre"
+    },
+    "description": "<p>Cocina mediterránea contemporánea con ingredientes locales y orgánicos en un ambiente moderno. Énfasis en sostenibilidad y productos de temporada.</p><p>Carta de vinos naturales y cocteles artesanales. El ambiente perfecto para una velada especial. Calificación: 4.7/5 - Rango de precio: $$$ - Teléfono: +506 2253-4509</p>"
+  },
+  {
+    "id": 9,
+    "coords": [9.9325, -84.0778],
+    "title": "Al Mercat - <span>Tapas Españolas</span>",
+    "small": "Barrio Escalante, San José",
+    "img": {
+      "src": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800",
+      "alt": "Al Mercat"
+    },
+    "description": "<p>Restaurante de tapas españolas con una excelente selección de jamones ibéricos y vinos. Auténtico sabor español en el corazón de San José.</p><p>Prueba las croquetas, patatas bravas y tabla de jamones. Ambiente animado ideal para compartir. Calificación: 4.6/5 - Rango de precio: $$$ - Teléfono: +506 2281-4307</p>"
+  },
+  {
+    "id": 10,
+    "coords": [9.9318, -84.0769],
+    "title": "Product C - <span>Fusión Costarricense</span>",
+    "small": "Barrio Escalante, San José",
+    "img": {
+      "src": "https://images.unsplash.com/photo-1551218808-94e220e084d2?w=800",
+      "alt": "Product C"
+    },
+    "description": "<p>Cocina contemporánea costarricense con enfoque en productos locales y sostenibles. Menú cambiante según temporada y disponibilidad.</p><p>Experiencia culinaria que celebra los sabores de Costa Rica con técnicas modernas. Calificación: 4.8/5 - Rango de precio: $$$ - Teléfono: +506 2281-0760</p>"
+  },
+  {
+    "id": 11,
+    "coords": [9.8612, -83.9207],
+    "title": "Restaurante La Basilica",
+    "small": "Frente a la Basílica, Cartago Centro",
+    "img": {
+      "src": "https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=800",
+      "alt": "Restaurante La Basilica"
+    },
+    "description": "<p>Ubicado frente a la Basílica de Los Ángeles, ofrece vista privilegiada y comida variada. Lugar perfecto para comer después de visitar el santuario.</p><p>Menú internacional con opciones de comida típica costarricense. Terraza con vista a la Basílica. Calificación: 4.3/5 - Rango de precio: $$ - Teléfono: +506 2551-2345</p>"
+  },
+  {
+    "id": 12,
+    "coords": [9.8634, -83.9189],
+    "title": "Soda La Puerta del Sol",
+    "small": "Centro de Cartago",
+    "img": {
+      "src": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800",
+      "alt": "Soda La Puerta del Sol"
+    },
+    "description": "<p>Soda familiar que sirve desayunos típicos y casados tradicionales a excelentes precios. El lugar favorito de los cartagineses para el desayuno.</p><p>Destacan el gallo pinto, los tamales y el café. Atención rápida y amigable. Calificación: 4.4/5 - Rango de precio: $ - Teléfono: +506 2552-1098</p>"
+  },
+  {
+    "id": 13,
+    "coords": [10.6356, -85.4406],
+    "title": "Restaurante Mar y Tierra",
+    "small": "Centro de Liberia, Guanacaste",
+    "img": {
+      "src": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800",
+      "alt": "Restaurante Mar y Tierra"
+    },
+    "description": "<p>Especializado en mariscos frescos y carnes a la parrilla en el corazón de Guanacaste. Combinación perfecta de mar y tierra.</p><p>El ceviche es imperdible, al igual que las costillas BBQ. Ambiente casual y familiar. Calificación: 4.5/5 - Rango de precio: $$ - Teléfono: +506 2666-1234</p>"
+  },
+  {
+    "id": 14,
+    "coords": [9.9978, -84.1165],
+    "title": "Soda Julia",
+    "small": "Centro de Alajuela",
+    "img": {
+      "src": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800",
+      "alt": "Soda Julia"
+    },
+    "description": "<p>Soda tradicional cerca del Aeropuerto Juan Santamaría, perfecta para comida típica tica. Ideal para una parada antes o después de tu vuelo.</p><p>Casados abundantes y frescos. Recomendado por locales y visitantes. Calificación: 4.2/5 - Rango de precio: $ - Teléfono: +506 2441-5678</p>"
+  },
+  {
+    "id": 15,
+    "coords": [9.9289, -84.0802],
+    "title": "Restaurante El Chante Vegano",
+    "small": "Barrio Escalante, San José",
+    "img": {
+      "src": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800",
+      "alt": "Restaurante El Chante Vegano"
+    },
+    "description": "<p>Primer restaurante 100% vegano de Costa Rica con opciones saludables y creativas. Demostrando que la comida vegana puede ser deliciosa y satisfactoria.</p><p>Desde bowls hasta hamburguesas veganas. Todo preparado con amor y conciencia ambiental. Calificación: 4.7/5 - Rango de precio: $$ - Teléfono: +506 2224-1163</p>"
+  },
+  {
+    "id": 16,
+    "coords": [9.8589, -83.9156],
+    "title": "Restaurante La Casona del Cafetal",
+    "small": "Cartago Centro, 200m este del Mercado",
+    "img": {
+      "src": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800",
+      "alt": "Restaurante La Casona del Cafetal"
+    },
+    "description": "<p>Restaurante tradicional en una casa antigua con comida típica y ambiente familiar. Decoración rústica que evoca la Costa Rica de antaño.</p><p>Especialidades incluyen olla de carne, picadillos y arroz con pollo. Perfecto para conocer la cocina tradicional cartaginesa. Calificación: 4.5/5 - Rango de precio: $$ - Teléfono: +506 2551-3456</p>"
+  },
+  {
+    "id": 17,
+    "coords": [9.8645, -83.9223],
+    "title": "Pizzería Trattoria Sole",
+    "small": "Del Teatro Municipal 100m sur, Cartago",
+    "img": {
+      "src": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800",
+      "alt": "Pizzería Trattoria Sole"
+    },
+    "description": "<p>Pizzas artesanales al horno de leña y pasta fresca en un ambiente acogedor. Recetas italianas auténticas traídas por sus fundadores.</p><p>La pizza margherita y los raviolis son altamente recomendados. Vinos italianos disponibles. Calificación: 4.6/5 - Rango de precio: $$ - Teléfono: +506 2552-8901</p>"
+  },
+  {
+    "id": 18,
+    "coords": [9.8598, -83.9178],
+    "title": "Marisquería El Pescador",
+    "small": "Cartago, diagonal a la Estación de Bomberos",
+    "img": {
+      "src": "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800",
+      "alt": "Marisquería El Pescador"
+    },
+    "description": "<p>Especialidad en ceviches, pescado frito y cócteles de mariscos frescos del Pacífico. Mariscos que llegan diariamente desde la costa.</p><p>El ceviche de corvina es el favorito de los clientes. Precios accesibles y porciones abundantes. Calificación: 4.4/5 - Rango de precio: $ - Teléfono: +506 2551-7890</p>"
+  },
+  {
+    "id": 19,
+    "coords": [9.8625, -83.9195],
+    "title": "Café Los Abuelos",
+    "small": "Frente al Parque Central, Cartago",
+    "img": {
+      "src": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800",
+      "alt": "Café Los Abuelos"
+    },
+    "description": "<p>Cafetería acogedora con repostería casera, café de altura y desayunos típicos. El aroma del café recién hecho te recibe al entrar.</p><p>Prueba el tres leches y el café de Tarrazú. Punto de encuentro de amigos y familias cartaginesas. Calificación: 4.7/5 - Rango de precio: $ - Teléfono: +506 2552-4567</p>"
+  },
+  {
+    "id": 20,
+    "coords": [9.8580, -83.9240],
+    "title": "Asados Don Tono",
+    "small": "Salida a Paraíso, Cartago",
+    "img": {
+      "src": "https://images.unsplash.com/photo-1544025162-d76694265947?w=800",
+      "alt": "Asados Don Tono"
+    },
+    "description": "<p>Carnes a la parrilla, chorizos artesanales y chifrijo en un ambiente informal y popular. El lugar perfecto para los amantes de la carne.</p><p>Las costillas BBQ y el chifrijo son legendarios en la zona. Música en vivo los fines de semana. Calificación: 4.3/5 - Rango de precio: $$ - Teléfono: +506 2552-6543</p>"
+  }
+]

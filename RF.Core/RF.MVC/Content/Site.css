@@ -18,3 +18,204 @@ select,
 textarea {
     max-width: 280px;
 }
+
+#map {
+    width: 100%;
+    height: 80vh;
+}
+
+/* CSS del ejemplo de inspiración */
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+.hidden {
+    display: none;
+}
+
+.active-sidebar .leaflet-left {
+    transform: translateX(490px);
+}
+
+.sidebar {
+    display: block;
+    position: absolute;
+    width: 100%;
+    max-width: 480px;
+    z-index: 99999;
+    background: #333;
+    color: white;
+    overflow: hidden;
+    height: 100%;
+    transform: translateX(calc(-100% - 20px));
+    box-shadow: 0px 0px 22px -11px rgba(66, 68, 90, 1);
+}
+
+.active-sidebar .sidebar {
+    max-width: 560px;
+    width: 100%;
+    transform: translateX(0);
+}
+
+@media (min-width: 768px) {
+    .sidebar {
+        top: 10px;
+        left: 10px;
+        border-radius: 5px;
+        height: calc(100% - 20px);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .active-sidebar .sidebar {
+        max-width: 480px;
+        width: 100%;
+        transform: translateX(0);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .active-sidebar .leaflet-left {
+        transform: translateX(485px);
+        transition: transform 350ms;
+    }
+}
+
+h1 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.close-button {
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    border: none;
+    margin: 0;
+    padding: 0;
+    border-radius: 3px;
+    z-index: 1;
+    background: none;
+    font-size: 1.5rem;
+}
+
+.sidebar svg {
+    display: block;
+    width: 20px;
+    height: 20px;
+    fill: #3f3f3f;
+    pointer-events: none;
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    height: 100%;
+}
+
+/* sidebar-content */
+.sidebar-content {
+    height: inherit;
+}
+
+    .sidebar-content h1 {
+        position: sticky;
+        top: 0;
+        color: #fff;
+        background: teal;
+        padding: 10px 35px 10px 15px;
+    }
+
+    .sidebar-content img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        padding-bottom: 15px;
+    }
+
+    .sidebar-content small {
+        display: block;
+        padding: 5px 15px;
+    }
+
+.info-description {
+    padding: 5px 15px 15px;
+    line-height: 150%;
+}
+
+.info-content {
+    height: 100%;
+    overflow: auto;
+    padding-bottom: 50px;
+}
+
+.info-content small{
+    display: block;
+    padding-top: 30px 0;
+}
+
+.marker-id {
+    font-size: 3rem;
+    font-weight: bold;
+    position: absolute;
+    left: 10px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.info-content::-webkit-scrollbar {
+    width: 10px;
+}
+
+.info-content::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 81, 255, 0.3);
+}
+
+.info-content::-webkit-scrollbar-thumb {
+    background-color: #003764;
+    outline: 1px solid #002449;
+}
+
+/* marker */
+.leaflet-marker-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+    color: #fff;
+    font-size: 12px;
+    box-shadow: 0px 0px 10px #fff;
+    border-radius: 100%;
+    border: 2px solid teal;
+    background: #ede9e9;
+}
+
+.leaflet-marker-icon::before {
+    content: "\f2e7"; /* Icono de utensils (tenedor y cuchillo) */
+    font-family: "Font Awesome 6 Free";
+    color: teal;
+    font-weight: 900;
+    font-size: 18px;
+    position: absolute;
+    left: .25em;
+    top: .18em
+}
+
+    .active-sidebar .leaflet-marker-icon,
+    .leaflet-marker-icon:hover {
+        animation: border-pulse 1.5s infinite;
+    }
+
+@keyframes border-pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 1);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 0, 0, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+    }
+}

@@ -42,7 +42,7 @@ svg:not(:root) {
     display: block;
     position: absolute;
     width: 100%;
-    max-width: 480px;
+    max-width: 345px;
     z-index: 99999;
     background: #333;
     color: white;
@@ -53,7 +53,7 @@ svg:not(:root) {
 }
 
 .active-sidebar .sidebar {
-    max-width: 560px;
+    max-width: 345px;
     width: 100%;
     transform: translateX(0);
 }
@@ -75,7 +75,7 @@ svg:not(:root) {
     }
 
     .active-sidebar .leaflet-left {
-        transform: translateX(485px);
+        transform: translateX(360px);
         transition: transform 350ms;
     }
 }

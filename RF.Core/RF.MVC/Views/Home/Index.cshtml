@@ -1,5 +1,7 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model IEnumerable<RF.Data.Restaurant>
+
+@{
+    ViewBag.Title = "Mapa";
 }
 
 <main>
@@ -10,8 +12,17 @@
     </div>
     <input id="filtrarMapa" type="text" class="form-control mb-2" placeholder="Buscar por ubicación o nombre">
     <div id="map"></div>
-     
+
     <script>
+
+        const restaurants = @Html.Raw(
+            Newtonsoft.Json.JsonConvert.SerializeObject(Model,
+            new Newtonsoft.Json.JsonSerializerSettings {
+                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            })
+        );
+
+
         // config map
         let config = {
             minZoom: 10,
@@ -60,69 +71,60 @@
 
         // function to add markers to map
         const renderMap = (textToSearch) => {
-            fetchData("/Content/places.json")
-            .then((data) => {
-                // create markers width "marker-options-id"
-                document.getElementsByClassName('leaflet-marker-pane')[0].innerHTML = "" //limpiamos los markups del mapa
-                data = data.filter(restaurant => (restaurant.title.includes(textToSearch) || restaurant.small.includes(textToSearch)));
+            // Limpia marcadores anteriores
+            document.getElementsByClassName('leaflet-marker-pane')[0].innerHTML = "";
+            featureGroups = [];
+            latlngs = [];
 
-                data.map((marker) => {
+            // Filtra según texto
+            let data = restaurants.filter(r =>
+                r.Name.toLowerCase().includes(textToSearch.toLowerCase()) ||
+                (r.Address && r.Address.toLowerCase().includes(textToSearch.toLowerCase()))
+            );
+
+            // Crea marcadores
+            data.map((r) => {
+                const coords = [r.Latitude ?? 0, r.Longitude ?? 0];
+                if (coords[0] !== 0 && coords[1] !== 0) {
                     featureGroups.push(
-                        L.marker(marker.coords, {
+                        L.marker(coords, {
                             icon: L.divIcon({
                                 className: "leaflet-marker-icon",
                                 iconSize: L.point(30, 30),
                                 popupAnchor: [3, -5],
                             }),
-                            "marker-options-id": marker.id,
+                            "marker-options-id": r.RestaurantID,
                         })
                     );
-                    latlngs.push(marker.coords);
-                });
-
-                // add polyline to map
-
-                /* COMENTAR ESTE BLOQUE (genera líneas que conectan los nodos)*/
-                /*L.polyline(latlngs, {
-                    color: "red",
-                    weight: 2,
-                }).addTo(map);*/
-
-                return data;
-            })
-            .then((data) => {
-                // create feature group
-                // add markers to map
-                featureGroups.map((marker) => {
-                    marker.addTo(map);
-                });
-
-                // create feature group with markers
-                groupBounds = new L.featureGroup(featureGroups);
-
-                // fitBounds of feature group to map
-                map.fitBounds(groupBounds.getBounds(), {
-                    padding: [50, 50],
-                });
-
-                // add event listener to markers to open sidebar
-                groupBounds.on("click", function (e) {
-                    if (e.layer instanceof L.Marker) {
-                        showSidebarWidthText(e.layer.options["marker-options-id"]);
-                    }
-                });
-
-                // add comment to sodebar depending on marker id
-                function showSidebarWidthText(id) {
-                    data.filter((marker) => {
-                        if (marker.id === id) {
-                            document.body.classList.add("active-sidebar");
-                            addContentToSidebar(marker);
-                        }
-                    });
+                    latlngs.push(coords);
                 }
             });
-        }
+
+            // Añade marcadores al mapa
+            featureGroups.map((marker) => marker.addTo(map));
+            groupBounds = new L.featureGroup(featureGroups);
+
+            // Ajusta vista del mapa
+            map.fitBounds(groupBounds.getBounds(), { padding: [50, 50] });
+
+            // Evento click marcador
+            groupBounds.on("click", function (e) {
+                if (e.layer instanceof L.Marker) {
+                    showSidebarWidthText(e.layer.options["marker-options-id"]);
+                }
+            });
+
+            // Mostrar info en sidebar
+            function showSidebarWidthText(id) {
+                data.filter((r) => {
+                    if (r.RestaurantID === id) {
+                        document.body.classList.add("active-sidebar");
+                        addContentToSidebar(r);
+                    }
+                });
+            }
+        };
+
         renderMap("");
 
         // --------------------------------------------------
@@ -158,34 +160,40 @@
         // --------------------------------------------------
         // add content to sidebar
 
-        function addContentToSidebar(marker) {
-            const { id, title, small, description, img, coords } = marker;
-            const smallInfo = small !== undefined ? `<small>${small}</small>` : "";
+        function addContentToSidebar(r) {
+            const img = r.ImageUrl ? `<img src="${r.ImageUrl}" alt="${r.Name}" style="width: 100%; padding: 20px; border-radius: 35px;">` : "";
+            const rating = r.Rating ? `⭐ ${r.Rating}` : "";
 
-            // create sidebar content
             const sidebarTemplate = `
-                <article class="sidebar-content">
-                    <h1>${title}</h1>
-                    <div class="info-content">
-                    <img class="img-zoom" src="${img.src}" alt="${img.alt}">
-                    ${smallInfo}
-                    <div class="info-description">${description}</div>
+                <div class="sidebar-content">
+                    <h1>${r.Name}</h1>
+                    <div>
+                        ${img}
+                        <div class="d-flex px-4">
+                            <div style="font-size: 16; font-weigth:bold;">${r.Address ?? ""}</div>
+                            <div class="ms-3" style="font-size: 16; font-weigth:bold;">${rating}</div>
+                        </div>
+                        <div class="px-4 py-2"><b>Descripción: </b>${r.Description ?? ""}</div>
+                        <div class="d-flex-center px-4">
+                            <a href="${r.GoogleMapsLink ?? "#"}" target="_blank" class="btn btn-outline-primary mt-2 w-100">Ver en Google Maps</a>
+                        </div>
+                        <div class="d-flex-center px-4 py-2">
+                            <a href="${r.WazeLink ?? "#"}" target="_blank" class="btn btn-outline-info mt-2 w-100">Ver en Waze Maps</a>
+                        </div>
+                        <div class="d-flex-center px-4">
+                            <a href="${r.Website ?? "#"}" target="_blank" class="btn btn-outline-light mt-2 w-100">Abrir Web</a>
+                        </div>
                     </div>
-                </article>
+                </div>
             `;
 
             const sidebar = document.querySelector(".sidebar");
             const sidebarContent = document.querySelector(".sidebar-content");
-
-            // always remove content before adding new one
             sidebarContent?.remove();
-            
-            // add content to sidebar
             sidebar.insertAdjacentHTML("beforeend", sidebarTemplate);
-
-            // set bounds depending on marker coords
-            boundsMap(coords);
+            boundsMap([r.Latitude, r.Longitude]);
         }
+
 
         // --------------------------------------------------
         // bounds map when sidebar is open

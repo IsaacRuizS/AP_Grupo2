@@ -37,6 +37,7 @@ namespace RF.Data
         public Nullable<bool> IsActive { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
+        public string ImageUrl { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Menu> Menus { get; set; }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="RestaurantFinderModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="RestaurantFinderModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="MenuItems">
           <Key>
             <PropertyRef Name="ItemID" />
@@ -52,6 +52,7 @@
           <Property Name="IsActive" Type="bit" />
           <Property Name="CreatedAt" Type="datetime" />
           <Property Name="UpdatedAt" Type="datetime" />
+          <Property Name="ImageUrl" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Schedules">
           <Key>
@@ -176,8 +177,7 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="RestaurantFinderModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -234,6 +234,7 @@
           <NavigationProperty Name="Menus" Relationship="Self.FK__Menus__Restauran__5070F446" FromRole="Restaurants" ToRole="Menus" />
           <NavigationProperty Name="User" Relationship="Self.FK__Restauran__UserI__45F365D3" FromRole="Restaurants" ToRole="Users" />
           <NavigationProperty Name="Schedules" Relationship="Self.FK__Schedules__Resta__4AB81AF0" FromRole="Restaurants" ToRole="Schedules" />
+          <Property Name="ImageUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Schedule">
           <Key>
@@ -400,6 +401,7 @@
           <EntitySetMapping Name="Restaurants">
             <EntityTypeMapping TypeName="RestaurantFinderModel.Restaurant">
               <MappingFragment StoreEntitySet="Restaurants">
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
                 <ScalarProperty Name="RestaurantID" ColumnName="RestaurantID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />

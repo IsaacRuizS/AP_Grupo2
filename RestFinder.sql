@@ -80,6 +80,8 @@ CREATE TABLE MenuItems (
     FOREIGN KEY (MenuID) REFERENCES Menus(MenuID)
 );
 
+ALTER TABLE [RestaurantFinder].[dbo].[Restaurants] ADD ImageUrl Varchar(500) DEFAULT '';
+
 --Inserts
 
 INSERT INTO UserRoles (Name, Description)

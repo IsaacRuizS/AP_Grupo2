@@ -6,11 +6,14 @@ using System.Web.Mvc;
 
 namespace RF.MVC.Controllers
 {
-    public class HomeController : Controller
-    {
+    public class HomeController : ControllerBase
+    { 
+
+
         public ActionResult Index()
         {
-            return View();
+            var restaurants = RestaurantBusiness.GetRestaurants(0);
+            return View(restaurants.ToList());
         }
 
         public ActionResult About()

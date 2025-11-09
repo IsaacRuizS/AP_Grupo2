@@ -1,13 +1,14 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using System.Data.SqlClient;
+using System.Data.Entity.Core.EntityClient;
+using System.Configuration;
 using FB.Login.Models;
 
 namespace FB.Login.Controllers
@@ -22,7 +23,7 @@ namespace FB.Login.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -34,10 +35,7 @@ namespace FB.Login.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
-            }
+            private set { _signInManager = value; }
         }
 
         public ApplicationUserManager UserManager
@@ -46,13 +44,11 @@ namespace FB.Login.Controllers
             {
                 return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
-            private set
-            {
-                _userManager = value;
-            }
+            private set { _userManager = value; }
         }
 
-        //
+        private const string XsrfKey = "XsrfId";
+
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -61,7 +57,6 @@ namespace FB.Login.Controllers
             return View();
         }
 
-        //
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
@@ -73,26 +68,46 @@ namespace FB.Login.Controllers
                 return View(model);
             }
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
+            try
             {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
+                // Find identity user by email first, then by username
+                var identityUser = await UserManager.FindByEmailAsync(model.Email) ?? await UserManager.FindByNameAsync(model.Email);
+
+                if (identityUser == null)
+                {
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
+                }
+
+                // Verify password against AspNetUsers password hash
+                var passwordValid = await UserManager.CheckPasswordAsync(identityUser, model.Password);
+                if (!passwordValid)
+                {
+                    ModelState.AddModelError("", "Invalid login attempt.");
+                    return View(model);
+                }
+
+                // Sign in the user
+                await SignInManager.SignInAsync(identityUser, isPersistent: model.RememberMe, rememberBrowser: false);
+
+                // Update or create record in Foodbank.Users (sync)
+                try
+                {
+                    var emailToSync = !string.IsNullOrEmpty(identityUser.Email) ? identityUser.Email : identityUser.UserName;
+                    SyncUserToFoodbank(emailToSync, updateLastLogin: true);
+                }
+                catch { /* Do not block login on sync errors */ }
+
+                return RedirectToLocal(returnUrl);
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "An error occurred while processing your request.");
+                return View(model);
             }
         }
 
-        //
-        // GET: /Account/VerifyCode
+        // Other identity actions (VerifyCode, Register, ExternalLogin, etc.)
         [AllowAnonymous]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
         {
@@ -120,7 +135,7 @@ namespace FB.Login.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -155,20 +170,16 @@ namespace FB.Login.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    try
+                    {
+                        SyncUserToFoodbank(model.Email, updateLastLogin: true);
+                    }
+                    catch { }
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
-
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
@@ -333,6 +344,16 @@ namespace FB.Login.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    // try update last_login if external provider supplied email
+                    try
+                    {
+                        if (!string.IsNullOrEmpty(loginInfo.Email))
+                        {
+                            SyncUserToFoodbank(loginInfo.Email, updateLastLogin: true);
+                        }
+                    }
+                    catch { }
+
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -375,6 +396,12 @@ namespace FB.Login.Controllers
                     if (result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        try
+                        {
+                            SyncUserToFoodbank(model.Email, updateLastLogin: true);
+                        }
+                        catch { }
+
                         return RedirectToLocal(returnUrl);
                     }
                 }
@@ -403,6 +430,48 @@ namespace FB.Login.Controllers
             return View();
         }
 
+        private void SyncUserToFoodbank(string username, bool updateLastLogin)
+        {
+            if (string.IsNullOrEmpty(username)) return;
+            string efConn = ConfigurationManager.ConnectionStrings["FoodbankEntities"]?.ConnectionString;
+            if (string.IsNullOrEmpty(efConn)) return;
+            var efBuilder = new EntityConnectionStringBuilder(efConn);
+            var providerConn = efBuilder.ProviderConnectionString;
+            if (string.IsNullOrEmpty(providerConn)) return;
+            using (var conn = new SqlConnection(providerConn))
+            {
+                conn.Open();
+                using (var cmd = new SqlCommand("SELECT UserId FROM Users WHERE Username = @username", conn))
+                {
+                    cmd.Parameters.AddWithValue("@username", username);
+                    var scalar = cmd.ExecuteScalar();
+                    if (scalar == null || scalar == DBNull.Value)
+                    {
+                        using (var insert = new SqlCommand("INSERT INTO Users (Username, Email, FullName, IsActive, CreatedAt, LastLogin) VALUES (@Username, @Email, @FullName, @IsActive, @CreatedAt, @LastLogin)", conn))
+                        {
+                            insert.Parameters.AddWithValue("@Username", username);
+                            insert.Parameters.AddWithValue("@Email", username);
+                            insert.Parameters.AddWithValue("@FullName", string.Empty);
+                            insert.Parameters.AddWithValue("@IsActive", true);
+                            insert.Parameters.AddWithValue("@CreatedAt", DateTime.Now);
+                            insert.Parameters.AddWithValue("@LastLogin", updateLastLogin ? (object)DateTime.Now : DBNull.Value);
+                            insert.ExecuteNonQuery();
+                        }
+                    }
+                    else if (updateLastLogin)
+                    {
+                        using (var upd = new SqlCommand("UPDATE Users SET LastLogin = @LastLogin, IsActive = @IsActive WHERE UserId = @id", conn))
+                        {
+                            upd.Parameters.AddWithValue("@LastLogin", DateTime.Now);
+                            upd.Parameters.AddWithValue("@IsActive", true);
+                            upd.Parameters.AddWithValue("@id", Convert.ToInt32(scalar));
+                            upd.ExecuteNonQuery();
+                        }
+                    }
+                }
+            }
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -424,62 +493,33 @@ namespace FB.Login.Controllers
         }
 
         #region Helpers
-        // Used for XSRF protection when adding external logins
-        private const string XsrfKey = "XsrfId";
-
-        private IAuthenticationManager AuthenticationManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
-        }
+        private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
 
         private void AddErrors(IdentityResult result)
         {
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError("", error);
-            }
+            foreach (var error in result.Errors) ModelState.AddModelError("", error);
         }
 
         private ActionResult RedirectToLocal(string returnUrl)
         {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
+            if (Url.IsLocalUrl(returnUrl)) return Redirect(returnUrl);
             return RedirectToAction("Index", "Home");
         }
+        #endregion
 
         internal class ChallengeResult : HttpUnauthorizedResult
         {
-            public ChallengeResult(string provider, string redirectUri)
-                : this(provider, redirectUri, null)
-            {
-            }
-
-            public ChallengeResult(string provider, string redirectUri, string userId)
-            {
-                LoginProvider = provider;
-                RedirectUri = redirectUri;
-                UserId = userId;
-            }
-
+            public ChallengeResult(string provider, string redirectUri) : this(provider, redirectUri, null) { }
+            public ChallengeResult(string provider, string redirectUri, string userId) { LoginProvider = provider; RedirectUri = redirectUri; UserId = userId; }
             public string LoginProvider { get; set; }
             public string RedirectUri { get; set; }
             public string UserId { get; set; }
-
             public override void ExecuteResult(ControllerContext context)
             {
                 var properties = new AuthenticationProperties { RedirectUri = RedirectUri };
-                if (UserId != null)
-                {
-                    properties.Dictionary[XsrfKey] = UserId;
-                }
+                if (UserId != null) properties.Dictionary[XsrfKey] = UserId;
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
         }
-        #endregion
     }
 }

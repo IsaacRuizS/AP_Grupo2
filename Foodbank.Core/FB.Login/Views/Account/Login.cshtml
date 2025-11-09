@@ -1,7 +1,11 @@
-﻿@using FB.Login.Models
-@model LoginViewModel
+﻿@model FB.Login.Models.LoginViewModel
 @{
     ViewBag.Title = "Log in";
+}
+
+@if (!string.IsNullOrEmpty(Request.QueryString["message"]))
+{
+    <div class="alert alert-warning">@Request.QueryString["message"]</div>
 }
 
 <main aria-labelledby="title">
@@ -45,10 +49,6 @@
                     <p>
                         @Html.ActionLink("Register as a new user", "Register")
                     </p>
-                    @* Enable this once you have account confirmation enabled for password reset functionality
-                        <p>
-                            @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                        </p>*@
                 }
             </section>
         </div>

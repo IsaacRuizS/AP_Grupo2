@@ -4,21 +4,92 @@
         ViewBag.Title = "Index";
     }
 
-    <h2>Index</h2>
+    
+    <div class="w-100">
+        <div class="d-flex justify-content-between">
+            <h2>Food Items</h2>
+            <button type="button" class="btn btn-primary ms-3" style="height: 40px;" onclick="location.href='@Url.Action("Create")'">New</button>
+        </div>
 
-    <div class="d-flex justify-content-between">
-        <p>
-            @Html.ActionLink("Create New", "Create")
-
-            @using (Html.BeginForm("Index", "FoodItems", FormMethod.Get))
-            {
-                <div class="d-flex pb-2">
-                    @Html.DropDownList("roleName", (SelectList)ViewBag.RoleList,  new { @class = "form-select me-2", style = "min-width:160px" })
-                    <button type="submit" class="btn btn-primary">Buscar</button>
+        @using (Html.BeginForm("FilterData", "FoodItems", FormMethod.Get))
+        {
+            <div class="row mt-2">
+                <div class="col-2 mb-2">
+                    <label for="Name">Name</label>
+                    <input type="text" name="Name" class="form-control" placeholder="Name" />
                 </div>
-            }
-        </p>
+                <div class="col-2 mb-2">
+                    <label for="Category">Category</label>
+                    <input type="text" name="Category" class="form-control" placeholder="Category" />
+                </div>
+                <div class="col-2 mb-2">
+                    <label for="Brand">Brand</label>
+                    <input type="text" name="Brand" class="form-control" placeholder="Brand" />
+                </div>
+                <div class="col-2 mb-2">
+                    <label for="Description">Description</label>
+                    <input type="text" name="Description" class="form-control" placeholder="Description" />
+                </div>
+                <div class="col-2 mb-2">
+                    <label for="MinPrice">MinPrice</label>
+                    <input type="number" step="0.01" name="MinPrice" class="form-control" placeholder="Min Price" />
+                </div>
+                <div class="col-2 mb-2">
+                    <label for="MaxPrice">MaxPrice</label>
+                    <input type="number" step="0.01" name="MaxPrice" class="form-control" placeholder="Max Price" />
+                </div>
+                <div class="col-2 mb-2">
+                    <label for="Unit">Unit</label>
+                    <input type="text" name="Unit" class="form-control" placeholder="Unit" style="min-width:100px" />
+                </div>
+                <div class="col-2 mb-2">
+                    <label for="QuantityInStock">QuantityInStock</label>
+                    <input type="number" name="QuantityInStock" class="form-control" placeholder="Quantity" />
+                </div>
+                <div class="col-2 mb-2">
+                    <label for="StartExpirationDate">StartExpirationDate</label>
+                    <input type="date" name="StartExpirationDate" class="form-control" />
+                </div>
+                <div class="col-2 mb-2">
+                    <label for="EndExpirationDate">EndExpirationDate</label>
+                    <input type="date" name="EndExpirationDate" class="form-control" />
+                </div>
+                <div class="col-2 mb-2">
+                    <label for="IsPerishable">IsPerishable</label>
+                    <select name="IsPerishable" class="form-select">
+                        <option value="">Perishable</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+                <div class="col-2 mb-2">
+                    <label for="CaloriesPerServing">CaloriesPerServing</label>
+                    <input type="number" name="CaloriesPerServing" class="form-control" placeholder="Calories">
+                </div>
+                <div class="col-2 mb-2">
+                    <label for="Barcode">Barcode</label>
+                    <input type="text" name="Barcode" class="form-control" placeholder="Barcode" />
+                </div>
+                <div class="col-2 mb-2">
+                    <label for="Role">Role</label>
+                    @Html.DropDownList("RoleId", (SelectList)ViewBag.RoleList, new { @class = "form-select" })
+                </div>
+                <div class="col-2 mb-2 d-flex align-items-center">
+                    <div class="form-check mt-4">
+                        @Html.CheckBox("FilterByRole", false, new { @class = "form-check-input", id = "FilterByRole" })
+                        <label class="form-check-label ms-2" for="FilterByRole">Filtrar por rol</label>
+                    </div>
+                </div>
+                <div class="col-2 mb-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-outline-info w-100">Buscar</button>
+                </div>
+                <div class="col-2 mb-2 d-flex align-items-end">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
     </div>
+
     <table class="table table-responsive table-bordered table-dark table-striped table-primary">
         <tr>
             <th>

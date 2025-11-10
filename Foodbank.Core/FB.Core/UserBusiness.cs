@@ -1,6 +1,7 @@
 ﻿using FB.Data;
 using FB.Data.Repository;
 using System.Collections.Generic;
+using System;
 
 namespace FB.Core
 {
@@ -37,6 +38,41 @@ namespace FB.Core
             return id <= 0
                 ? _repositoryUser.GetAll()
                 : new List<User>() { _repositoryUser.GetById(id) };
+        }
+
+        // Get user by username/email
+        public User GetUserByUsername(string username)
+        {
+            return _repositoryUser.GetByUsername(username);
+        }
+
+        // Create user record if not exists or update last login if exists
+        public bool CreateOrUpdateLastLogin(string username)
+        {
+            if (string.IsNullOrEmpty(username))
+                return false;
+
+            var existing = _repositoryUser.GetByUsername(username);
+            if (existing != null)
+            {
+                existing.LastLogin = DateTime.Now;
+                _repositoryUser.Update(existing);
+            }
+            else
+            {
+                var newUser = new User
+                {
+                    Username = username,
+                    Email = username,
+                    FullName = string.Empty,
+                    IsActive = true,
+                    CreatedAt = DateTime.Now,
+                    LastLogin = DateTime.Now
+                };
+                _repositoryUser.Add(newUser);
+            }
+
+            return true;
         }
     }
 }

@@ -10,14 +10,12 @@ namespace FB.MVC.Controllers
 {
     public class FoodItemsController : ControllerBase
     {
-        private FoodbankEntities db = new FoodbankEntities();
-
         // GET: FoodItems
-        public ActionResult Index(string roleName)
+        public ActionResult Index()
         {
-            ViewBag.RoleList = new SelectList(db.Roles.OrderBy(r => r.RoleName).ToList(), "RoleName", "RoleName", roleName);
-
-            var foodItems = FoodItemBusiness.GetFoodItemsByRole(roleName);
+            ViewBag.RoleList = new SelectList(RoleBusiness.GetRoles(0).ToList(), "RoleId", "RoleName");
+            
+            var foodItems = FoodItemBusiness.GetFoodItems(0);
 
             return View(foodItems.ToList());
         }
@@ -42,7 +40,7 @@ namespace FB.MVC.Controllers
         // GET: FoodItems/Create
         public ActionResult Create()
         {
-            ViewBag.RoleId = new SelectList(db.Roles, "RoleId", "RoleName");
+            ViewBag.RoleId = new SelectList(RoleBusiness.GetRoles(0), "RoleId", "RoleName");
             return View();
         }
 
@@ -58,7 +56,7 @@ namespace FB.MVC.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.RoleId = new SelectList(db.Roles, "RoleId", "RoleName", foodItem.RoleId);
+            ViewBag.RoleId = new SelectList(RoleBusiness.GetRoles((int)foodItem.RoleId), "RoleId", "RoleName", foodItem.RoleId);
             return View(foodItem);
         }
 
@@ -76,7 +74,7 @@ namespace FB.MVC.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.RoleId = new SelectList(db.Roles, "RoleId", "RoleName", foodItem.RoleId);
+            ViewBag.RoleId = new SelectList(RoleBusiness.GetRoles((int)foodItem.RoleId), "RoleId", "RoleName", foodItem.RoleId);
             return View(foodItem);
         }
 
@@ -90,7 +88,7 @@ namespace FB.MVC.Controllers
                 FoodItemBusiness.SaveOrUpdate(foodItem);
                 return RedirectToAction("Index");
             }
-            ViewBag.RoleId = new SelectList(db.Roles, "RoleId", "RoleName", foodItem.RoleId);
+            ViewBag.RoleId = new SelectList(RoleBusiness.GetRoles((int)foodItem.RoleId), "RoleId", "RoleName", foodItem.RoleId);
             return View(foodItem);
         }
 
@@ -120,13 +118,38 @@ namespace FB.MVC.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
+        public ActionResult FilterData(FilterFoodItemDto filtersInfo)
         {
-            if (disposing)
+            //devolver los roles
+            ViewBag.RoleList = new SelectList(RoleBusiness.GetRoles(0).ToList(), "RoleId", "RoleName", filtersInfo?.RoleId);
+
+            // Validacion de precios 
+            if (filtersInfo.MinPrice.HasValue && filtersInfo.MaxPrice.HasValue)
             {
-                db.Dispose();
+                if (filtersInfo.MinPrice > filtersInfo.MaxPrice)
+                {
+                    ModelState.AddModelError("", "El precio mínimo no puede ser mayor que el precio máximo.");
+                }
             }
-            base.Dispose(disposing);
+
+            // Validacion de fechas 
+            if (filtersInfo.StartExpirationDate.HasValue && filtersInfo.EndExpirationDate.HasValue)
+            {
+                if (filtersInfo.StartExpirationDate > filtersInfo.EndExpirationDate)
+                {
+                    ModelState.AddModelError("", "La fecha inicial no puede ser posterior a la fecha final.");
+                }
+            }
+
+            if (!ModelState.IsValid)
+            {
+                IEnumerable<FoodItem> allItems = FoodItemBusiness.GetFoodItems(0);
+                return View("Index", allItems.ToList());
+            }
+
+            IEnumerable<FoodItem> items = FoodItemBusiness.GetFoodItemsByFilters(filtersInfo);
+            return View("Index", items.ToList());
         }
+
     }
 }

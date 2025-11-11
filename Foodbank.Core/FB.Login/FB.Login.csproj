@@ -170,9 +170,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ControllerBase.cs" />
+    <Compile Include="Controllers\FoodItemsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UserRolesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\UsersDBController.cs" />
     <Compile Include="Filters\RequireLoginAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -262,13 +266,28 @@
     <Content Include="Views\Manage\ManageLogins.cshtml" />
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
-    <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Scripts\jquery-3.7.0.min.map" />
     <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
     <Content Include="web.config" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\FoodItems\Create.cshtml" />
+    <Content Include="Views\FoodItems\Delete.cshtml" />
+    <Content Include="Views\FoodItems\Details.cshtml" />
+    <Content Include="Views\FoodItems\Edit.cshtml" />
+    <Content Include="Views\FoodItems\Index.cshtml" />
+    <Content Include="Views\UserRoles\Create.cshtml" />
+    <Content Include="Views\UserRoles\Delete.cshtml" />
+    <Content Include="Views\UserRoles\Details.cshtml" />
+    <Content Include="Views\UserRoles\Edit.cshtml" />
+    <Content Include="Views\UserRoles\Index.cshtml" />
+    <Content Include="Views\UsersDB\Create.cshtml" />
+    <Content Include="Views\UsersDB\Delete.cshtml" />
+    <Content Include="Views\UsersDB\Details.cshtml" />
+    <Content Include="Views\UsersDB\Edit.cshtml" />
+    <Content Include="Views\UsersDB\Index.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -287,6 +306,20 @@
     <Content Include="Scripts\bootstrap.esm.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.min.js.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FB.Core\FB.Core.csproj">
+      <Project>{dc1726ea-2b94-4b61-8549-d18394e462a4}</Project>
+      <Name>FB.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FB.Data\FB.Data.csproj">
+      <Project>{f3516e98-d4ab-4b7f-bfd4-2a8f54d7701c}</Project>
+      <Name>FB.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FB.Models\FB.Models.csproj">
+      <Project>{313e14f3-414e-449f-838e-062ba2b29c21}</Project>
+      <Name>FB.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

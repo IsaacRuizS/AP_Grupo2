@@ -5,17 +5,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="639695e559c140d9adb0800bc29d516b" Name="Diagram1">
-        <EntityTypeShape EntityType="RestaurantFinderModel.MenuItem" Width="1.5" PointX="9.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="RestaurantFinderModel.Menu" Width="1.5" PointX="7.5" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="RestaurantFinderModel.Restaurant" Width="1.5" PointX="5.25" PointY="2" IsExpanded="true" />
-        <EntityTypeShape EntityType="RestaurantFinderModel.Schedule" Width="1.5" PointX="7.5" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="RestaurantFinderModel.UserRole" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="RestaurantFinderModel.User" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
-        <AssociationConnector Association="RestaurantFinderModel.FK__MenuItems__MenuI__5629CD9C" ManuallyRouted="false" />
-        <AssociationConnector Association="RestaurantFinderModel.FK__Menus__Restauran__5070F446" ManuallyRouted="false" />
-        <AssociationConnector Association="RestaurantFinderModel.FK__Restauran__UserI__45F365D3" ManuallyRouted="false" />
-        <AssociationConnector Association="RestaurantFinderModel.FK__Schedules__Resta__4AB81AF0" ManuallyRouted="false" />
-        <AssociationConnector Association="RestaurantFinderModel.FK__Users__RoleID__403A8C7D" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="RestaurantFinderModel.RestaurantRegistrationRequest" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="RestaurantFinderModel.Restaurant" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="RestaurantFinderModel.User" Width="1.5" PointX="3" PointY="1.875" />
+        <EntityTypeShape EntityType="RestaurantFinderModel.UserRole" Width="1.5" PointX="0.75" PointY="2.25" />
+        <AssociationConnector Association="RestaurantFinderModel.FK_Restaurant_User" />
+        <AssociationConnector Association="RestaurantFinderModel.FK_User_UserRole" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

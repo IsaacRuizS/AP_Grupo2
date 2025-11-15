@@ -33,6 +33,10 @@
                 <ul class="navbar-nav flex-grow-1">
                     <li>@Html.ActionLink("Restaurantes", "Index", "Restaurants", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Usuarios", "Index", "Users", new { area = "" }, new { @class = "nav-link" })</li>
+                    @if(Context.Request.Path == "/")
+                    {
+                        <a>@Html.ActionLink("New Restaurant", "SignUp", "Restaurants", new { area = "" }, new { @class = "btn btn-success ms-auto" })</a>
+                    }
                 </ul>
             </div>
         </div>

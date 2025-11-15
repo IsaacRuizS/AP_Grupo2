@@ -27,7 +27,7 @@ CREATE TABLE [User] (
 GO
 
 CREATE TABLE Restaurant (
-    Id INT PRIMARY KEY IDENTITY(1,1),
+    RestaurantId INT PRIMARY KEY IDENTITY(1,1),
     UserId INT NOT NULL,
     Name NVARCHAR(100) NOT NULL,
     LegalBusinessId NVARCHAR(50) NOT NULL, -- Cédula Jurídica
@@ -60,3 +60,5 @@ CREATE TABLE RestaurantRegistrationRequest (
     UpdatedAt DATETIME NOT NULL DEFAULT GETDATE()
 );
 GO
+
+ALTER TABLE RESTAURANTS ADD ImageUrl Varchar(500);

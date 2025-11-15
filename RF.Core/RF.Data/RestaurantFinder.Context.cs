@@ -25,11 +25,9 @@ namespace RF.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<MenuItem> MenuItems { get; set; }
-        public virtual DbSet<Menu> Menus { get; set; }
+        public virtual DbSet<RestaurantRegistrationRequest> RestaurantRegistrationRequests { get; set; }
         public virtual DbSet<Restaurant> Restaurants { get; set; }
-        public virtual DbSet<Schedule> Schedules { get; set; }
-        public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserRole> UserRoles { get; set; }
     }
 }

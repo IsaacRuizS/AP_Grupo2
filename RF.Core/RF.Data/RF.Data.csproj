@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -43,6 +43,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -59,18 +60,16 @@
     <Compile Include="Entities\Menu.cs" />
     <Compile Include="Entities\Schedule.cs" />
     <Compile Include="Entities\Restaurant.cs" />
+    <Compile Include="Entities\Mail.cs" />
+    <Compile Include="Entities\RestaurantRegistrationRequest.cs" />
     <Compile Include="Entities\UserRole.cs" />
     <Compile Include="Entities\User.cs" />
-    <Compile Include="Menu.cs">
-      <DependentUpon>RestaurantFinder.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MenuItem.cs">
-      <DependentUpon>RestaurantFinder.tt</DependentUpon>
-    </Compile>
     <Compile Include="Repositories\RepositoryMenuItem.cs" />
     <Compile Include="Repositories\RepositoryMenu.cs" />
+    <Compile Include="Repositories\RepositoryRestaurantRegistrationRequest.cs" />
     <Compile Include="Repositories\RepositorySchedule.cs" />
     <Compile Include="Repositories\RepositoryRestaurant.cs" />
+    <Compile Include="Repositories\RepositoryMail.cs" />
     <Compile Include="Repositories\RepositoryUserRole.cs" />
     <Compile Include="Repositories\RepositoryUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -93,7 +92,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RestaurantFinder.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Schedule.cs">
+    <Compile Include="RestaurantRegistrationRequest.cs">
       <DependentUpon>RestaurantFinder.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
@@ -113,6 +112,7 @@
     <None Include="RestaurantFinder.edmx.diagram">
       <DependentUpon>RestaurantFinder.edmx</DependentUpon>
     </None>
+    <None Include="script.db" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

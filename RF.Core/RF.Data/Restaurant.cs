@@ -14,16 +14,10 @@ namespace RF.Data
     
     public partial class Restaurant
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Restaurant()
-        {
-            this.Menus = new HashSet<Menu>();
-            this.Schedules = new HashSet<Schedule>();
-        }
-    
-        public int RestaurantID { get; set; }
-        public int UserID { get; set; }
+        public int RestaurantId { get; set; }
+        public int UserId { get; set; }
         public string Name { get; set; }
+        public string LegalBusinessId { get; set; }
         public string Description { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
@@ -34,15 +28,11 @@ namespace RF.Data
         public Nullable<decimal> Latitude { get; set; }
         public Nullable<decimal> Longitude { get; set; }
         public Nullable<decimal> Rating { get; set; }
-        public Nullable<bool> IsActive { get; set; }
-        public Nullable<System.DateTime> CreatedAt { get; set; }
-        public Nullable<System.DateTime> UpdatedAt { get; set; }
+        public bool IsActive { get; set; }
+        public System.DateTime CreatedAt { get; set; }
+        public System.DateTime UpdatedAt { get; set; }
         public string ImageUrl { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Menu> Menus { get; set; }
         public virtual User User { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Schedule> Schedules { get; set; }
     }
 }

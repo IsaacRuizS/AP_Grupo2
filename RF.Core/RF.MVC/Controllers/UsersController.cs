@@ -57,7 +57,7 @@ namespace RF.MVC.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.RoleID = new SelectList(db.UserRoles, "RoleID", "Name", user.RoleID);
+            //ViewBag.RoleID = new SelectList(db.UserRoles, "RoleID", "Name", user.RoleID);
             return View(user);
         }
 
@@ -73,7 +73,7 @@ namespace RF.MVC.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.RoleID = new SelectList(db.UserRoles, "RoleID", "Name", user.RoleID);
+            //ViewBag.RoleID = new SelectList(db.UserRoles, "RoleID", "Name", user.RoleID);
             return View(user);
         }
 
@@ -90,7 +90,7 @@ namespace RF.MVC.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.RoleID = new SelectList(db.UserRoles, "RoleID", "Name", user.RoleID);
+            //ViewBag.RoleID = new SelectList(db.UserRoles, "RoleID", "Name", user.RoleID);
             return View(user);
         }
 

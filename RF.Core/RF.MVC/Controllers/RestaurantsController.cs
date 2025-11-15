@@ -73,7 +73,7 @@ namespace RF.MVC.Controllers
                 RestaurantBusiness.SaveOrUpdate(restaurant);
                 return RedirectToAction("Index");
             }
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "FullName", restaurant.UserID);
+            //ViewBag.UserID = new SelectList(db.Users, "UserID", "FullName", restaurant.UserID);
             return View(restaurant);
         }
 

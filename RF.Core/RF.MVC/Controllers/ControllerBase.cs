@@ -15,18 +15,12 @@ namespace RF.MVC.Controllers
 
         protected readonly RestaurantBusiness RestaurantBusiness;
         protected readonly RestaurantRegistrationRequestBusiness RestaurantRegistrationRequestBusiness;
-        protected readonly ScheduleBusiness ScheduleBusiness;
-        protected readonly MenuBusiness MenuBusiness;
-        protected readonly MenuItemBusiness MenuItemBusiness;
 
         public ControllerBase()
         {
             UserRoleBusiness = new UserRoleBusiness();
             UserBusiness = new UserBusiness();
             RestaurantRegistrationRequestBusiness = new RestaurantRegistrationRequestBusiness();
-            ScheduleBusiness = new ScheduleBusiness();
-            MenuBusiness = new MenuBusiness();
-            MenuItemBusiness = new MenuItemBusiness();
         }
 
     }

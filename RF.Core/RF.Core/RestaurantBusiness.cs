@@ -18,7 +18,7 @@ namespace RF.Core
         public bool SaveOrUpdate(Restaurant user)
         {
 
-            if (user.RestaurantID <= 0)
+            if (user.RestaurantId <= 0)
                 _repositoryRestaurant.Add(user);
             else
                 _repositoryRestaurant.Update(user);

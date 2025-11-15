@@ -42,9 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MenuItemBusiness.cs" />
-    <Compile Include="MenuBusiness.cs" />
-    <Compile Include="ScheduleBusiness.cs" />
     <Compile Include="RestaurantBusiness.cs" />
     <Compile Include="RestaurantRegistrationRequestBusiness.cs" />
     <Compile Include="UserRoleBusiness.cs" />
@@ -64,6 +61,10 @@
       <Project>{313e14f3-414e-449f-838e-062ba2b29c21}</Project>
       <Name>RF.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EmailTemplates\RestaurantRejectedRequest.html" />
+    <Content Include="EmailTemplates\RestaurantAcceptedRequest.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

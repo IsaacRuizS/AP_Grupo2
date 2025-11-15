@@ -18,7 +18,7 @@ namespace RF.Core
         public bool SaveOrUpdate(User user)
         {
 
-            if (user.UserID <= 0)
+            if (user.Id <= 0)
                 _repositoryUser.Add(user);
             else
                 _repositoryUser.Update(user);

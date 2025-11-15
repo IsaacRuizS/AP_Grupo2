@@ -12,8 +12,6 @@ namespace RF.MVC.Controllers
 {
     public class RestaurantRegistrationRequestsController : ControllerBase
     {
-        private RestaurantFinderEntities db = new RestaurantFinderEntities();
-
         // GET: RestaurantRegistrationRequests
         public ActionResult Index()
         {
@@ -24,7 +22,6 @@ namespace RF.MVC.Controllers
         // GET: RestaurantRegistrationRequests/Create
         public ActionResult Create()
         {
-            ViewBag.UserID = new SelectList(UserBusiness.GetUsers(0), "UserID", "FullName");
             return View();
         }
 
@@ -33,15 +30,16 @@ namespace RF.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RestaurantRegistrationRequestID,UserID,Name,Description,Address,Phone,Email,Website,WazeLink,GoogleMapsLink,Latitude,Longitude,Rating,IsActive,CreatedAt,UpdatedAt,ImageUrl")] RestaurantRegistrationRequest restaurantRegistrationRequest)
+        public ActionResult Create([Bind(Include = "Name,LegalBusinessId,Email,Latitude,Longitude,IsActive,CreatedAt,UpdatedAt")] RestaurantRegistrationRequest restaurantRegistrationRequest)
         {
             if (ModelState.IsValid)
             {
+                restaurantRegistrationRequest.CreatedAt = DateTime.Now;
+
                 RestaurantRegistrationRequestBusiness.SaveOrUpdate(restaurantRegistrationRequest);
-                return RedirectToAction("Index");
+                return RedirectToAction("~/Views/Shared/SignUpRequestSended.cshtml");
             }
 
-            ViewBag.UserID = new SelectList(UserBusiness.GetUsers(0), "UserID", "FullName");
             return View(restaurantRegistrationRequest);
         }
 
@@ -66,14 +64,14 @@ namespace RF.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RestaurantRegistrationRequestID,UserID,Name,Description,Address,Phone,Email,Website,WazeLink,GoogleMapsLink,Latitude,Longitude,Rating,IsActive,CreatedAt,UpdatedAt,ImageUrl")] RestaurantRegistrationRequest restaurantRegistrationRequest)
+        public ActionResult Edit([Bind(Include = "Name,LegalBusinessId,Email,Latitude,Longitude,IsActive,CreatedAt,UpdatedAt")] RestaurantRegistrationRequest restaurantRegistrationRequest)
         {
             if (ModelState.IsValid)
             {
                 RestaurantRegistrationRequestBusiness.SaveOrUpdate(restaurantRegistrationRequest);
                 return RedirectToAction("Index");
             }
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "FullName", restaurantRegistrationRequest.UserID);
+            //ViewBag.UserID = new SelectList(db.Users, "UserID", "FullName", restaurantRegistrationRequest.Id);
             return View(restaurantRegistrationRequest);
         }
 

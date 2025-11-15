@@ -125,7 +125,7 @@
     <Compile Include="Controllers\ControllerBase.cs" />
     <Compile Include="Controllers\FoodItemsController.cs" />
     <Compile Include="Controllers\UserRolesController.cs" />
-    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\UsersDBController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -173,11 +173,11 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\shared\Error.cshtml" />
     <Content Include="Views\shared\_Layout.cshtml" />
-    <Content Include="Views\Users\Create.cshtml" />
-    <Content Include="Views\Users\Delete.cshtml" />
-    <Content Include="Views\Users\Details.cshtml" />
-    <Content Include="Views\Users\Edit.cshtml" />
-    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\UsersDB\Create.cshtml" />
+    <Content Include="Views\UsersDB\Delete.cshtml" />
+    <Content Include="Views\UsersDB\Details.cshtml" />
+    <Content Include="Views\UsersDB\Edit.cshtml" />
+    <Content Include="Views\UsersDB\Index.cshtml" />
     <Content Include="Views\UserRoles\Create.cshtml" />
     <Content Include="Views\UserRoles\Delete.cshtml" />
     <Content Include="Views\UserRoles\Details.cshtml" />

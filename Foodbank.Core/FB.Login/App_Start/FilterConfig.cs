@@ -12,6 +12,13 @@ namespace FB.Login
             filters.Add(new RequireLoginAttribute());
 
             filters.Add(new HandleErrorAttribute());
+
+            // aca aplica un limite de velociadad global para proteger los controladores del trafico excesivo
+            filters.Add(new RateLimitFilter
+            {
+                MaxRequests = 1000, // numero maximo de solicitudes permitidas por intervalo de tiempo
+                WindowSeconds = 60 // duracion del tiempo de solicitud en segundos
+            });
         }
     }
 }

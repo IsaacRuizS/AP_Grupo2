@@ -1,53 +1,48 @@
 ﻿using FB.Core;
 using FB.Data;
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 
 namespace FB.MVC.Controllers
 {
-    public class UsersController : ControllerBase
+    [RoutePrefix("UsersDB")]    // ← URL becomes /UsersDB
+    public class UsersDBController : ControllerBase
     {
-
-        // GET: Users
+        // GET: UsersDB
+        [Route("")]
         public ActionResult Index()
         {
             return View(UserBusiness.GetUsers(0));
         }
 
-        // GET: Users/Details/5
+        // GET: UsersDB/Details/5
+        [Route("Details/{id:int}")]
         public ActionResult Details(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
 
-            User user = (User)UserBusiness.GetUsers((int)id).FirstOrDefault();
+            User user = (User)UserBusiness.GetUsers(id.Value).FirstOrDefault();
 
             if (user == null)
-            {
                 return HttpNotFound();
-            }
+
             return View(user);
         }
 
-        // GET: Users/Create
+        // GET: UsersDB/Create
+        [Route("Create")]
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Users/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: UsersDB/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Create")]
         public ActionResult Create([Bind(Include = "UserId,Username,Email,FullName,IsActive,CreatedAt,LastLogin")] User user)
         {
             if (ModelState.IsValid)
@@ -62,68 +57,58 @@ namespace FB.MVC.Controllers
             return View(user);
         }
 
-        // GET: Users/Edit/5
+        // GET: UsersDB/Edit/5
+        [Route("Edit/{id:int}")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = (User)UserBusiness.GetUsers((int)id).FirstOrDefault();
+
+            User user = (User)UserBusiness.GetUsers(id.Value).FirstOrDefault();
+
             if (user == null)
-            {
                 return HttpNotFound();
-            }
+
             return View(user);
         }
 
-        // POST: Users/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: UsersDB/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Edit/{id:int}")]
         public ActionResult Edit([Bind(Include = "UserId,Username,Email,FullName,IsActive,CreatedAt,LastLogin")] User user)
         {
             if (ModelState.IsValid)
             {
-                //tomar el created y login del usuario
-                /*User baseUser = (User)UserBusiness.GetUsers((int)user.UserId).FirstOrDefault();
-                if (baseUser != null)
-                {
-                    user.CreatedAt = baseUser.CreatedAt;
-                    user.LastLogin = baseUser.LastLogin;
-
-                }*/
-
                 UserBusiness.SaveOrUpdate(user);
-
-
                 return RedirectToAction("Index");
             }
+
             return View(user);
         }
 
-        // GET: Users/Delete/5
+        // GET: UsersDB/Delete/5
+        [Route("Delete/{id:int}")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = (User)UserBusiness.GetUsers((int)id).FirstOrDefault();
+
+            User user = (User)UserBusiness.GetUsers(id.Value).FirstOrDefault();
+
             if (user == null)
-            {
                 return HttpNotFound();
-            }
+
             return View(user);
         }
 
-        // POST: Users/Delete/5
+        // POST: UsersDB/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("DeleteConfirmed/{id:int}")]
         public ActionResult DeleteConfirmed(int id)
         {
-            bool isDeleted = UserBusiness.Delete(id);
+            UserBusiness.Delete(id);
             return RedirectToAction("Index");
         }
     }

@@ -10,6 +10,8 @@ using System.Data.SqlClient;
 using System.Data.Entity.Core.EntityClient;
 using System.Configuration;
 using FB.Login.Models;
+using FB.Data;
+using FB.Core;
 
 namespace FB.Login.Controllers
 {
@@ -79,7 +81,6 @@ namespace FB.Login.Controllers
                     return View(model);
                 }
 
-                // Verify password against AspNetUsers password hash
                 var passwordValid = await UserManager.CheckPasswordAsync(identityUser, model.Password);
                 if (!passwordValid)
                 {
@@ -87,16 +88,52 @@ namespace FB.Login.Controllers
                     return View(model);
                 }
 
-                // Sign in the user
-                await SignInManager.SignInAsync(identityUser, isPersistent: model.RememberMe, rememberBrowser: false);
+                var identity = await UserManager.CreateIdentityAsync(identityUser, DefaultAuthenticationTypes.ApplicationCookie);
 
-                // Update or create record in Foodbank.Users (sync)
                 try
                 {
                     var emailToSync = !string.IsNullOrEmpty(identityUser.Email) ? identityUser.Email : identityUser.UserName;
-                    SyncUserToFoodbank(emailToSync, updateLastLogin: true);
+
+                    var userBus = new UserBusiness();
+                    var userRoleBus = new UserRoleBusiness();
+
+                    FB.Data.User fbUser = null;
+                    try
+                    {
+                        fbUser = userBus.GetUserByUsername(identityUser.UserName);
+                    }
+                    catch { 
+                    }
+
+                    if (fbUser == null)
+                    {
+                        fbUser = userBus.GetUsers(0)
+                            .FirstOrDefault(u => string.Equals(u.Email, emailToSync, StringComparison.OrdinalIgnoreCase)
+                                                || string.Equals(u.Username, emailToSync, StringComparison.OrdinalIgnoreCase));
+                    }
+
+                    if (fbUser != null)
+                    {
+                        var fbRoles = userRoleBus.GetUserRoles(0)
+                                        .Where(ur => ur.UserId == fbUser.UserId)
+                                        .Select(ur => ur.Role?.RoleName)
+                                        .Where(r => !string.IsNullOrEmpty(r))
+                                        .Distinct()
+                                        .ToList();
+
+                        foreach (var roleName in fbRoles)
+                        {
+                            identity.AddClaim(new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.Role, roleName));
+                        }
+
+                        try { UserSync.SyncUserToFoodbank(emailToSync, updateLastLogin: true); } catch { }
+                    }
                 }
-                catch { /* Do not block login on sync errors */ }
+                catch { 
+                }
+
+                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                AuthenticationManager.SignIn(new Microsoft.Owin.Security.AuthenticationProperties { IsPersistent = model.RememberMe }, identity);
 
                 return RedirectToLocal(returnUrl);
             }
@@ -173,7 +210,7 @@ namespace FB.Login.Controllers
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     try
                     {
-                        SyncUserToFoodbank(model.Email, updateLastLogin: true);
+                        UserSync.SyncUserToFoodbank(model.Email, updateLastLogin: true);
                     }
                     catch { }
                     return RedirectToAction("Index", "Home");
@@ -349,7 +386,7 @@ namespace FB.Login.Controllers
                     {
                         if (!string.IsNullOrEmpty(loginInfo.Email))
                         {
-                            SyncUserToFoodbank(loginInfo.Email, updateLastLogin: true);
+                            UserSync.SyncUserToFoodbank(loginInfo.Email, updateLastLogin: true);
                         }
                     }
                     catch { }
@@ -398,7 +435,7 @@ namespace FB.Login.Controllers
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                         try
                         {
-                            SyncUserToFoodbank(model.Email, updateLastLogin: true);
+                            UserSync.SyncUserToFoodbank(model.Email, updateLastLogin: true);
                         }
                         catch { }
 
@@ -429,49 +466,6 @@ namespace FB.Login.Controllers
         {
             return View();
         }
-
-        private void SyncUserToFoodbank(string username, bool updateLastLogin)
-        {
-            if (string.IsNullOrEmpty(username)) return;
-            string efConn = ConfigurationManager.ConnectionStrings["FoodbankEntities"]?.ConnectionString;
-            if (string.IsNullOrEmpty(efConn)) return;
-            var efBuilder = new EntityConnectionStringBuilder(efConn);
-            var providerConn = efBuilder.ProviderConnectionString;
-            if (string.IsNullOrEmpty(providerConn)) return;
-            using (var conn = new SqlConnection(providerConn))
-            {
-                conn.Open();
-                using (var cmd = new SqlCommand("SELECT UserId FROM Users WHERE Username = @username", conn))
-                {
-                    cmd.Parameters.AddWithValue("@username", username);
-                    var scalar = cmd.ExecuteScalar();
-                    if (scalar == null || scalar == DBNull.Value)
-                    {
-                        using (var insert = new SqlCommand("INSERT INTO Users (Username, Email, FullName, IsActive, CreatedAt, LastLogin) VALUES (@Username, @Email, @FullName, @IsActive, @CreatedAt, @LastLogin)", conn))
-                        {
-                            insert.Parameters.AddWithValue("@Username", username);
-                            insert.Parameters.AddWithValue("@Email", username);
-                            insert.Parameters.AddWithValue("@FullName", string.Empty);
-                            insert.Parameters.AddWithValue("@IsActive", true);
-                            insert.Parameters.AddWithValue("@CreatedAt", DateTime.Now);
-                            insert.Parameters.AddWithValue("@LastLogin", updateLastLogin ? (object)DateTime.Now : DBNull.Value);
-                            insert.ExecuteNonQuery();
-                        }
-                    }
-                    else if (updateLastLogin)
-                    {
-                        using (var upd = new SqlCommand("UPDATE Users SET LastLogin = @LastLogin, IsActive = @IsActive WHERE UserId = @id", conn))
-                        {
-                            upd.Parameters.AddWithValue("@LastLogin", DateTime.Now);
-                            upd.Parameters.AddWithValue("@IsActive", true);
-                            upd.Parameters.AddWithValue("@id", Convert.ToInt32(scalar));
-                            upd.ExecuteNonQuery();
-                        }
-                    }
-                }
-            }
-        }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

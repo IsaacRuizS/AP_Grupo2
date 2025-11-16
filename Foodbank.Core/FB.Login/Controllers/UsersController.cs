@@ -3,19 +3,17 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Data.Entity.Core.EntityClient;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using FB.Login.Models;
 
 namespace FB.Login.Controllers
 {
     [Authorize]
+    [RoutePrefix("Users")]   // Diferenciador de controller
     public class UsersController : Controller
     {
         private string GetProviderConnectionString()
         {
-            // Try EF connection first
             var efConn = ConfigurationManager.ConnectionStrings["FoodbankEntities"]?.ConnectionString;
             if (!string.IsNullOrEmpty(efConn))
             {
@@ -28,44 +26,40 @@ namespace FB.Login.Controllers
                 }
                 catch
                 {
-                    // ignore and fallback
                 }
             }
 
-            // Fallback to DefaultConnection
-            var defaultConn = ConfigurationManager.ConnectionStrings["DefaultConnection"]?.ConnectionString;
-            return defaultConn;
+            return ConfigurationManager.ConnectionStrings["DefaultConnection"]?.ConnectionString;
         }
 
         // GET: Users
+        [Route("")]
         public ActionResult Index()
         {
             var list = new List<UserViewModel>();
             var connStr = GetProviderConnectionString();
             if (string.IsNullOrEmpty(connStr))
-            {
                 return View(list);
-            }
 
             using (var conn = new SqlConnection(connStr))
             {
                 conn.Open();
-                using (var cmd = new SqlCommand("SELECT UserId, Username, Email, FullName, IsActive, CreatedAt, LastLogin FROM Users ORDER BY Username", conn))
+                using (var cmd = new SqlCommand(
+                    "SELECT UserId, Username, Email, FullName, IsActive, CreatedAt, LastLogin FROM Users ORDER BY Username", conn))
                 using (var rdr = cmd.ExecuteReader())
                 {
                     while (rdr.Read())
                     {
-                        var u = new UserViewModel
+                        list.Add(new UserViewModel
                         {
                             UserId = rdr.GetInt32(0),
                             Username = rdr.IsDBNull(1) ? null : rdr.GetString(1),
                             Email = rdr.IsDBNull(2) ? null : rdr.GetString(2),
                             FullName = rdr.IsDBNull(3) ? null : rdr.GetString(3),
                             IsActive = !rdr.IsDBNull(4) && rdr.GetBoolean(4),
-                            CreatedAt = !rdr.IsDBNull(5) ? rdr.GetDateTime(5) : DateTime.MinValue,
-                            LastLogin = !rdr.IsDBNull(6) ? (DateTime?)rdr.GetDateTime(6) : null
-                        };
-                        list.Add(u);
+                            CreatedAt = rdr.IsDBNull(5) ? DateTime.MinValue : rdr.GetDateTime(5),
+                            LastLogin = rdr.IsDBNull(6) ? (DateTime?)null : rdr.GetDateTime(6)
+                        });
                     }
                 }
             }
@@ -74,17 +68,21 @@ namespace FB.Login.Controllers
         }
 
         // GET: Users/Edit/5
+        [Route("Edit/{id:int}")]   // ? /Users/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null) return new HttpStatusCodeResult(400);
+
             var connStr = GetProviderConnectionString();
             if (string.IsNullOrEmpty(connStr)) return HttpNotFound();
 
             UserViewModel model = null;
+
             using (var conn = new SqlConnection(connStr))
             {
                 conn.Open();
-                using (var cmd = new SqlCommand("SELECT UserId, Username, Email, FullName, IsActive, CreatedAt, LastLogin FROM Users WHERE UserId = @id", conn))
+                using (var cmd = new SqlCommand(
+                    "SELECT UserId, Username, Email, FullName, IsActive, CreatedAt, LastLogin FROM Users WHERE UserId = @id", conn))
                 {
                     cmd.Parameters.AddWithValue("@id", id.Value);
                     using (var rdr = cmd.ExecuteReader())
@@ -98,8 +96,8 @@ namespace FB.Login.Controllers
                                 Email = rdr.IsDBNull(2) ? null : rdr.GetString(2),
                                 FullName = rdr.IsDBNull(3) ? null : rdr.GetString(3),
                                 IsActive = !rdr.IsDBNull(4) && rdr.GetBoolean(4),
-                                CreatedAt = !rdr.IsDBNull(5) ? rdr.GetDateTime(5) : DateTime.MinValue,
-                                LastLogin = !rdr.IsDBNull(6) ? (DateTime?)rdr.GetDateTime(6) : null
+                                CreatedAt = rdr.IsDBNull(5) ? DateTime.MinValue : rdr.GetDateTime(5),
+                                LastLogin = rdr.IsDBNull(6) ? (DateTime?)null : rdr.GetDateTime(6)
                             };
                         }
                     }
@@ -113,12 +111,11 @@ namespace FB.Login.Controllers
         // POST: Users/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Edit/{id:int}")]
         public ActionResult Edit([Bind(Include = "UserId,IsActive")] UserViewModel model)
         {
             if (!ModelState.IsValid)
-            {
                 return View(model);
-            }
 
             var connStr = GetProviderConnectionString();
             if (string.IsNullOrEmpty(connStr)) return HttpNotFound();
@@ -126,7 +123,8 @@ namespace FB.Login.Controllers
             using (var conn = new SqlConnection(connStr))
             {
                 conn.Open();
-                using (var cmd = new SqlCommand("UPDATE Users SET IsActive = @IsActive WHERE UserId = @id", conn))
+                using (var cmd = new SqlCommand(
+                    "UPDATE Users SET IsActive = @IsActive WHERE UserId = @id", conn))
                 {
                     cmd.Parameters.AddWithValue("@IsActive", model.IsActive);
                     cmd.Parameters.AddWithValue("@id", model.UserId);

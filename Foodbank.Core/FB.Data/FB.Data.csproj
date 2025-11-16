@@ -43,6 +43,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -92,6 +93,7 @@
     <Compile Include="UserRole.cs">
       <DependentUpon>Foodbank.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserSync.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Foodbank.edmx">

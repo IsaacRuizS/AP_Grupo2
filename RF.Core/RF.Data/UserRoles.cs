@@ -12,12 +12,12 @@ namespace RF.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class UserRole
+    public partial class UserRoles
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public UserRole()
+        public UserRoles()
         {
-            this.Users = new HashSet<User>();
+            this.Users = new HashSet<Users>();
         }
     
         public int RoleID { get; set; }
@@ -27,6 +27,6 @@ namespace RF.Data
         public Nullable<System.DateTime> UpdatedAt { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<Users> Users { get; set; }
     }
 }

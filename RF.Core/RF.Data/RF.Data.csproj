@@ -61,12 +61,6 @@
     <Compile Include="Entities\Restaurant.cs" />
     <Compile Include="Entities\UserRole.cs" />
     <Compile Include="Entities\User.cs" />
-    <Compile Include="Menu.cs">
-      <DependentUpon>RestaurantFinder.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MenuItem.cs">
-      <DependentUpon>RestaurantFinder.tt</DependentUpon>
-    </Compile>
     <Compile Include="Repositories\RepositoryMenuItem.cs" />
     <Compile Include="Repositories\RepositoryMenu.cs" />
     <Compile Include="Repositories\RepositorySchedule.cs" />
@@ -75,9 +69,6 @@
     <Compile Include="Repositories\RepositoryUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
-    <Compile Include="Restaurant.cs">
-      <DependentUpon>RestaurantFinder.tt</DependentUpon>
-    </Compile>
     <Compile Include="RestaurantFinder.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -93,13 +84,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RestaurantFinder.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Schedule.cs">
+    <Compile Include="Restaurants.cs">
       <DependentUpon>RestaurantFinder.tt</DependentUpon>
     </Compile>
-    <Compile Include="User.cs">
+    <Compile Include="UserRoles.cs">
       <DependentUpon>RestaurantFinder.tt</DependentUpon>
     </Compile>
-    <Compile Include="UserRole.cs">
+    <Compile Include="Users.cs">
       <DependentUpon>RestaurantFinder.tt</DependentUpon>
     </Compile>
   </ItemGroup>

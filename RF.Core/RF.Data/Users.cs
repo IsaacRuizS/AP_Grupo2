@@ -12,37 +12,26 @@ namespace RF.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Restaurant
+    public partial class Users
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Restaurant()
+        public Users()
         {
-            this.Menus = new HashSet<Menu>();
-            this.Schedules = new HashSet<Schedule>();
+            this.Restaurants = new HashSet<Restaurants>();
         }
     
-        public int RestaurantID { get; set; }
         public int UserID { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string Address { get; set; }
-        public string Phone { get; set; }
+        public string FullName { get; set; }
         public string Email { get; set; }
-        public string Website { get; set; }
-        public string WazeLink { get; set; }
-        public string GoogleMapsLink { get; set; }
-        public Nullable<decimal> Latitude { get; set; }
-        public Nullable<decimal> Longitude { get; set; }
-        public Nullable<decimal> Rating { get; set; }
+        public string PasswordHash { get; set; }
+        public int RoleID { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
-        public string ImageUrl { get; set; }
+        public Nullable<System.DateTime> VerifiedAt { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Menu> Menus { get; set; }
-        public virtual User User { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Schedule> Schedules { get; set; }
+        public virtual ICollection<Restaurants> Restaurants { get; set; }
+        public virtual UserRoles UserRoles { get; set; }
     }
 }

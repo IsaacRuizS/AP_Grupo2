@@ -12,19 +12,26 @@ namespace RF.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class MenuItem
+    public partial class Restaurants
     {
-        public int ItemID { get; set; }
-        public int MenuID { get; set; }
+        public int RestaurantID { get; set; }
+        public int UserID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public decimal Price { get; set; }
-        public string Category { get; set; }
-        public string ImageUrl { get; set; }
+        public string Address { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
+        public string Website { get; set; }
+        public string WazeLink { get; set; }
+        public string GoogleMapsLink { get; set; }
+        public Nullable<decimal> Latitude { get; set; }
+        public Nullable<decimal> Longitude { get; set; }
+        public Nullable<decimal> Rating { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
+        public string ImageUrl { get; set; }
     
-        public virtual Menu Menu { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

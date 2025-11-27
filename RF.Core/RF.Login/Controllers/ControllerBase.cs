@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace RF.MVC.Controllers
+namespace RF.Login.Controllers
 {
     public class ControllerBase : Controller
     {

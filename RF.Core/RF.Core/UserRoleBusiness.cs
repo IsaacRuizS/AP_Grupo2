@@ -37,6 +37,6 @@ namespace RF.Core
             return id <= 0
                 ? _repositoryUserRole.GetAll()
                 : new List<UserRole>() { _repositoryUserRole.GetById(id) };
-        } 
+        }
     }
 }

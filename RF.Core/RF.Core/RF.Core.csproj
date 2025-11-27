@@ -42,9 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MenuItemBusiness.cs" />
-    <Compile Include="MenuBusiness.cs" />
-    <Compile Include="ScheduleBusiness.cs" />
     <Compile Include="RestaurantBusiness.cs" />
     <Compile Include="UserRoleBusiness.cs" />
     <Compile Include="UserBusiness.cs" />

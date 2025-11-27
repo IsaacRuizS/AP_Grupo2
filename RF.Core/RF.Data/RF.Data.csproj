@@ -55,69 +55,63 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="Entities\MenuItem.cs" />
-    <Compile Include="Entities\Menu.cs" />
-    <Compile Include="Entities\Schedule.cs" />
     <Compile Include="Entities\Restaurant.cs" />
     <Compile Include="Entities\UserRole.cs" />
     <Compile Include="Entities\User.cs" />
-    <Compile Include="Repositories\RepositoryMenuItem.cs" />
-    <Compile Include="Repositories\RepositoryMenu.cs" />
-    <Compile Include="Repositories\RepositorySchedule.cs" />
     <Compile Include="Repositories\RepositoryRestaurant.cs" />
     <Compile Include="Repositories\RepositoryUserRole.cs" />
     <Compile Include="Repositories\RepositoryUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
-    <Compile Include="RestaurantFinder.Context.cs">
+    <Compile Include="RestauranFinder.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RestaurantFinder.Context.tt</DependentUpon>
+      <DependentUpon>RestauranFinder.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="RestaurantFinder.cs">
+    <Compile Include="RestauranFinder.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RestaurantFinder.tt</DependentUpon>
+      <DependentUpon>RestauranFinder.tt</DependentUpon>
     </Compile>
-    <Compile Include="RestaurantFinder.Designer.cs">
+    <Compile Include="RestauranFinder.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RestaurantFinder.edmx</DependentUpon>
+      <DependentUpon>RestauranFinder.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Restaurants.cs">
-      <DependentUpon>RestaurantFinder.tt</DependentUpon>
+    <Compile Include="Restaurant.cs">
+      <DependentUpon>RestauranFinder.tt</DependentUpon>
     </Compile>
-    <Compile Include="UserRoles.cs">
-      <DependentUpon>RestaurantFinder.tt</DependentUpon>
+    <Compile Include="User.cs">
+      <DependentUpon>RestauranFinder.tt</DependentUpon>
     </Compile>
-    <Compile Include="Users.cs">
-      <DependentUpon>RestaurantFinder.tt</DependentUpon>
+    <Compile Include="UserRole.cs">
+      <DependentUpon>RestauranFinder.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
     <None Include="packages.config" />
-    <EntityDeploy Include="RestaurantFinder.edmx">
+    <EntityDeploy Include="RestauranFinder.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>RestaurantFinder.Designer.cs</LastGenOutput>
+      <LastGenOutput>RestauranFinder.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="RestaurantFinder.edmx.diagram">
-      <DependentUpon>RestaurantFinder.edmx</DependentUpon>
+    <None Include="RestauranFinder.edmx.diagram">
+      <DependentUpon>RestauranFinder.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="RestaurantFinder.Context.tt">
+    <Content Include="RestauranFinder.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RestaurantFinder.edmx</DependentUpon>
-      <LastGenOutput>RestaurantFinder.Context.cs</LastGenOutput>
+      <DependentUpon>RestauranFinder.edmx</DependentUpon>
+      <LastGenOutput>RestauranFinder.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="RestaurantFinder.tt">
+    <Content Include="RestauranFinder.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RestaurantFinder.edmx</DependentUpon>
-      <LastGenOutput>RestaurantFinder.cs</LastGenOutput>
+      <DependentUpon>RestauranFinder.edmx</DependentUpon>
+      <LastGenOutput>RestauranFinder.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

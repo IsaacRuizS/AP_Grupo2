@@ -1,0 +1,47 @@
+﻿@model RF.Login.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Crear cuenta";
+}
+
+<main class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="shadow-lg p-4" style="width: 325px;">
+        <h3 class="text-center mb-4">@ViewBag.Title</h3>
+
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary("", new { @class = "text-danger mb-3" })
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.UserName, "Nombre Completo", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "Ingresa tu nombre de usuario" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Email, "Correo electrónico", new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "correo@ejemplo.com" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Password, "Contraseña", new { @class = "form-label" })
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Ingresa una contraseña" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.ConfirmPassword, "Confirmar contraseña", new { @class = "form-label" })
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Repite la contraseña" })
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 py-2">Crear cuenta</button>
+
+            <div class="text-center mt-2">
+                @Html.ActionLink("Ya tengo una cuenta", "Login", "Account", null, new { @class = "text-decoration-none" })
+            </div>
+        }
+    </div>
+</main>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

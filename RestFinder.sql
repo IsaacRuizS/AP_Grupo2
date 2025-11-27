@@ -43,44 +43,8 @@ CREATE TABLE Restaurants (
 	FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
-
-CREATE TABLE Schedules (
-    ScheduleID INT IDENTITY(1,1) PRIMARY KEY,
-    RestaurantID INT NOT NULL,
-    DayOfWeek TINYINT NOT NULL, -- 1 = Monday, 7 = Sunday
-    OpenTime TIME NOT NULL,
-    CloseTime TIME NOT NULL,
-    CreatedAt DATETIME DEFAULT GETDATE(),
-    UpdatedAt DATETIME DEFAULT GETDATE(),
-    FOREIGN KEY (RestaurantID) REFERENCES Restaurants(RestaurantID)
-);
-
-CREATE TABLE Menus (
-    MenuID INT IDENTITY(1,1) PRIMARY KEY,
-    RestaurantID INT NOT NULL,
-    Name NVARCHAR(100) NOT NULL,
-    Description NVARCHAR(255),
-    IsActive BIT DEFAULT 1,
-    CreatedAt DATETIME DEFAULT GETDATE(),
-    UpdatedAt DATETIME DEFAULT GETDATE(),
-    FOREIGN KEY (RestaurantID) REFERENCES Restaurants(RestaurantID)
-);
-
-CREATE TABLE MenuItems (
-    ItemID INT IDENTITY(1,1) PRIMARY KEY,
-    MenuID INT NOT NULL,
-    Name NVARCHAR(100) NOT NULL,
-    Description NVARCHAR(255),
-    Price DECIMAL(10,2) NOT NULL,
-    Category NVARCHAR(50),
-    ImageUrl NVARCHAR(255),
-    IsActive BIT DEFAULT 1,
-    CreatedAt DATETIME DEFAULT GETDATE(),
-    UpdatedAt DATETIME DEFAULT GETDATE(),
-    FOREIGN KEY (MenuID) REFERENCES Menus(MenuID)
-);
-
 ALTER TABLE [RestaurantFinder].[dbo].[Restaurants] ADD ImageUrl Varchar(500) DEFAULT '';
+ALTER TABLE [RestaurantFinder].[dbo].[Users] ADD VerifiedAt DATETIME;
 
 --Inserts
 

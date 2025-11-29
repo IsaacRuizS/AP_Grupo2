@@ -37,6 +37,11 @@ namespace RF.Core
             return id <= 0
                 ? _repositoryUser.GetAll()
                 : new List<User>() { _repositoryUser.GetById(id) };
-        } 
+        }
+
+        public User GetUserByNameAndEmail(string email)
+        {
+            return _repositoryUser.GetUserByNameAndEmail(email);
+        }
     }
 }

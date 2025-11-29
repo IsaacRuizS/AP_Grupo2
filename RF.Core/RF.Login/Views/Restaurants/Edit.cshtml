@@ -1,7 +1,12 @@
-﻿@model RF.Data.Restaurant
+﻿@using System.Security.Claims
+@model RF.Data.Restaurant
 
 @{
     ViewBag.Title = "Editar restaurante";
+
+    var claimsIdentity = (ClaimsIdentity)User.Identity;
+    var userDbIdClaim = claimsIdentity.FindFirst("UserDBId");
+    var userDbId = userDbIdClaim != null ? int.Parse(userDbIdClaim.Value) : 0;
 }
 
 <h2 class="mb-4 text-center">Editar Restaurante</h2>
@@ -20,13 +25,21 @@
         </a>
 
         <div class="row">
-            <div class="col-md-6 mb-3">
-                @Html.LabelFor(model => model.UserID, "Usuario", htmlAttributes: new { @class = "form-label fw-bold d-flex justify-content-center" })
-                <div class="d-flex justify-content-center">
-                    @Html.DropDownList("UserID", null, htmlAttributes: new { @class = "form-control" })
+            @if (User.IsInRole("Admin"))
+            {
+                <div class="col-md-6 mb-3">
+                    @Html.LabelFor(model => model.UserID, "Usuario", htmlAttributes: new { @class = "form-label fw-bold d-flex justify-content-center" })
+                    <div class="d-flex justify-content-center">
+                        @Html.DropDownList("UserID", null, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger d-flex justify-content-center" })
                 </div>
-                @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger d-flex justify-content-center" })
-            </div>
+            }
+            else
+            {
+                <!-- Para usuarios Restaurant -->
+                @Html.HiddenFor(model => model.UserID, new { Value = userDbId })
+            }
 
             <div class="col-md-6 mb-3">
                 @Html.LabelFor(model => model.Name, "Nombre", htmlAttributes: new { @class = "form-label fw-bold d-flex justify-content-center" })

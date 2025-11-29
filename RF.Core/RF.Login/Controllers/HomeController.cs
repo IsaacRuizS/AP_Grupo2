@@ -7,9 +7,9 @@ using System.Web.Mvc;
 
 namespace RF.Login.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : ControllerBase
     {
-
 
         public ActionResult Index()
         {

@@ -46,7 +46,6 @@ namespace RF.Data
             public string Website { get; set; }
 
             [Display(Name = "Enlace de Waze")]
-            [RegularExpression(@"^(https?:\/\/)?(www\.)?waze\.com\/.*$", ErrorMessage = "Debe ingresar una URL válida de Waze.")]
             public string WazeLink { get; set; }
 
             [Display(Name = "Enlace de Google Maps")]

@@ -37,6 +37,11 @@ namespace RF.Core
             return id <= 0
                 ? _repositoryRestaurant.GetAll()
                 : new List<Restaurant>() { _repositoryRestaurant.GetById(id) };
-        } 
+        }
+
+        public IEnumerable<Restaurant> GetRestaurantsByUser(int userId)
+        {
+            return _repositoryRestaurant.GetRestaurantsByUser(userId);
+        }
     }
 }

@@ -9,6 +9,7 @@ using System.Configuration;
 using System.Data.Entity.Core.EntityClient;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -77,61 +78,32 @@ namespace RF.Login.Controllers
 
                 if (identityUser == null)
                 {
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", "Correo o contraseña incorrecto, intenta de nuevo");
                     return View(model);
                 }
 
                 var passwordValid = await UserManager.CheckPasswordAsync(identityUser, model.Password);
                 if (!passwordValid)
                 {
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", "Correo o contraseña incorrecto, intenta de nuevo");
                     return View(model);
                 }
 
                 var identity = await UserManager.CreateIdentityAsync(identityUser, DefaultAuthenticationTypes.ApplicationCookie);
 
-                try
+                var user = UserBusiness.GetUserByNameAndEmail(identityUser.Email);
+
+                if(user.UserRole.RoleID == 1)
                 {
-                    /*
-                    var emailToSync = !string.IsNullOrEmpty(identityUser.Email) ? identityUser.Email : identityUser.UserName;
-
-                    var userBus = new UserBusiness();
-                    var userRoleBus = new UserRoleBusiness();
-
-                    FB.Data.User fbUser = null;
-                    try
-                    {
-                        fbUser = userBus.GetUserByUsername(identityUser.UserName);
-                    }
-                    catch { 
-                    }
-
-                    if (fbUser == null)
-                    {
-                        fbUser = userBus.GetUsers(0)
-                            .FirstOrDefault(u => string.Equals(u.Email, emailToSync, StringComparison.OrdinalIgnoreCase)
-                                                || string.Equals(u.Username, emailToSync, StringComparison.OrdinalIgnoreCase));
-                    }
-
-                    if (fbUser != null)
-                    {
-                        var fbRoles = userRoleBus.GetUserRoles(0)
-                                        .Where(ur => ur.UserId == fbUser.UserId)
-                                        .Select(ur => ur.Role?.RoleName)
-                                        .Where(r => !string.IsNullOrEmpty(r))
-                                        .Distinct()
-                                        .ToList();
-
-                        foreach (var roleName in fbRoles)
-                        {
-                            identity.AddClaim(new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.Role, roleName));
-                        }
-
-                        try { UserSync.SyncUserToFoodbank(emailToSync, updateLastLogin: true); } catch { }
-                    }*/
+                    identity.AddClaim(new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.Role, "Admin"));
                 }
-                catch { 
+                else
+                {
+                    identity.AddClaim(new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.Role, "Restaurant"));
                 }
+                
+                identity.AddClaim(new Claim("UserDBId", user.UserID.ToString()));
+
 
                 AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
                 AuthenticationManager.SignIn(new Microsoft.Owin.Security.AuthenticationProperties { IsPersistent = model.RememberMe }, identity);

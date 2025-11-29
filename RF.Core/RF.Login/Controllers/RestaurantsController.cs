@@ -17,7 +17,12 @@ namespace RF.Login.Controllers
         // GET: Restaurants
         public ActionResult Index()
         {
-            var restaurants = RestaurantBusiness.GetRestaurants(0);
+            var claimsIdentity = (System.Security.Claims.ClaimsIdentity)User.Identity;
+            var userDbIdClaim = claimsIdentity.FindFirst("UserDBId");
+            int userDbId = int.Parse(userDbIdClaim.Value);
+
+
+            var restaurants = RestaurantBusiness.GetRestaurantsByUser(userDbId);
             return View(restaurants.ToList());
         }
 

@@ -1,1 +1,0 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="FB.Login.MvcApplication, FB.Login" Language="C#" %>

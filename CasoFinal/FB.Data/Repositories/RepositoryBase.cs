@@ -20,12 +20,12 @@ namespace FB.Data.Repository
 
     public class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {
-        protected readonly APCEOneEntities _context;
+        protected readonly FoodbankEntities _context;
         protected readonly DbSet<T> _set;
 
         public RepositoryBase()
         {
-            _context = new APCEOneEntities();
+            _context = new FoodbankEntities();
             _set = _context.Set<T>();
         }
 

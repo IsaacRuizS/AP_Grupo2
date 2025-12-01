@@ -1,0 +1,84 @@
+﻿@model IEnumerable<CASO2.Data.UserDetail>
+
+    @{
+        ViewBag.Title = "Paso 3";
+    }
+
+   <h2>Paso 3 (Normalizar correos/salario/address/numberrange)</h2>
+
+    @if (!string.IsNullOrEmpty(ViewBag.Message as string))
+    {
+        <div class="alert alert-info">@ViewBag.Message</div>
+    }
+
+    @* Run stage 3 *@
+    @using (Html.BeginForm("RunStage", "Data", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("stage", "3")
+        @Html.Hidden("returnTo", "Paso3")
+        <button type="submit" class="btn btn-success mb-3">Ejecutar</button>
+    }
+
+    <style>
+        .table-scrollable {
+            max-height: 60vh;
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+            .table-scrollable thead th {
+                position: sticky;
+                top: 0;
+                background: #fff;
+                z-index: 2;
+            }
+
+            .table-scrollable td, .table-scrollable th {
+                white-space: nowrap;
+            }
+    </style>
+
+    <div class="table-scrollable">
+        <table class="table table-striped table-bordered table-sm mb-0">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>PostalZip</th>
+                    <th>Region</th>
+                    <th>Country</th>
+                    <th>List</th>
+                    <th>Text</th>
+                    <th>NumberRange</th>
+                    <th>Salary</th>
+                    <th>Password</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>@item.Phone</td>
+                        <td>@item.Email</td>
+                        <td>@item.Address</td>
+                        <td>@item.PostalZip</td>
+                        <td>@item.Region</td>
+                        <td>@item.Country</td>
+                        <td>@item.List</td>
+                        <td>@item.Text</td>
+                        <td>@item.NumberRange</td>
+                        <td>@item.Salary</td>
+                        <td>@item.Password</td>
+                        <td>@item.Status</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>

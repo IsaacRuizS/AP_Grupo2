@@ -1,4 +1,4 @@
-﻿using FB.Data;
+﻿using CASO2.Data;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FB.Data.Repository
+namespace CASO2.Data.Repository
 {
     public interface IRepositoryBase<T> where T : class
     {

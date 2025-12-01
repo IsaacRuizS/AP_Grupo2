@@ -1,0 +1,47 @@
+﻿@using CASO2.Core
+@{
+    var bus = new UserDetailBusiness();
+    bool s1 = bus.IsStageCompleted(1);
+    bool s2 = bus.IsStageCompleted(2);
+    bool s3 = bus.IsStageCompleted(3);
+    bool s4 = bus.IsStageCompleted(4);
+
+    // Paso1 always visible and enabled on the layout
+    bool canPaso1 = true;
+    // Paso2/3/4 always visible but only enabled when previous stage completed
+    bool canPaso2 = s1;
+    bool canPaso3 = s2;
+    bool canPaso4 = s3;
+
+    string linkClass(bool canAccess) => canAccess ? "nav-link" : "nav-link disabled text-muted";
+}
+
+<ul class="navbar-nav flex-grow-1">
+    <li class="nav-item">
+        <a class="nav-link" href="@Url.Action("Paso1","Data")">Paso 1</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="@(linkClass(canPaso2))"
+           href="@(canPaso2 ? Url.Action("Paso2","Data") : "#")"
+           @(canPaso2 ? "" : "aria-disabled=\"true\" tabindex=\"-1\"")>
+            Paso 2
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="@(linkClass(canPaso3))"
+           href="@(canPaso3 ? Url.Action("Paso3","Data") : "#")"
+           @(canPaso3 ? "" : "aria-disabled=\"true\" tabindex=\"-1\"")>
+            Paso 3
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="@(linkClass(canPaso4))"
+           href="@(canPaso4 ? Url.Action("Paso4","Data") : "#")"
+           @(canPaso4 ? "" : "aria-disabled=\"true\" tabindex=\"-1\"")>
+            Paso 4
+        </a>
+    </li>
+</ul>

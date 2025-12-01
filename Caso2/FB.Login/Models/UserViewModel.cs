@@ -1,0 +1,15 @@
+using System;
+
+namespace CASO2.Login.Models
+{
+    public class UserViewModel
+    {
+        public int UserId { get; set; }
+        public string Username { get; set; }
+        public string Email { get; set; }
+        public string FullName { get; set; }
+        public bool IsActive { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime? LastLogin { get; set; }
+    }
+}

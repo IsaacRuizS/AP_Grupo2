@@ -10,7 +10,7 @@ using CASO2.Data.Repository;
 namespace CASO2.Core
 {
     // Pattern: Repository (existing)
-    // Pattern: Chain of Responsibility (stage handlers implemented inline in business methods)
+    // Pattern: Aca se usa el chain of responsability para abarcar los pasos a realizar desde el 1 al 5, en este se implementa primero las interfaces
     public class UserDetailBusiness
     {
         private readonly IRepositoryUserDetail _repository;
@@ -74,19 +74,19 @@ namespace CASO2.Core
                 switch (stage)
                 {
                     case 1:
-                        return (ExecuteStage1(), "Stage 1 executed.");
+                        return (ExecuteStage1(), "Paso 1 listo.");
                     case 2:
                         if (!IsStageCompleted(1))
-                            return (false, "Stage 1 must be completed before running Stage 2.");
-                        return (ExecuteStage2(), "Stage 2 executed.");
+                            return (false, "El paso 1 debe de estar completo primero.");
+                        return (ExecuteStage2(), "Paso 2 listo.");
                     case 3:
                         if (!IsStageCompleted(2))
-                            return (false, "Stage 2 must be completed before running Stage 3.");
-                        return (ExecuteStage3(), "Stage 3 executed.");
+                            return (false, "El paso 2 debe de estar completo primero.");
+                        return (ExecuteStage3(), "Paso 3 listo.");
                     case 4:
                         if (!IsStageCompleted(3))
-                            return (false, "Stage 3 must be completed before running Stage 4.");
-                        return (ExecuteStage4(), "Stage 4 executed.");
+                            return (false, "El paso 3 debe de estar completo primero.");
+                        return (ExecuteStage4(), "Paso 4 listo.");
                     default:
                         return (false, "Unknown stage.");
                 }
@@ -189,7 +189,7 @@ namespace CASO2.Core
                     catch
                     {
                     }
-
+                    // aca se debe de modificar para poder realizar el paso 3.4
                     if (!string.IsNullOrWhiteSpace(u.Salary))
                     {
                         var mapped = MapSalary(u.Salary);

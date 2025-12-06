@@ -18,12 +18,15 @@
             <div>Nombre</div>
         </th>
         <th>
+            <div>Dueño</div>
+        </th>
+        <th>
             <div>Descripción</div>
         </th>
         <th>
-            <div>Dirección</div> 
+            <div>Dirección</div>
         </th>
-        <th style="width: 132px;">
+        <th>
             <div>Teléfono</div>
         </th>
         <th>
@@ -35,56 +38,49 @@
         <th>
             <div>Estado</div>
         </th>
-        <th>
-            <div>Imagen</div>
-        </th>
-        <th>
-            <div>Usuario</div>
-        </th>
-        <th style="width: 90px;">
-            <div>Acciones</div>
-        </th>
+        <th></th>
+        <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rating)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
-            <td>
-                <img src="@item.ImageUrl" alt="Imagen" style="width: 80px; height: auto; border-radius: 8px;" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.FullName)
-            </td>
-            <td>
-                <a href="@Url.Action("Edit", new { id = item.RestaurantID })" class="text-primary me-2" title="Editar">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                </a>
-                <a href="@Url.Action("Delete", new { id = item.RestaurantID })" class="text-danger" title="Eliminar">
-                    <i class="fa-solid fa-trash"></i>
-                </a>
-            </td>
-        </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.User.FullName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Description)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Address)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Phone)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Email)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Rating)
+    </td>
+    <td>
+        <input type="checkbox" checked="@item.IsActive" disabled />
+    </td>
+
+    <td>
+        <a href="@Url.Action("Edit", new { id = item.RestaurantID })" title="Editar">
+            <i class="fa-solid fa-pen-to-square text-primary"></i>
+        </a>
+    </td>
+    <td>
+        <a href="@Url.Action("Delete", new { id = item.RestaurantID })" title="Eliminar">
+            <i class="fa-solid fa-trash text-danger"></i>
+        </a>
+    </td>
+</tr>
     }
 
 </table>

@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="10f437900b3d476c907e40c739d1819b" Name="Diagram1">
+      <Diagram DiagramId="ab32b1d5aa3e4a8e962e2da0e0e78ca5" Name="Diagram1">
         <EntityTypeShape EntityType="RestaurantFinderModel.Restaurant" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="RestaurantFinderModel.UserRole" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
         <EntityTypeShape EntityType="RestaurantFinderModel.User" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
-        <AssociationConnector Association="RestaurantFinderModel.FK__Restauran__UserI__45F365D3" ManuallyRouted="false" />
-        <AssociationConnector Association="RestaurantFinderModel.FK__Users__RoleID__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="RestaurantFinderModel.FK__Restauran__UserI__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="RestaurantFinderModel.FK__Users__RoleID__52593CB8" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

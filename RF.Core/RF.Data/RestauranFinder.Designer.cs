@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\Documents\U\2025 III\Progra\Projects\Git\AP_Grupo2\RF.Core\RF.Data\RestauranFinder.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\fauri\Documents\!c-sharp-clones\AP_Grupo2\RF.Core\RF.Data\RestauranFinder.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

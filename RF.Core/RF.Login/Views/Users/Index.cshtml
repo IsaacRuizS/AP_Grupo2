@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Usuarios del Sistema</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,13 +12,10 @@
 <table class="table table-responsive table-bordered table-dark table-striped table-primary">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.FullName)
+            Nombre
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PasswordHash)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.IsActive)
@@ -30,9 +27,11 @@
             @Html.DisplayNameFor(model => model.UpdatedAt)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UserRole.Name)
+            Rol
         </th>
-        <th></th>
+        <th>
+            Acciones
+        </th>
     </tr>
 
 @foreach (var item in Model) {
@@ -44,10 +43,7 @@
             @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.PasswordHash)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsActive)
+            <input type="checkbox" checked="@item.IsActive" disabled />
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CreatedAt)

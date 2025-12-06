@@ -102,7 +102,7 @@ namespace RF.Login.Controllers
                     identity.AddClaim(new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.Role, "Restaurant"));
                 }
                 
-                identity.AddClaim(new Claim("UserDBId", user.UserID.ToString()));
+                identity.AddClaim(new Claim("UserDbId", user.UserID.ToString()));
 
 
                 AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);

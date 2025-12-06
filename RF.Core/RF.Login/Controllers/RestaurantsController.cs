@@ -1,9 +1,12 @@
 ﻿using System;
+using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using RF.Data;
@@ -17,13 +20,28 @@ namespace RF.Login.Controllers
         // GET: Restaurants
         public ActionResult Index()
         {
-            var claimsIdentity = (System.Security.Claims.ClaimsIdentity)User.Identity;
-            var userDbIdClaim = claimsIdentity.FindFirst("UserDBId");
-            int userDbId = int.Parse(userDbIdClaim.Value);
+            var claims = (ClaimsIdentity)User.Identity;
 
+            // Obtener el rol del claim estándar
+            string role = claims.FindFirst(ClaimTypes.Role)?.Value;
 
-            var restaurants = RestaurantBusiness.GetRestaurantsByUser(userDbId);
-            return View(restaurants.ToList());
+            if (role == "Admin")
+            {
+                var allRestaurants = RestaurantBusiness.GetRestaurants(0);
+                return View(allRestaurants.ToList());
+            }
+
+            // Si NO es admin → es Restaurant
+            var claimId = claims.FindFirst("UserDbId");
+            if (claimId == null)
+            {
+                HttpContext.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                return RedirectToAction("Login", "Account");
+            }
+            var userDbId = int.Parse(claimId.Value);
+
+            var restaurantsByUser = RestaurantBusiness.GetRestaurantsByUser(userDbId);
+            return View(restaurantsByUser.ToList());
         }
 
         // GET: Restaurants/Create

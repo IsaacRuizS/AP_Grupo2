@@ -1,89 +1,71 @@
 ﻿@model RF.Data.User
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Crear Usuario";
 }
 
-<h2>Create</h2>
-
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Crear Nuevo Usuario</h2>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">
+        <i class="fa-solid fa-arrow-left"></i> Volver
+    </a>
+</div>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>User</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
+    <div class="card bg-dark border-secondary">
+        <div class="card-header bg-success text-white">
+            <h5 class="mb-0">Información del Usuario</h5>
+        </div>
+        <div class="card-body">
+            @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+            <div class="mb-3">
+                @Html.LabelFor(model => model.FullName, "Nombre Completo", new { @class = "form-label" })
+                @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", placeholder = "Ingrese el nombre completo" } })
                 @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="mb-3">
+                @Html.LabelFor(model => model.Email, "Correo Electrónico", new { @class = "form-label" })
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "ejemplo@correo.com", type = "email" } })
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.PasswordHash, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PasswordHash, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="mb-3">
+                @Html.LabelFor(model => model.PasswordHash, "Contraseña", new { @class = "form-label" })
+                @Html.PasswordFor(model => model.PasswordHash, new { @class = "form-control", placeholder = "Ingrese la contraseña" })
                 @Html.ValidationMessageFor(model => model.PasswordHash, "", new { @class = "text-danger" })
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.RoleID, "RoleID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("RoleID", null, htmlAttributes: new { @class = "form-control" })
+            <div class="mb-3">
+                @Html.LabelFor(model => model.RoleID, "Rol", new { @class = "form-label" })
+                @Html.DropDownList("RoleID", null, "Seleccione un rol", new { @class = "form-select" })
                 @Html.ValidationMessageFor(model => model.RoleID, "", new { @class = "text-danger" })
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.IsActive)
-                    @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreatedAt, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedAt, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatedAt, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.UpdatedAt, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UpdatedAt, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UpdatedAt, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="mb-3">
+                @Html.LabelFor(model => model.IsActive, "Estado", new { @class = "form-label" })
+                @Html.DropDownListFor(model => model.IsActive, new SelectList(new[] { 
+                    new { Value = true, Text = "Activo" }, 
+                    new { Value = false, Text = "Inactivo" } 
+                }, "Value", "Text"), "Seleccione un estado", new { @class = "form-select" })
+                @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <div class="mt-4 d-flex gap-3">
+        <button type="submit" class="btn btn-success">
+            <i class="fa-solid fa-plus"></i> Crear Usuario
+        </button>
+        <a href="@Url.Action("Index")" class="btn btn-secondary">
+            <i class="fa-solid fa-times"></i> Cancelar
+        </a>
+    </div>
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

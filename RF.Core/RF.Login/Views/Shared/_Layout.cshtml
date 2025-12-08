@@ -46,13 +46,12 @@
             @Html.Partial("_LoginPartial")
         </div>
     </nav>
-    <div style="margin: 40px;">
+    <div style="margin: 40px; flex: 1;">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Restaurant Finder</p>
-        </footer>
     </div>
+    <footer class="bg-dark text-center py-3 border-top border-secondary">
+        <p class="mb-0 text-muted">&copy; @DateTime.Now.Year - Restaurant Finder</p>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

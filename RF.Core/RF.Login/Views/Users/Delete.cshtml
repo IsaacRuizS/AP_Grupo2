@@ -1,80 +1,96 @@
 ﻿@model RF.Data.User
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Eliminar Usuario";
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>User</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FullName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FullName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PasswordHash)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PasswordHash)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsActive)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UpdatedAt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UpdatedAt)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UserRole.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserRole.Name)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
+<div class="mb-4">
+    <h2 class="text-danger">
+        <i class="fa-solid fa-exclamation-triangle"></i> Eliminar Usuario
+    </h2>
+    <div class="alert alert-danger my-4" role="alert">
+        <strong>¿Está seguro que desea eliminar este usuario?</strong>
+    </div>
 </div>
+
+<div class="card bg-dark border-danger">
+    <div class="card-header bg-danger text-white">
+        <h5 class="mb-0">Información del Usuario</h5>
+    </div>
+    <div class="card-body">
+        <div class="row mb-3">
+            <div class="col-md-3">
+                <strong>Nombre Completo:</strong>
+            </div>
+            <div class="col-md-9">
+                @Html.DisplayFor(model => model.FullName)
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-3">
+                <strong>Email:</strong>
+            </div>
+            <div class="col-md-9">
+                @Html.DisplayFor(model => model.Email)
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-3">
+                <strong>Activo:</strong>
+            </div>
+            <div class="col-md-9">
+                @if (Model.IsActive.GetValueOrDefault())
+                {
+                    <span class="badge bg-success">Sí</span>
+                }
+                else
+                {
+                    <span class="badge bg-danger">No</span>
+                }
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-3">
+                <strong>Rol:</strong>
+            </div>
+            <div class="col-md-9">
+                <span class="badge bg-primary">@Html.DisplayFor(model => model.UserRole.Name)</span>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-3">
+                <strong>Fecha de Creación:</strong>
+            </div>
+            <div class="col-md-9">
+                @Html.DisplayFor(model => model.CreatedAt)
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-3">
+                <strong>Última Actualización:</strong>
+            </div>
+            <div class="col-md-9">
+                @Html.DisplayFor(model => model.UpdatedAt)
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="mt-4 d-flex gap-5">
+        <button type="submit" class="btn btn-danger">
+            <i class="fa-solid fa-trash"></i> Eliminar Usuario
+        </button>
+        <a href="@Url.Action("Index")" class="btn btn-secondary">
+            <i class="fa-solid fa-arrow-left"></i> Cancelar
+        </a>
+    </div>
+}

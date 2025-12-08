@@ -2,175 +2,161 @@
 @model RF.Data.Restaurant
 
 @{
-    ViewBag.Title = "Crear restaurante";
+    ViewBag.Title = "Crear Restaurante";
 
     var claimsIdentity = (ClaimsIdentity)User.Identity;
     var userDbIdClaim = claimsIdentity.FindFirst("UserDBId");
     var userDbId = userDbIdClaim != null ? int.Parse(userDbIdClaim.Value) : 0;
 }
 
-<h2 class="mb-4 text-center">Registrar Restaurante</h2>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Crear Nuevo Restaurante</h2>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">
+        <i class="fa-solid fa-arrow-left"></i> Volver
+    </a>
+</div>
 
 @using (Html.BeginForm("Create", "Restaurants", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
-    <div class="container bg-secondary p-4 rounded shadow-sm">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger d-flex justify-content-center" })
+    <div class="card bg-dark border-secondary">
+        <div class="card-header bg-success text-white">
+            <h5 class="mb-0">Información del Restaurante</h5>
+        </div>
+        <div class="card-body">
+            @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
 
-        <a href="@Url.Action("Index")" class="btn btn-secondary">
-            <i class="fa-solid fa-arrow-left me-1"></i> Volver a la lista
-        </a>
-
-        <div class="row">
-            @if (User.IsInRole("Admin"))
-            {
-                <div class="col-md-6 mb-3">
-                    @Html.LabelFor(model => model.UserID, "Usuario", htmlAttributes: new { @class = "form-label fw-bold d-flex justify-content-center" })
-                    <div class="d-flex justify-content-center">
-                        @Html.DropDownList("UserID", null, htmlAttributes: new { @class = "form-control" })
+            <div class="row">
+                @if (User.IsInRole("Admin"))
+                {
+                    <div class="col-md-6 mb-3">
+                        @Html.LabelFor(model => model.UserID, "Usuario", new { @class = "form-label" })
+                        @Html.DropDownList("UserID", null, "Seleccione un usuario", new { @class = "form-select" })
+                        @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
                     </div>
-                    @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger d-flex justify-content-center" })
-                </div>
-            }
-            else
-            {
-                <!-- Para usuarios Restaurant -->
-                @Html.HiddenFor(model => model.UserID, new { Value = userDbId })
-            }
+                }
+                else
+                {
+                    @Html.HiddenFor(model => model.UserID, new { Value = userDbId })
+                }
 
-            <div class="col-md-6 mb-3">
-                @Html.LabelFor(model => model.Name, "Nombre", htmlAttributes: new { @class = "form-label fw-bold d-flex justify-content-center" })
-                <div class="d-flex justify-content-center">
+                <div class="col-md-6 mb-3">
+                    @Html.LabelFor(model => model.Name, "Nombre", new { @class = "form-label" })
                     @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "Ej. Restaurante La Casona" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                 </div>
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger d-flex justify-content-center" })
-            </div>
 
-            <div class="col-md-6 mb-3">
-                @Html.LabelFor(model => model.Description, "Descripción", htmlAttributes: new { @class = "form-label fw-bold d-flex justify-content-center" })
-                <div class="d-flex justify-content-center">
+                <div class="col-md-6 mb-3">
+                    @Html.LabelFor(model => model.Description, "Descripción", new { @class = "form-label" })
                     @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = 3, placeholder = "Describe brevemente el restaurante" })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                 </div>
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger d-flex justify-content-center" })
-            </div>
 
-            <div class="col-md-6 mb-3">
-                @Html.LabelFor(model => model.Address, "Dirección", htmlAttributes: new { @class = "form-label fw-bold d-flex justify-content-center" })
-                <div class="d-flex justify-content-center">
+                <div class="col-md-6 mb-3">
+                    @Html.LabelFor(model => model.Address, "Dirección", new { @class = "form-label" })
                     @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", placeholder = "Ej. Avenida Central, San José" } })
+                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
                 </div>
-                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger d-flex justify-content-center" })
-            </div>
 
-            <div class="col-md-6 mb-3">
-                @Html.LabelFor(model => model.Phone, "Teléfono", htmlAttributes: new { @class = "form-label fw-bold d-flex justify-content-center" })
-                <div class="d-flex justify-content-center">
+                <div class="col-md-6 mb-3">
+                    @Html.LabelFor(model => model.Phone, "Teléfono", new { @class = "form-label" })
                     @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", placeholder = "8888-8888" } })
+                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
                 </div>
-                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger d-flex justify-content-center" })
-            </div>
 
-            <div class="col-md-6 mb-3">
-                @Html.LabelFor(model => model.Email, "Correo electrónico", htmlAttributes: new { @class = "form-label fw-bold d-flex justify-content-center" })
-                <div class="d-flex justify-content-center">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "correo@ejemplo.com" } })
+                <div class="col-md-6 mb-3">
+                    @Html.LabelFor(model => model.Email, "Correo Electrónico", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "correo@ejemplo.com", type = "email" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                 </div>
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger d-flex justify-content-center" })
-            </div>
 
-            <div class="col-md-6 mb-3">
-                @Html.LabelFor(model => model.Website, "Sitio web", htmlAttributes: new { @class = "form-label fw-bold d-flex justify-content-center" })
-                <div class="d-flex justify-content-center">
+                <div class="col-md-6 mb-3">
+                    @Html.LabelFor(model => model.Website, "Sitio Web", new { @class = "form-label" })
                     @Html.EditorFor(model => model.Website, new { htmlAttributes = new { @class = "form-control", placeholder = "https://..." } })
+                    @Html.ValidationMessageFor(model => model.Website, "", new { @class = "text-danger" })
                 </div>
-                @Html.ValidationMessageFor(model => model.Website, "", new { @class = "text-danger d-flex justify-content-center" })
-            </div>
 
-            <div class="col-md-6 mb-3">
-                @Html.Label("Imagen", "Imagen del restaurante", htmlAttributes: new { @class = "form-label fw-bold d-flex justify-content-center" })
-                <div class="d-flex justify-content-center">
+                <div class="col-md-6 mb-3">
+                    @Html.Label("Imagen", "Imagen del Restaurante", new { @class = "form-label" })
                     <input type="file" name="imageFile" class="form-control" />
                 </div>
-            </div>
 
-            <div class="col-md-6 mb-3">
-                @Html.LabelFor(model => model.WazeLink, "Enlace de Waze", htmlAttributes: new { @class = "form-label fw-bold d-flex justify-content-center" })
-                <div class="d-flex justify-content-center">
-                    @Html.EditorFor(model => model.WazeLink, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="col-md-6 mb-3">
+                    @Html.LabelFor(model => model.WazeLink, "Enlace de Waze", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.WazeLink, new { htmlAttributes = new { @class = "form-control", placeholder = "https://waze.com/..." } })
+                    @Html.ValidationMessageFor(model => model.WazeLink, "", new { @class = "text-danger" })
                 </div>
-                @Html.ValidationMessageFor(model => model.WazeLink, "", new { @class = "text-danger d-flex justify-content-center" })
-            </div>
 
-            <div class="col-md-6 mb-3">
-                @Html.LabelFor(model => model.GoogleMapsLink, "Enlace de Google Maps", htmlAttributes: new { @class = "form-label fw-bold d-flex justify-content-center" })
-                <div class="d-flex justify-content-center">
-                    @Html.EditorFor(model => model.GoogleMapsLink, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="col-md-6 mb-3">
+                    @Html.LabelFor(model => model.GoogleMapsLink, "Enlace de Google Maps", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.GoogleMapsLink, new { htmlAttributes = new { @class = "form-control", placeholder = "https://maps.google.com/..." } })
+                    @Html.ValidationMessageFor(model => model.GoogleMapsLink, "", new { @class = "text-danger" })
                 </div>
-                @Html.ValidationMessageFor(model => model.GoogleMapsLink, "", new { @class = "text-danger d-flex justify-content-center" })
-            </div>
 
-            <div class="col-md-9 mb-3 mx-auto">
-                <label class="form-label fw-bold d-flex justify-content-center">Seleccionar Ubicación en el Mapa</label>
-                <div id="map" style="height: 400px; width: 100%;" class="rounded shadow-sm border"></div>
-                <small class="text-muted d-flex justify-content-center mt-1">Haga clic en el mapa para establecer la ubicación.</small>
-            </div>
-
-            <div class="col-md-6 mb-3 d-none">
-                @Html.LabelFor(model => model.Latitude, "Latitud", htmlAttributes: new { @class = "form-label fw-bold d-flex justify-content-center" })
-                <div class="d-flex justify-content-center">
-                    @Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                </div>
-                @Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "text-danger d-flex justify-content-center" })
-            </div>
-
-            <div class="col-md-6 mb-3 d-none">
-                @Html.LabelFor(model => model.Longitude, "Longitud", htmlAttributes: new { @class = "form-label fw-bold d-flex justify-content-center" })
-                <div class="d-flex justify-content-center">
-                    @Html.EditorFor(model => model.Longitude, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                </div>
-                @Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "text-danger d-flex justify-content-center" })
-            </div>
-
-            <div class="col-md-6 mb-3">
-                @Html.LabelFor(model => model.Rating, "Calificación", htmlAttributes: new { @class = "form-label fw-bold d-flex justify-content-center" })
-                <div class="d-flex justify-content-center">
-                    @Html.EditorFor(model => model.Rating, new { htmlAttributes = new { @class = "form-control", placeholder = "0 - 5" } })
-                </div>
-                @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger d-flex justify-content-center" })
-            </div>
-
-            <div class="col-md-6 mb-3">
-                <div class="d-flex justify-content-center align-items-center h-100">
-                    <div class="form-check">
-                        @Html.CheckBox("IsActive", (Model != null && Model.IsActive.HasValue) ? Model.IsActive.Value : true, new { @class = "form-check-input" })
-                        @Html.Label("IsActive", "Activo", htmlAttributes: new { @class = "form-check-label fw-bold ms-1" })
+                <div class="col-12 mb-3">
+                    <div class="col-8 mb-3">
+                        <label class="form-label">Seleccionar Ubicación en el Mapa</label>
+                        <div id="map" style="height: 600px; width: 100%;" class="rounded border"></div>
+                        <small class="text-muted">Haga clic en el mapa para establecer la ubicación.</small>
                     </div>
                 </div>
+
+                <div class="col-md-6 mb-3 d-none">
+                    @Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                </div>
+
+                <div class="col-md-6 mb-3 d-none">
+                    @Html.EditorFor(model => model.Longitude, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    @Html.LabelFor(model => model.Rating, "Calificación (0-5)", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.Rating, new { htmlAttributes = new { @class = "form-control", placeholder = "0 - 5", type = "number", step = "0.1", min = "0", max = "5" } })
+                    @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    @Html.LabelFor(model => model.IsActive, "Estado", new { @class = "form-label" })
+                    @Html.DropDownListFor(model => model.IsActive, new SelectList(new[] {
+                        new { Value = true, Text = "Activo" },
+                        new { Value = false, Text = "Inactivo" }
+                    }, "Value", "Text", true), "Seleccione un estado", new { @class = "form-select" })
+                    @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
+    </div>
 
-        <div class="d-flex justify-content-center mt-4">
-            <button type="submit" class="btn btn-success">
-                <i class="fa-solid fa-check me-1"></i> Guardar
-            </button>
-        </div>
+    <div class="mt-4 d-flex gap-3">
+        <button type="submit" class="btn btn-success">
+            <i class="fa-solid fa-plus"></i> Crear Restaurante
+        </button>
+        <a href="@Url.Action("Index")" class="btn btn-secondary">
+            <i class="fa-solid fa-times"></i> Cancelar
+        </a>
     </div>
 }
+
+<style>
+    .leaflet-marker-icon {
+        background-color: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+</style>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     
     <script>
-        // Check if Leaflet is loaded (it should be in Layout)
         if (typeof L !== 'undefined') {
-             // Default config
             const config = {
                 minZoom: 7,
                 maxZoom: 18,
             };
             const zoom = 10;
-            const defaultLat = 9.9281; // San José default
+            const defaultLat = 9.9281;
             const defaultLng = -84.0907;
 
             const map = L.map("map", config).setView([defaultLat, defaultLng], zoom);
@@ -180,26 +166,16 @@
             }).addTo(map);
 
             let currentMarker = null;
-
-            // Inputs
             const latInput = document.getElementById("Latitude");
             const lngInput = document.getElementById("Longitude");
 
             function updateMarker(lat, lng) {
-                 if (currentMarker) {
+                if (currentMarker) {
                     map.removeLayer(currentMarker);
                 }
-                currentMarker = L.marker([lat, lng], {
-                     icon: L.divIcon({
-                        className: "leaflet-marker-icon",
-                        iconSize: L.point(30, 30),
-                        popupAnchor: [3, -5],
-                        html: '<i class=""></i>'
-                    })
-                }).addTo(map);
+                currentMarker = L.marker([lat, lng]).addTo(map);
             }
 
-            // Click event
             map.on('click', function(e) {
                 const lat = e.latlng.lat.toFixed(6);
                 const lng = e.latlng.lng.toFixed(6);
@@ -209,15 +185,14 @@
 
                 updateMarker(lat, lng);
             });
-            
-            // If editing/returning and values exist
-             if (latInput.value && lngInput.value) {
-                 const lat = parseFloat(latInput.value);
-                 const lng = parseFloat(lngInput.value);
-                 if(!isNaN(lat) && !isNaN(lng)){
+
+            if (latInput.value && lngInput.value) {
+                const lat = parseFloat(latInput.value);
+                const lng = parseFloat(lngInput.value);
+                if(!isNaN(lat) && !isNaN(lng)){
                     updateMarker(lat, lng);
                     map.setView([lat, lng], 15);
-                 }
+                }
             }
         } else {
             console.error("Leaflet library not found!");

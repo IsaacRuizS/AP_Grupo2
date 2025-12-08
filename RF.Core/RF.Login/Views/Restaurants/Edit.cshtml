@@ -30,18 +30,7 @@
             @Html.HiddenFor(model => model.ImageUrl)
 
             <div class="row">
-                @if (User.IsInRole("Admin"))
-                {
-                    <div class="col-md-6 mb-3">
-                        @Html.LabelFor(model => model.UserID, "Usuario", new { @class = "form-label" })
-                        @Html.DropDownList("UserID", null, "Seleccione un usuario", new { @class = "form-select" })
-                        @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
-                    </div>
-                }
-                else
-                {
-                    @Html.HiddenFor(model => model.UserID, new { Value = userDbId })
-                }
+                @Html.HiddenFor(model => model.UserID)
 
                 <div class="col-md-6 mb-3">
                     @Html.LabelFor(model => model.Name, "Nombre", new { @class = "form-label" })
@@ -84,10 +73,16 @@
                     @if (!string.IsNullOrEmpty(Model.ImageUrl))
                     {
                         <div class="mb-2">
-                            <img src="@Url.Content(Model.ImageUrl)" alt="Imagen Actual" style="max-height: 150px; max-width: 100%;" class="rounded border" />
+                            <img id="imagePreview" src="@Url.Content(Model.ImageUrl)" alt="Imagen Actual" style="max-height: 150px; max-width: 100%;" class="rounded border" />
                         </div>
                     }
-                    <input type="file" name="imageFile" class="form-control" />
+                    else
+                    {
+                        <div class="mb-2">
+                            <img id="imagePreview" src="" alt="Vista previa" style="max-height: 150px; max-width: 100%; display: none;" class="rounded border" />
+                        </div>
+                    }
+                    <input type="file" id="imageFileInput" name="imageFile" class="form-control" accept="image/*" />
                 </div>
 
                 <div class="col-md-6 mb-3">
@@ -223,5 +218,20 @@
         } else {
             console.error("Leaflet library not found!");
         }
+    </script>
+
+    <script>
+        document.getElementById('imageFileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = document.getElementById('imagePreview');
+                    img.src = event.target.result;
+                    img.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
     </script>
 }

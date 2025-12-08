@@ -113,14 +113,47 @@ namespace RF.Login.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Obtener solo la URL de la imagen anterior sin cargar la entidad completa
+                string oldImageUrl = null;
                 if (imageFile != null && imageFile.ContentLength > 0)
                 {
-                    var fileName = FileHelper.GenerateUniqueFileName(imageFile.FileName);
-                    var path = Path.Combine(Server.MapPath("~/Content/Images/Restaurants"), fileName);
+                    // Usar una instancia temporal de RestaurantBusiness para leer, 
+                    // así evitamos conflictos de tracking en el contexto principal
+                    var tempBusiness = new RF.Core.RestaurantBusiness();
+                    var existingRestaurant = tempBusiness.GetRestaurants(restaurant.RestaurantID).FirstOrDefault();
+                    
+                    if (existingRestaurant != null && !string.IsNullOrEmpty(existingRestaurant.ImageUrl))
+                    {
+                        oldImageUrl = existingRestaurant.ImageUrl;
+                    }
+                    
+                    // Guardar nueva imagen con timestamp
+                    var extension = Path.GetExtension(imageFile.FileName);
+                    var timestamp = DateTime.Now.ToString("yyyyMMddHHmmss");
+                    var fileName = $"{timestamp}{extension}";
+                    
+                    var folderPath = Server.MapPath("~/Content/Images/Restaurants");
+                    if (!Directory.Exists(folderPath))
+                    {
+                        Directory.CreateDirectory(folderPath);
+                    }
+                    
+                    var path = Path.Combine(folderPath, fileName);
                     imageFile.SaveAs(path);
                     restaurant.ImageUrl = "/Content/Images/Restaurants/" + fileName;
+                    
+                    // Eliminar la imagen anterior después de guardar la nueva
+                    if (!string.IsNullOrEmpty(oldImageUrl))
+                    {
+                        var oldImagePath = Server.MapPath("~" + oldImageUrl);
+                        if (System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
+                    }
                 }
                 
+                restaurant.UpdatedAt = DateTime.Now;
                 RestaurantBusiness.SaveOrUpdate(restaurant);
                 return RedirectToAction("Index");
             }
@@ -148,6 +181,29 @@ namespace RF.Login.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            // Obtener el restaurante antes de eliminarlo para borrar su imagen
+            var restaurant = RestaurantBusiness.GetRestaurants(id).FirstOrDefault();
+            
+            if (restaurant != null && !string.IsNullOrEmpty(restaurant.ImageUrl))
+            {
+                // Este condicional verifica que la ruta tenga formato valido, sino lo ignora
+                if (restaurant.ImageUrl.StartsWith("/") && !restaurant.ImageUrl.StartsWith("//") && !restaurant.ImageUrl.Contains("http"))
+                {
+                    try 
+                    {
+                        var imagePath = Server.MapPath("~" + restaurant.ImageUrl);
+                        if (System.IO.File.Exists(imagePath))
+                        {
+                            System.IO.File.Delete(imagePath);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        // Ignorar errores
+                    }
+                }
+            }
+            
             bool isDeleted = RestaurantBusiness.Delete(id);
             return RedirectToAction("Index");
         }

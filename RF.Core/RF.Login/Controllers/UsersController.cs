@@ -52,9 +52,33 @@ namespace RF.Login.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Users.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                user.CreatedAt = DateTime.Now;
+                try
+                {
+                    db.Users.Add(user);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (System.Data.Entity.Infrastructure.DbUpdateException ex)
+                {
+                    // Verificar si es un error de clave unica, osea el UNIQUE del sql
+                    var sqlException = ex.InnerException?.InnerException as System.Data.SqlClient.SqlException;
+                    if (sqlException != null && (sqlException.Number == 2601 || sqlException.Number == 2627))
+                    {
+                        if (sqlException.Message.Contains("Email"))
+                        {
+                            ModelState.AddModelError("Email", "Este correo electrónico ya está registrado.");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "Ya existe un registro con esta información.");
+                        }
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
             }
 
             ViewBag.RoleID = new SelectList(db.UserRoles, "RoleID", "Name", user.RoleID);
@@ -86,6 +110,7 @@ namespace RF.Login.Controllers
         {
             if (ModelState.IsValid)
             {
+                user.UpdatedAt = DateTime.Now;
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -1,89 +1,80 @@
-﻿@model RF.Login.Models.IndexViewModel
+﻿@model RF.Data.User
 @{
-    ViewBag.Title = "Manage";
+    ViewBag.Title = "Mi Perfil";
 }
 
-<main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title.</h2>
-
-    <p class="text-success">@ViewBag.StatusMessage</p>
+<div class="d-flex justify-content-between align-items-center mb-4">
     <div>
-        <h4>Change your account settings</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>Password:</dt>
-            <dd>
-                [
-                @if (Model.HasPassword)
-                {
-                    @Html.ActionLink("Change your password", "ChangePassword")
-                }
-                else
-                {
-                    @Html.ActionLink("Create", "SetPassword")
-                }
-                ]
-            </dd>
-            <dt>External Logins:</dt>
-            <dd>
-                @Model.Logins.Count [
-                @Html.ActionLink("Manage", "ManageLogins") ]
-            </dd>
-            @*
-                Phone Numbers can used as a second factor of verification in a two-factor authentication system.
-                
-                See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                    for details on setting up this ASP.NET application to support two-factor authentication using SMS.
-                
-                Uncomment the following block after you have set up two-factor authentication
-            *@
-            @*  
-                <dt>Phone Number:</dt>
-                <dd>
-                    @(Model.PhoneNumber ?? "None")
-                    @if (Model.PhoneNumber != null)
-                    {
-                        <br />
-                        <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
-                        using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { role = "form" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            <text>[<input type="submit" value="Remove" class="btn-link" />]</text>
-                        }
-                    }
-                    else
-                    {
-                        <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
-                    }
-                </dd>
-            *@
-            <dt>Two-Factor Authentication:</dt>
-            <dd>
-                <p>
-                    There are no two-factor authentication providers configured. See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                    for details on setting up this ASP.NET application to support two-factor authentication.
-                </p>
-                @*@if (Model.TwoFactor)
-                    {
-                        using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { role = "form" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            <text>Enabled
-                            <input type="submit" value="Disable" class="btn btn-link" />
-                            </text>
-                        }
-                    }
-                    else
-                    {
-                        using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { role = "form" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            <text>Disabled
-                            <input type="submit" value="Enable" class="btn btn-link" />
-                            </text>
-                        }
-                    }*@
-            </dd>
-        </dl>
+        <h2 class="mb-3">Mi Perfil</h2>
     </div>
-</main>
+    <div>
+        <a href="@Url.Action("ChangePassword")" class="btn btn-outline-primary">
+            <i class="fa-solid fa-key"></i> Cambiar Contraseña
+        </a>
+    </div>
+</div>
+
+@if (!string.IsNullOrEmpty(ViewBag.StatusMessage as string))
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fa-solid fa-check-circle"></i> @ViewBag.StatusMessage
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@using (Html.BeginForm("Edit", "Users", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="card bg-dark border-secondary">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Información Personal</h5>
+        </div>
+        <div class="card-body">
+            @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+            @Html.HiddenFor(model => model.UserID)
+            @Html.HiddenFor(model => model.CreatedAt)
+            @Html.HiddenFor(model => model.UpdatedAt)
+            @Html.HiddenFor(model => model.PasswordHash)
+            @Html.HiddenFor(model => model.RoleID)
+            @Html.HiddenFor(model => model.IsActive)
+
+            <div class="row">
+                <div class="col-md-6 mb-5">
+                    @Html.LabelFor(model => model.FullName, "Nombre Completo", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", placeholder = "Ingrese su nombre completo" } })
+                    @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-md-6 mb-5">
+                    @Html.LabelFor(model => model.Email, "Correo Electrónico", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "ejemplo@correo.com", type = "email" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Rol</label>
+                    <p class="form-control-plaintext text-white">@Model.UserRole.Name</p>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Fecha de Registro</label>
+                    <p class="form-control-plaintext text-white">@(Model.CreatedAt.HasValue ? Model.CreatedAt.Value.ToString("dd/MM/yyyy") : "N/A")</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4 d-flex gap-3">
+        <button type="submit" class="btn btn-success">
+            <i class="fa-solid fa-save"></i> Guardar Cambios
+        </button>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">
+            <i class="fa-solid fa-times"></i> Cancelar
+        </a>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

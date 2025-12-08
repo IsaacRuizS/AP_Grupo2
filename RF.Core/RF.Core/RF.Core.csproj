@@ -45,6 +45,7 @@
     <Compile Include="RestaurantBusiness.cs" />
     <Compile Include="UserRoleBusiness.cs" />
     <Compile Include="UserBusiness.cs" />
+    <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

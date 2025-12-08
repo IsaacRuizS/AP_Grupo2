@@ -11,7 +11,7 @@
 
 <h2 class="mb-4 text-center">Registrar Restaurante</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Restaurants", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -88,11 +88,10 @@
             </div>
 
             <div class="col-md-6 mb-3">
-                @Html.LabelFor(model => model.ImageUrl, "URL de imagen", htmlAttributes: new { @class = "form-label fw-bold d-flex justify-content-center" })
+                @Html.Label("Imagen", "Imagen del restaurante", htmlAttributes: new { @class = "form-label fw-bold d-flex justify-content-center" })
                 <div class="d-flex justify-content-center">
-                    @Html.EditorFor(model => model.ImageUrl, new { htmlAttributes = new { @class = "form-control", placeholder = "https://imagen.jpg" } })
+                    <input type="file" name="imageFile" class="form-control" />
                 </div>
-                @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger d-flex justify-content-center" })
             </div>
 
             <div class="col-md-6 mb-3">
@@ -111,18 +110,24 @@
                 @Html.ValidationMessageFor(model => model.GoogleMapsLink, "", new { @class = "text-danger d-flex justify-content-center" })
             </div>
 
-            <div class="col-md-6 mb-3">
+            <div class="col-md-9 mb-3 mx-auto">
+                <label class="form-label fw-bold d-flex justify-content-center">Seleccionar Ubicación en el Mapa</label>
+                <div id="map" style="height: 400px; width: 100%;" class="rounded shadow-sm border"></div>
+                <small class="text-muted d-flex justify-content-center mt-1">Haga clic en el mapa para establecer la ubicación.</small>
+            </div>
+
+            <div class="col-md-6 mb-3 d-none">
                 @Html.LabelFor(model => model.Latitude, "Latitud", htmlAttributes: new { @class = "form-label fw-bold d-flex justify-content-center" })
                 <div class="d-flex justify-content-center">
-                    @Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 </div>
                 @Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "text-danger d-flex justify-content-center" })
             </div>
 
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-3 d-none">
                 @Html.LabelFor(model => model.Longitude, "Longitud", htmlAttributes: new { @class = "form-label fw-bold d-flex justify-content-center" })
                 <div class="d-flex justify-content-center">
-                    @Html.EditorFor(model => model.Longitude, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Longitude, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 </div>
                 @Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "text-danger d-flex justify-content-center" })
             </div>
@@ -136,9 +141,11 @@
             </div>
 
             <div class="col-md-6 mb-3">
-                <div class="d-flex justify-content-center align-items-center">
-                    @Html.CheckBox("IsActive", (Model != null && Model.IsActive.HasValue) ? Model.IsActive.Value : true, new { @class = "form-check-input" })
-                    @Html.Label("IsActive", "Activo", htmlAttributes: new { @class = "form-check-label fw-bold ms-1" })
+                <div class="d-flex justify-content-center align-items-center h-100">
+                    <div class="form-check">
+                        @Html.CheckBox("IsActive", (Model != null && Model.IsActive.HasValue) ? Model.IsActive.Value : true, new { @class = "form-check-input" })
+                        @Html.Label("IsActive", "Activo", htmlAttributes: new { @class = "form-check-label fw-bold ms-1" })
+                    </div>
                 </div>
             </div>
         </div>
@@ -153,4 +160,67 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    
+    <script>
+        // Check if Leaflet is loaded (it should be in Layout)
+        if (typeof L !== 'undefined') {
+             // Default config
+            const config = {
+                minZoom: 7,
+                maxZoom: 18,
+            };
+            const zoom = 10;
+            const defaultLat = 9.9281; // San José default
+            const defaultLng = -84.0907;
+
+            const map = L.map("map", config).setView([defaultLat, defaultLng], zoom);
+
+            L.tileLayer("https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png", {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            }).addTo(map);
+
+            let currentMarker = null;
+
+            // Inputs
+            const latInput = document.getElementById("Latitude");
+            const lngInput = document.getElementById("Longitude");
+
+            function updateMarker(lat, lng) {
+                 if (currentMarker) {
+                    map.removeLayer(currentMarker);
+                }
+                currentMarker = L.marker([lat, lng], {
+                     icon: L.divIcon({
+                        className: "leaflet-marker-icon",
+                        iconSize: L.point(30, 30),
+                        popupAnchor: [3, -5],
+                        html: '<i class=""></i>'
+                    })
+                }).addTo(map);
+            }
+
+            // Click event
+            map.on('click', function(e) {
+                const lat = e.latlng.lat.toFixed(6);
+                const lng = e.latlng.lng.toFixed(6);
+
+                latInput.value = lat;
+                lngInput.value = lng;
+
+                updateMarker(lat, lng);
+            });
+            
+            // If editing/returning and values exist
+             if (latInput.value && lngInput.value) {
+                 const lat = parseFloat(latInput.value);
+                 const lng = parseFloat(lngInput.value);
+                 if(!isNaN(lat) && !isNaN(lng)){
+                    updateMarker(lat, lng);
+                    map.setView([lat, lng], 15);
+                 }
+            }
+        } else {
+            console.error("Leaflet library not found!");
+        }
+    </script>
 }

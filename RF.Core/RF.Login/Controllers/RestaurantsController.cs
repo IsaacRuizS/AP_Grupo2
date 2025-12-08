@@ -10,6 +10,8 @@ using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using RF.Data;
+using RF.Core.Helpers;
+using System.IO;
 
 namespace RF.Login.Controllers
 {
@@ -35,8 +37,8 @@ namespace RF.Login.Controllers
             var claimId = claims.FindFirst("UserDbId");
             if (claimId == null)
             {
-                HttpContext.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-                return RedirectToAction("Login", "Account");
+                //HttpContext.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                return RedirectToAction("Index", "Restaurants");
             }
             var userDbId = int.Parse(claimId.Value);
 
@@ -56,10 +58,18 @@ namespace RF.Login.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RestaurantID,UserID,Name,Description,Address,Phone,Email,Website,WazeLink,GoogleMapsLink,Latitude,Longitude,Rating,IsActive,CreatedAt,UpdatedAt,ImageUrl")] Restaurant restaurant)
+        public ActionResult Create([Bind(Include = "RestaurantID,UserID,Name,Description,Address,Phone,Email,Website,WazeLink,GoogleMapsLink,Latitude,Longitude,Rating,IsActive,CreatedAt,UpdatedAt,ImageUrl")] Restaurant restaurant, HttpPostedFileBase imageFile)
         {
             if (ModelState.IsValid)
             {
+                if (imageFile != null && imageFile.ContentLength > 0)
+                {
+                    var fileName = FileHelper.GenerateUniqueFileName(imageFile.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Content/Images/Restaurants"), fileName);
+                    imageFile.SaveAs(path);
+                    restaurant.ImageUrl = "/Content/Images/Restaurants/" + fileName;
+                }
+
                 RestaurantBusiness.SaveOrUpdate(restaurant);
                 return RedirectToAction("Index");
             }
@@ -89,10 +99,18 @@ namespace RF.Login.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RestaurantID,UserID,Name,Description,Address,Phone,Email,Website,WazeLink,GoogleMapsLink,Latitude,Longitude,Rating,IsActive,CreatedAt,UpdatedAt,ImageUrl")] Restaurant restaurant)
+        public ActionResult Edit([Bind(Include = "RestaurantID,UserID,Name,Description,Address,Phone,Email,Website,WazeLink,GoogleMapsLink,Latitude,Longitude,Rating,IsActive,CreatedAt,UpdatedAt,ImageUrl")] Restaurant restaurant, HttpPostedFileBase imageFile)
         {
             if (ModelState.IsValid)
             {
+                if (imageFile != null && imageFile.ContentLength > 0)
+                {
+                    var fileName = FileHelper.GenerateUniqueFileName(imageFile.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Content/Images/Restaurants"), fileName);
+                    imageFile.SaveAs(path);
+                    restaurant.ImageUrl = "/Content/Images/Restaurants/" + fileName;
+                }
+                
                 RestaurantBusiness.SaveOrUpdate(restaurant);
                 return RedirectToAction("Index");
             }

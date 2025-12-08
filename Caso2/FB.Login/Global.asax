@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="CASO2.Login.MvcApplication, FB.Login" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="FB.Login.MvcApplication, FB.Login" Language="C#" %>

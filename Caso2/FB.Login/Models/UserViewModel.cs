@@ -1,6 +1,6 @@
 using System;
 
-namespace CASO2.Login.Models
+namespace FB.Login.Models
 {
     public class UserViewModel
     {

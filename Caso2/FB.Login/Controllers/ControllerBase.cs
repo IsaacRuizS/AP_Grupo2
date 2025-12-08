@@ -1,11 +1,11 @@
-﻿using CASO2.Core;
+﻿using FB.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace CASO2.MVC.Controllers
+namespace FB.MVC.Controllers
 {
     public class ControllerBase : Controller
     {

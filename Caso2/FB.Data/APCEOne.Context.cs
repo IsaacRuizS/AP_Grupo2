@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CASO2.Data
+namespace FB.Data
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class APCEOneEntities : DbContext
+    public partial class APCEOneEntities1 : DbContext
     {
-        public APCEOneEntities()
-            : base("name=APCEOneEntities")
+        public APCEOneEntities1()
+            : base("name=APCEOneEntities1")
         {
         }
     

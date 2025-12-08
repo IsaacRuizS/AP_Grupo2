@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Data.Entity.Core.EntityClient;
 
-namespace CASO2.Data
+namespace FB.Data
 {
     public static class UserSync
     {

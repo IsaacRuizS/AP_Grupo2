@@ -1,76 +1,305 @@
-﻿@model IEnumerable<CASO2.Data.UserDetail>
+﻿@model IEnumerable<FB.Data.UserDetail>
 
     @{
-        ViewBag.Title = "Cleanup completed";
+        ViewBag.Title = "Cleanup Completed";
     }
 
-    <h2>Data cleaning completed</h2>
+    <div class="cleanup-container">
+        <div class="cleanup-hero">
 
-    <p>The cleaning pipeline has finished successfully. All stages were applied and data is marked as Ready.</p>
+            <div class="cleanup-badge">Limpieza Completada</div>
 
-    <p>
-        @Html.ActionLink("Back to Paso1", "Paso1", "Data", null, new { @class = "btn btn-primary" })
-    </p>
+            <h2 class="cleanup-title">Proceso de limpieza de datos finalizado correctamente</h2>
+
+            <p class="cleanup-subtitle">
+                Se han aplicado todas las etapas y todos los registros válidos están marcados como <strong>Ready</strong>.
+                Puede revisar los resultados a continuación o volver al primer paso del procesamiento.
+            </p>
+
+            <p class="cleanup-link">
+                @Html.ActionLink("Volver al Paso 1", "Paso1", "Data", null, new { @class = "btn-cleanup-primary" })
+            </p>
+
+        </div>
+
+
+        <div class="cleanup-card">
+            <div class="cleanup-card-header">
+                <h3 class="cleanup-card-title">Processed Records Overview</h3>
+                <p class="cleanup-card-subtitle">Final dataset state after full cleaning workflow.</p>
+            </div>
+
+            <div class="cleanup-table-wrapper">
+                <table class="cleanup-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>PostalZip</th>
+                            <th>Region</th>
+                            <th>Country</th>
+                            <th>List</th>
+                            <th>Stage</th>
+                            <th>Range</th>
+                            <th>Salary</th>
+                            <th>Password</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td><span class="tag tag-id">@item.Id</span></td>
+                                <td>@item.Name</td>
+                                <td>@item.Phone</td>
+                                <td>@item.Email</td>
+                                <td>@item.Address</td>
+                                <td>@item.PostalZip</td>
+                                <td>@item.Region</td>
+                                <td>@item.Country</td>
+                                <td>@item.List</td>
+
+                                <td>
+                                    <span class="tag tag-stage">@item.Text</span>
+                                </td>
+
+                                <td>
+                                    <span class="tag tag-range">@item.NumberRange</span>
+                                </td>
+
+                                <td>@item.Salary</td>
+
+                                <td>
+                                    <span class="tag tag-sensitive">@item.Password</span>
+                                </td>
+
+                                <td>
+                                    <span class="tag @(item.Status == "Ready" ? "tag-ready" : "tag-status")">
+                                        @item.Status
+                                    </span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+
 
     <style>
-        .table-scrollable {
-            max-height: 60vh;
-            overflow: auto;
-            -webkit-overflow-scrolling: touch;
-        }
 
-            .table-scrollable thead th {
-                position: sticky;
-                top: 0;
-                background: #fff;
-                z-index: 2;
-            }
 
-            .table-scrollable td, .table-scrollable th {
-                white-space: nowrap;
-            }
+                .cleanup-container {
+                    position: relative;
+                    padding: 2.5rem 1.5rem 3rem;
+                    border-radius: 24px;
+                    background: radial-gradient(circle at top left, #113060 0%, #0a1a3c 40%, #020617 100%);
+                    overflow: hidden;
+                    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.75), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+                }
+
+                    .cleanup-container::before {
+                        content: "";
+                        position: absolute;
+                        top: -90px;
+                        left: -60px;
+                        width: 260px;
+                        height: 260px;
+                        background: radial-gradient(circle, rgba(245, 210, 108, 0.55), transparent 70%);
+                        filter: blur(12px);
+                    }
+
+                    .cleanup-container::after {
+                        content: "";
+                        position: absolute;
+                        bottom: -110px;
+                        right: -40px;
+                        width: 240px;
+                        height: 240px;
+                        background: radial-gradient(circle, rgba(14, 112, 190, 0.45), transparent 70%);
+                        filter: blur(14px);
+                    }
+
+
+                .cleanup-hero {
+                    position: relative;
+                    z-index: 2;
+                }
+
+                .cleanup-badge {
+                    display: inline-flex;
+                    padding: 0.35rem 1.1rem;
+                    border-radius: 999px;
+                    background: linear-gradient(135deg, #f5d26c, #1e3a8a);
+                    color: #fafaf9;
+                    font-size: 0.78rem;
+                    text-transform: uppercase;
+                    letter-spacing: 0.06em;
+                    box-shadow: 0 0 0 1px rgba(17, 24, 39, 0.8), 0 12px 28px rgba(14, 112, 190, 0.7);
+                }
+
+                .cleanup-title {
+                    font-size: 1.8rem;
+                    margin-top: 1rem;
+                    font-weight: 700;
+                    color: #f8fafc;
+                    text-shadow: 0 8px 24px rgba(0,0,0,0.7);
+                }
+
+                .cleanup-subtitle {
+                    color: #d1d5db;
+                    margin-top: 0.4rem;
+                    max-width: 700px;
+                    font-size: 0.92rem;
+                }
+
+
+                .btn-cleanup-primary {
+                    display: inline-block;
+                    margin-top: 1.3rem;
+                    padding: 0.55rem 1.4rem;
+                    border-radius: 999px;
+                    background: linear-gradient(135deg, #1e3a8a, #0ea5e9);
+                    color: #fefefe !important;
+                    font-weight: 600;
+                    letter-spacing: 0.05em;
+                    border: 1px solid rgba(255,255,255,0.18);
+                    box-shadow: 0 0 0 1px rgba(14, 112, 190, 0.35), 0 8px 18px rgba(0,0,0,0.6);
+                }
+
+                    .btn-cleanup-primary:hover {
+                        opacity: 0.92;
+                        transform: translateY(-1px);
+                    }
+
+                .cleanup-card {
+                    margin-top: 2rem;
+                    border-radius: 20px;
+                    padding: 1.6rem 1.4rem;
+                    background: rgba(6, 14, 31, 0.8);
+                    border: 1px solid rgba(255, 255, 255, 0.06);
+                    backdrop-filter: blur(10px);
+                    box-shadow: 0 22px 40px rgba(0,0,0,0.75), inset 0 0 0 1px rgba(41, 63, 116, 0.35);
+                }
+
+                .cleanup-card-title {
+                    margin: 0;
+                    color: #f8fafc;
+                    font-size: 1.1rem;
+                }
+
+                .cleanup-card-subtitle {
+                    margin-top: 0.2rem;
+                    color: #94a3b8;
+                    font-size: 0.8rem;
+                }
+
+                .cleanup-card-legend {
+                    display: flex;
+                    gap: 0.4rem;
+                    flex-wrap: wrap;
+                }
+
+
+                .tag {
+                    display: inline-flex;
+                    padding: 0.1rem 0.55rem;
+                    border-radius: 999px;
+                    font-size: 0.7rem;
+                    backdrop-filter: blur(8px);
+                    border: 1px solid rgba(255,255,255,0.12);
+                }
+
+                .tag-id {
+                    background: rgba(30, 58, 138, 0.5);
+                    border-color: rgba(30, 58, 138, 0.8);
+                    color: #e0e7ff;
+                }
+
+                .tag-stage {
+                    background: rgba(14, 112, 190, 0.4);
+                    border-color: rgba(14, 112, 190, 0.8);
+                    color: #dbeafe;
+                }
+
+                .tag-range {
+                    background: rgba(245, 208, 78, 0.22);
+                    border-color: rgba(245, 208, 78, 0.8);
+                    color: #fef9c3;
+                }
+
+                .tag-sensitive {
+                    background: rgba(190, 18, 60, 0.25);
+                    border-color: rgba(225, 29, 72, 0.8);
+                    color: #ffe4e6;
+                }
+
+                .tag-status {
+                    background: rgba(55, 65, 81, 0.8);
+                    border-color: rgba(156, 163, 175, 0.8);
+                }
+
+                .tag-ready {
+                    background: linear-gradient(135deg, #f5d26c, #fde047);
+                    border-color: rgba(252, 211, 77, 1);
+                    color: #1f2937;
+                    box-shadow: 0 0 14px rgba(245, 208, 78, 0.9);
+                }
+
+
+                .cleanup-table-wrapper {
+                    max-height: 60vh;
+                    overflow: auto;
+                    border-radius: 18px;
+                    background: radial-gradient(circle at top left, rgba(30, 58, 138, 0.3), transparent 60%), rgba(6, 14, 31, 0.85);
+                    border: 1px solid rgba(41, 63, 116, 0.6);
+                }
+
+                .cleanup-table {
+                    width: 100%;
+                    border-collapse: separate;
+                    border-spacing: 0;
+                    color: #e5e7eb;
+                    font-size: 0.82rem;
+                }
+
+                    .cleanup-table thead th {
+                        position: sticky;
+                        top: 0;
+                        background: rgba(2, 8, 23, 0.95);
+                        padding: 0.65rem 0.75rem;
+                        text-transform: uppercase;
+                        font-size: 0.7rem;
+                        letter-spacing: 0.08em;
+                        border-bottom: 1px solid rgba(41, 63, 116, 0.9);
+                    }
+
+                    .cleanup-table tbody tr:nth-child(odd) {
+                        background: rgba(6, 14, 31, 0.85);
+                    }
+
+                    .cleanup-table tbody tr:nth-child(even) {
+                        background: rgba(10, 20, 42, 0.85);
+                    }
+
+                    .cleanup-table tbody tr:hover {
+                        background: linear-gradient(90deg, rgba(245, 208, 78, 0.2), rgba(10, 20, 42, 1));
+                        transform: translateY(-1px);
+                        transition: 0.12s;
+                        box-shadow: 0 10px 28px rgba(0,0,0,0.8);
+                    }
+
+                    .cleanup-table td {
+                        padding: 0.55rem 0.7rem;
+                        border-bottom: 1px solid rgba(41, 63, 116, 0.6);
+                        white-space: nowrap;
+                    }
     </style>
 
-    <div class="table-scrollable mt-3">
-        <table class="table table-striped table-bordered table-sm mb-0">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                    <th>PostalZip</th>
-                    <th>Region</th>
-                    <th>Country</th>
-                    <th>List</th>
-                    <th>Text</th>
-                    <th>NumberRange</th>
-                    <th>Salary</th>
-                    <th>Password</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@item.Id</td>
-                        <td>@item.Name</td>
-                        <td>@item.Phone</td>
-                        <td>@item.Email</td>
-                        <td>@item.Address</td>
-                        <td>@item.PostalZip</td>
-                        <td>@item.Region</td>
-                        <td>@item.Country</td>
-                        <td>@item.List</td>
-                        <td>@item.Text</td>
-                        <td>@item.NumberRange</td>
-                        <td>@item.Salary</td>
-                        <td>@item.Password</td>
-                        <td>@item.Status</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>

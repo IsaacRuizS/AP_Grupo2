@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
 using System.Web.Mvc;
-using CASO2.Core;
-using CASO2.Data;
+using FB.Core;
+using FB.Data;
 
-namespace CASO2.Login.Controllers
+namespace FB.Login.Controllers
 {
     [Authorize]
     public class DataController : Controller

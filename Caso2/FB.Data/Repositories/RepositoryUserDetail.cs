@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CASO2.Data;
-using CASO2.Data.Repository;
+using FB.Data;
+using FB.Data.Repository;
 
-namespace CASO2.Data.Repositories
+namespace FB.Data.Repositories
 {
     public interface IRepositoryUserDetail : IRepositoryBase<UserDetail>
     {

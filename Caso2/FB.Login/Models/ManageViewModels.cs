@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
-namespace CASO2.Login.Models
+namespace FB.Login.Models
 {
     public class IndexViewModel
     {

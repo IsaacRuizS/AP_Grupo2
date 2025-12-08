@@ -1,4 +1,4 @@
-﻿using CASO2.Data;
+﻿using FB.Data;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CASO2.Data.Repository
+namespace FB.Data.Repository
 {
     public interface IRepositoryBase<T> where T : class
     {
@@ -20,12 +20,12 @@ namespace CASO2.Data.Repository
 
     public class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {
-        protected readonly APCEOneEntities _context;
+        protected readonly APCEOneEntities1 _context;
         protected readonly DbSet<T> _set;
 
         public RepositoryBase()
         {
-            _context = new APCEOneEntities();
+            _context = new APCEOneEntities1();
             _set = _context.Set<T>();
         }
 

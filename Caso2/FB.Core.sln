@@ -3,13 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36414.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Caso2.Core", "FB.Core\Caso2.Core.csproj", "{DC1726EA-2B94-4B61-8549-D18394E462A4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FB.Core", "FB.Core\FB.Core.csproj", "{DC1726EA-2B94-4B61-8549-D18394E462A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FB.Models", "FB.Models\FB.Models.csproj", "{313E14F3-414E-449F-838E-062BA2B29C21}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FB.Data", "FB.Data\FB.Data.csproj", "{F3516E98-D4AB-4B7F-BFD4-2A8F54D7701C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Caso2.Data", "FB.Data\Caso2.Data.csproj", "{F3516E98-D4AB-4B7F-BFD4-2A8F54D7701C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Caso2.Login", "FB.Login\Caso2.Login.csproj", "{EF47A4AA-B786-41BE-8A8A-5B942561A264}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FB.Login", "FB.Login\FB.Login.csproj", "{EF47A4AA-B786-41BE-8A8A-5B942561A264}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +19,6 @@ Global
 		{DC1726EA-2B94-4B61-8549-D18394E462A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC1726EA-2B94-4B61-8549-D18394E462A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC1726EA-2B94-4B61-8549-D18394E462A4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{313E14F3-414E-449F-838E-062BA2B29C21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{313E14F3-414E-449F-838E-062BA2B29C21}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{313E14F3-414E-449F-838E-062BA2B29C21}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{313E14F3-414E-449F-838E-062BA2B29C21}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F3516E98-D4AB-4B7F-BFD4-2A8F54D7701C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F3516E98-D4AB-4B7F-BFD4-2A8F54D7701C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3516E98-D4AB-4B7F-BFD4-2A8F54D7701C}.Release|Any CPU.ActiveCfg = Release|Any CPU

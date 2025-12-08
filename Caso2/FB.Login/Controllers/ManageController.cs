@@ -6,9 +6,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using CASO2.Login.Models;
+using FB.Login.Models;
 
-namespace CASO2.Login.Controllers
+namespace FB.Login.Controllers
 {
     [Authorize]
     public class ManageController : Controller

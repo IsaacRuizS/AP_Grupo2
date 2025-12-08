@@ -1,6 +1,6 @@
 using System.Web.Mvc;
 
-namespace CASO2.Login.Filters
+namespace FB.Login.Filters
 {
     public class RequireLoginAttribute : AuthorizeAttribute
     {

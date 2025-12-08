@@ -9,11 +9,11 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
-          <Property Name="Email" Type="nvarchar" MaxLength="200" />
-          <Property Name="Address" Type="nvarchar" MaxLength="300" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="30" />
+          <Property Name="Email" Type="nvarchar" MaxLength="150" />
+          <Property Name="Address" Type="nvarchar" MaxLength="250" />
           <Property Name="PostalZip" Type="nvarchar" MaxLength="20" />
           <Property Name="Region" Type="nvarchar" MaxLength="100" />
           <Property Name="Country" Type="nvarchar" MaxLength="100" />
@@ -36,11 +36,11 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="PostalZip" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Region" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -51,7 +51,7 @@
           <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityContainer Name="APCEOneEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="APCEOneEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
         </EntityContainer>
       </Schema>
@@ -59,7 +59,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="APCEOneModelStoreContainer" CdmEntityContainer="APCEOneEntities">
+        <EntityContainerMapping StorageEntityContainer="APCEOneModelStoreContainer" CdmEntityContainer="APCEOneEntities1">
           <EntitySetMapping Name="UserDetails">
             <EntityTypeMapping TypeName="APCEOneModel.UserDetail">
               <MappingFragment StoreEntitySet="UserDetails">

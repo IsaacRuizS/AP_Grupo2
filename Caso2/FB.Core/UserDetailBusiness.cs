@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
-using CASO2.Data;
-using CASO2.Data.Repositories;
-using CASO2.Data.Repository;
+using FB.Data;
+using FB.Data.Repositories;
+using FB.Data.Repository;
 
-namespace CASO2.Core
+namespace FB.Core
 {
     // Pattern: Repository (existing)
-    // Pattern: Aca se usa el chain of responsability para abarcar los pasos a realizar desde el 1 al 5, en este se implementa primero las interfaces
+    // Pattern: Chain of Responsibility para los pasos 1 al 5
     public class UserDetailBusiness
     {
         private readonly IRepositoryUserDetail _repository;
@@ -97,10 +97,10 @@ namespace CASO2.Core
             }
         }
 
-
+        // Paso 1:
+        // Eliminar registros con China/Rusia y marcar Text = "1"
         private bool ExecuteStage1()
         {
-            // Eliminar registros con China/Rusia
             try
             {
                 _repository.DeleteByCountry("Russia");
@@ -121,8 +121,8 @@ namespace CASO2.Core
             }
         }
 
-        // Paso 2 2:
-        // - Remover informacion sensible y pws
+        // Paso 2:
+        // Remover informacion sensible y passwords
         private bool ExecuteStage2()
         {
             try
@@ -144,8 +144,8 @@ namespace CASO2.Core
             }
         }
 
-        // Paso 3
-        // modificar correos y salario
+        // Paso 3:
+        // Modificar correos, direcciones, asignar NumberRange y mapear Salary
         private bool ExecuteStage3()
         {
             try
@@ -168,16 +168,19 @@ namespace CASO2.Core
 
                 foreach (var u in items)
                 {
+                    // 3.1 - Enmascarar correo
                     if (!string.IsNullOrWhiteSpace(u.Email))
                     {
                         u.Email = MaskEmail(u.Email);
                     }
 
+                    // 3.2 - Normalizar dirección
                     if (!string.IsNullOrWhiteSpace(u.Address))
                     {
                         u.Address = NormalizeAddress(u.Address);
                     }
 
+                    // 3.3 - Asignar correlativo a NumberRange si es 0
                     try
                     {
                         if (u.NumberRange == 0)
@@ -189,7 +192,8 @@ namespace CASO2.Core
                     catch
                     {
                     }
-                    // aca se debe de modificar para poder realizar el paso 3.4
+
+                    // 3.4 - Mapear Salary a 4 / 3 / 2 / 1 según rango
                     if (!string.IsNullOrWhiteSpace(u.Salary))
                     {
                         var mapped = MapSalary(u.Salary);
@@ -209,8 +213,8 @@ namespace CASO2.Core
             }
         }
 
-        // Paso 4
-        //Completar y cambiar estados a Ready
+        // Paso 4:
+        // Cambiar estados a Ready y Text = "4"
         private bool ExecuteStage4()
         {
             try
@@ -247,6 +251,7 @@ namespace CASO2.Core
             if (string.IsNullOrWhiteSpace(address)) return address;
             var s = address.Trim();
 
+            // Remover PO Box, AP#, prefijos numéricos, etc.
             s = Regex.Replace(s, @"\bP\.?\s*O\.?\s*\.?\s*Box\s*\d+\s*,\s*\d+\s*,?\s*", "", RegexOptions.IgnoreCase);
             s = Regex.Replace(s, @"\bAP\s*#\s*\d[\d\-]*\b", "", RegexOptions.IgnoreCase);
             s = Regex.Replace(s, @"^\s*\d+(-\d+)?\s+", "", RegexOptions.IgnoreCase);
@@ -256,35 +261,89 @@ namespace CASO2.Core
             return string.IsNullOrEmpty(s) ? address : s;
         }
 
-        private static string MapSalary(string salary)
+
+        /// Mapea el salario original a:
+        ///  4  -> entre 5k y 6.5k
+        ///  3  -> entre 6.5k y 8k
+        ///  2  -> entre 8k y 9.5k
+        ///   1  -> mayor o igual a 9.5k
+        /// Se devuelve el valor original si no se puede interpretar el salario
+
+        private static string MapSalary(string salaryRaw)
         {
-            var num = ParseSalaryToDouble(salary);
-            if (!num.HasValue) return salary;
+            if (string.IsNullOrWhiteSpace(salaryRaw))
+                return salaryRaw;
 
-            var v = num.Value;
+            // Se normaliza para analizar texto
+            var s = salaryRaw.Trim().ToLowerInvariant();
 
-            if (v >= 5000 && v <= 6500) return "44";
-            if (v > 6500 && v <= 8000) return "33";
-            if (v > 8000 && v <= 9500) return "22";
-            if (v > 9500) return "11";
+            // Caso 1: El salario ya viene como rango en texto:
+            // "5k-6.5k", "5k a 6.5k", "entre 5k y 6.5k", etc.
+            if (s.Contains("5k") && s.Contains("6.5k"))
+                return "4";
 
-            return salary;
+            if (s.Contains("6.5k") && s.Contains("8k"))
+                return "3";
+
+            if (s.Contains("8k") && s.Contains("9.5k"))
+                return "2";
+
+            // Mayor o igual a 9.5k (ej. "9.5k+", ">=9.5k", "9.5k o más")
+            if (s.Contains("9.5k"))
+                return "1";
+
+            // Caso 2: El salario viene como un número: 5000, 6500, 8000, 9500, etc. ---
+            // Limpiamos símbolos comunes
+            s = s.Replace("$", "")
+                 .Replace("₡", "")
+                 .Replace(",", "")
+                 .Replace(" ", "");
+
+            decimal numericSalary;
+
+            // Si termina en 'k', se interpreta como miles: 5k -> 5000, 9.5k -> 9500
+            if (s.EndsWith("k"))
+            {
+                var numberPart = s.Substring(0, s.Length - 1); // quitamos la 'k'
+
+                if (decimal.TryParse(numberPart, NumberStyles.Any, CultureInfo.InvariantCulture, out var baseK))
+                {
+                    numericSalary = baseK * 1000m;
+                    return MapSalaryNumeric(numericSalary);
+                }
+            }
+
+            // Se intenta parsear directamente como número
+            if (decimal.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out numericSalary))
+            {
+                return MapSalaryNumeric(numericSalary);
+            }
+
+            // Se devuelve el valor original si no se puede interpretar el salario
+            return salaryRaw;
         }
 
-        private static double? ParseSalaryToDouble(string input)
+        /// Aplica las reglas de rango a un valor numérico de salario.
+        private static string MapSalaryNumeric(decimal salary)
         {
-            if (string.IsNullOrWhiteSpace(input)) return null;
-            var s = input.Trim().ToLowerInvariant();
+            // Entre 5k y 6.5k → 4
+            if (salary >= 5000m && salary < 6500m)
+                return "4";
 
-            var m = Regex.Match(s, @"(\d+(\.\d+)?)\s*(k)?", RegexOptions.IgnoreCase);
-            if (!m.Success) return null;
+            // Entre 6.5k y 8k → 3
+            if (salary >= 6500m && salary < 8000m)
+                return "3";
 
-            if (!double.TryParse(m.Groups[1].Value, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out var baseNum))
-                return null;
+            // Entre 8k y 9.5k → 2
+            if (salary >= 8000m && salary < 9500m)
+                return "2";
 
-            var isK = m.Groups[3].Success && !string.IsNullOrEmpty(m.Groups[3].Value);
-            return isK ? baseNum * 1000.0 : baseNum;
+            // Mayor o igual a 9.5k → 1
+            if (salary >= 9500m)
+                return "1";
+
+            // Menor a 5k o fuera de rango: no asignamos nada
+            return null;
         }
     }
 }
-

@@ -10,9 +10,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using CASO2.Login.Models;
+using FB.Login.Models;
 
-namespace CASO2.Login
+namespace FB.Login
 {
     public class EmailService : IIdentityMessageService
     {

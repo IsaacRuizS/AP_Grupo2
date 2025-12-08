@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Cuent\Documents\GitHub\AP_Grupo2\Caso2\CASO2.Data\APCEOne.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Henry\source\repos\IsaacRuizS\AP_Grupo2\Caso2\FB.Data\APCEOne.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

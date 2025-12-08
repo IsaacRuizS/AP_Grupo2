@@ -1,8 +1,8 @@
 ﻿using System.Web;
 using System.Web.Mvc;
-using CASO2.Login.Filters;
+using FB.Login.Filters;
 
-namespace CASO2.Login
+namespace FB.Login
 {
     public class FilterConfig
     {

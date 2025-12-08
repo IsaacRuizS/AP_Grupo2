@@ -7,17 +7,60 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System.Security.Claims;
-using CASO2.Login.Models;
-using CASO2.Data;
-using CASO2.Core;
+using FB.Login.Models;
+using FB.Data;
+using FB.Core;
 
-namespace CASO2.Login.Controllers
+namespace FB.Login.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        [AllowAnonymous]
+        public ActionResult DebugAutoLogin()
+        {
+            try
+            {
+                var userBus = new UserDetailBusiness();
+
+                // 👇 Cambia este correo por el usuario con el que quieres entrar
+                var user = userBus.GetByEmail("admin@demo.com");
+
+                if (user == null)
+                {
+                    return Content("El usuario admin@demo.com no existe. Cámbialo por uno válido.");
+                }
+
+                var claims = new[]
+                {
+            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+            new Claim(ClaimTypes.Name, string.IsNullOrEmpty(user.Name) ? user.Email : user.Name),
+            new Claim(ClaimTypes.Email, user.Email ?? string.Empty)
+        };
+
+                var identity = new ClaimsIdentity(claims, DefaultAuthenticationTypes.ApplicationCookie);
+
+                // Cerrar cualquier sesión previa
+                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+
+                // Iniciar sesión “como si hubiera pasado por el login”
+                AuthenticationManager.SignIn(new AuthenticationProperties
+                {
+                    IsPersistent = true   // o false si no quieres que recuerde
+                }, identity);
+
+                // Enviar al dashboard / página principal
+                return RedirectToAction("Index", "Home");
+                // Si tu pantalla principal es otra, cámbiala aquí
+            }
+            catch (Exception)
+            {
+                return Content("Ocurrió un error al intentar hacer auto-login.");
+            }
+        }
+
 
         public AccountController()
         {

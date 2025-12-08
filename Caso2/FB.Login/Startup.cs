@@ -1,11 +1,11 @@
-﻿using CASO2.Login.Models;
+﻿using FB.Login.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(CASO2.Login.Startup))]
-namespace CASO2.Login
+[assembly: OwinStartupAttribute(typeof(FB.Login.Startup))]
+namespace FB.Login
 {
     public partial class Startup
     {

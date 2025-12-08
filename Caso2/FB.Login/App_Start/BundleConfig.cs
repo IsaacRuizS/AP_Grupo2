@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace CASO2.Login
+namespace FB.Login
 {
     public class BundleConfig
     {

@@ -5,9 +5,9 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using CASO2.Login.Models;
+using FB.Login.Models;
 
-namespace CASO2.Login
+namespace FB.Login
 {
     public partial class Startup
     {

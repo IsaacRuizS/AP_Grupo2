@@ -216,7 +216,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -243,8 +242,13 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
-    <Content Include="web.config" />
     <Content Include="Views\Data\Paso1.cshtml" />
+    <Content Include="Views\Data\Paso4.cshtml" />
+    <Content Include="Views\Data\Paso2.cshtml" />
+    <Content Include="Views\Data\Paso3.cshtml" />
+    <Content Include="Views\Shared\_StagesMenu.cshtml" />
+    <Content Include="Views\Data\Completed.cshtml" />
+    <Content Include="Web.config" />
     <Content Include="Content\bootstrap.rtl.min.css.map" />
     <Content Include="Content\bootstrap.rtl.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
@@ -270,31 +274,22 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.0.min.map" />
-    <Content Include="Views\Data\Paso4.cshtml" />
-    <Content Include="Views\Data\Paso2.cshtml" />
-    <Content Include="Views\Data\Paso3.cshtml" />
-    <Content Include="Views\Shared\_StagesMenu.cshtml" />
-    <Content Include="Views\Data\Completed.cshtml" />
-    <None Include="web.Debug.config">
-      <DependentUpon>web.config</DependentUpon>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
     </None>
-    <None Include="web.Release.config">
-      <DependentUpon>web.config</DependentUpon>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\FB.Core\Caso2.Core.csproj">
+    <ProjectReference Include="..\FB.Core\FB.Core.csproj">
       <Project>{dc1726ea-2b94-4b61-8549-d18394e462a4}</Project>
-      <Name>Caso2.Core</Name>
+      <Name>FB.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FB.Data\Caso2.Data.csproj">
+    <ProjectReference Include="..\FB.Data\FB.Data.csproj">
       <Project>{f3516e98-d4ab-4b7f-bfd4-2a8f54d7701c}</Project>
-      <Name>Caso2.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FB.Models\FB.Models.csproj">
-      <Project>{313e14f3-414e-449f-838e-062ba2b29c21}</Project>
-      <Name>FB.Models</Name>
+      <Name>FB.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

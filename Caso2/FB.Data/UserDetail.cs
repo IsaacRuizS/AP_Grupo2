@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CASO2.Data
+namespace FB.Data
 {
     using System;
     using System.Collections.Generic;

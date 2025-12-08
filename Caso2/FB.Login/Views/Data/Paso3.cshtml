@@ -1,84 +1,333 @@
-﻿@model IEnumerable<CASO2.Data.UserDetail>
+﻿@model IEnumerable<FB.Data.UserDetail>
 
     @{
-        ViewBag.Title = "Paso 3";
+        ViewBag.Title = "Paso 3 (Normalizar correos/salario/address/numberrange)";
     }
 
-   <h2>Paso 3 (Normalizar correos/salario/address/numberrange)</h2>
+    <div class="stage3-container">
+        <div class="stage3-hero">
 
-    @if (!string.IsNullOrEmpty(ViewBag.Message as string))
-    {
-        <div class="alert alert-info">@ViewBag.Message</div>
-    }
+            <div class="stage3-badge">Paso 3</div>
 
-    @* Run stage 3 *@
-    @using (Html.BeginForm("RunStage", "Data", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
-        @Html.Hidden("stage", "3")
-        @Html.Hidden("returnTo", "Paso3")
-        <button type="submit" class="btn btn-success mb-3">Ejecutar</button>
-    }
+            <h2 class="stage3-title">Normalizar correos/salario/address/numberrange</h2>
+
+            @if (!string.IsNullOrEmpty(ViewBag.Message as string))
+            {
+                <div class="stage3-alert">
+                    @ViewBag.Message
+                </div>
+            }
+
+            @using (Html.BeginForm("RunStage", "Data", FormMethod.Post, new { @class = "stage3-form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("stage", "3")
+                @Html.Hidden("returnTo", "Paso3")
+
+                <button type="submit" class="btn-neo3-primary">
+                    <span class="btn3-glow"></span>
+                    <span class="btn3-label">Ejecutar</span>
+                </button>
+            }
+        </div>
+
+        <div class="data3-card">
+            <div class="data3-card-header">
+
+                <div class="data3-card-legend">
+                    <span class="pill3 pill3-id">ID</span>
+                    <span class="pill3 pill3-field">Normalizado</span>
+                    <span class="pill3 pill3-status">Estado</span>
+                </div>
+            </div>
+
+            <div class="data3-table-wrapper">
+                <table class="neo3-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>PostalZip</th>
+                            <th>Region</th>
+                            <th>Country</th>
+                            <th>List</th>
+                            <th>Etapa</th>
+                            <th>Range</th>
+                            <th>Salary</th>
+                            <th>Password</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td><span class="pill3 pill3-id">@item.Id</span></td>
+                                <td>@item.Name</td>
+
+                                <td>@item.Phone</td>
+
+                                <td><span class="pill3 pill3-field">@item.Email</span></td>
+
+                                <td>@item.Address</td>
+                                <td>@item.PostalZip</td>
+                                <td>@item.Region</td>
+                                <td>@item.Country</td>
+                                <td>@item.List</td>
+
+                                <td><span class="pill3 pill3-stage">@item.Text</span></td>
+                                <td><span class="pill3 pill3-range">@item.NumberRange</span></td>
+
+                                <td>@item.Salary</td>
+
+                                <td><span class="pill3 pill3-danger">@item.Password</span></td>
+
+                                <td>
+                                    <span class="pill3 @(item.Status == "Ready" ? "pill3-ready" : "pill3-normal")">
+                                        @item.Status
+                                    </span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
 
     <style>
-        .table-scrollable {
-            max-height: 60vh;
-            overflow: auto;
-            -webkit-overflow-scrolling: touch;
-        }
 
-            .table-scrollable thead th {
-                position: sticky;
-                top: 0;
-                background: #fff;
-                z-index: 2;
-            }
 
-            .table-scrollable td, .table-scrollable th {
-                white-space: nowrap;
-            }
-    </style>
-
-    <div class="table-scrollable">
-        <table class="table table-striped table-bordered table-sm mb-0">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                    <th>PostalZip</th>
-                    <th>Region</th>
-                    <th>Country</th>
-                    <th>List</th>
-                    <th>Text</th>
-                    <th>NumberRange</th>
-                    <th>Salary</th>
-                    <th>Password</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@item.Id</td>
-                        <td>@item.Name</td>
-                        <td>@item.Phone</td>
-                        <td>@item.Email</td>
-                        <td>@item.Address</td>
-                        <td>@item.PostalZip</td>
-                        <td>@item.Region</td>
-                        <td>@item.Country</td>
-                        <td>@item.List</td>
-                        <td>@item.Text</td>
-                        <td>@item.NumberRange</td>
-                        <td>@item.Salary</td>
-                        <td>@item.Password</td>
-                        <td>@item.Status</td>
-                    </tr>
+                .stage3-container {
+                    position: relative;
+                    padding: 2.5rem 1.5rem 3rem;
+                    border-radius: 24px;
+                    background: radial-gradient(circle at top left, #ff8cf5 0%, #61d7ff 35%, #0f172a 100%);
+                    overflow: hidden;
+                    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7), inset 0 0 0 1px rgba(255, 255, 255, 0.04);
                 }
-            </tbody>
-        </table>
-    </div>
+
+                    .stage3-container::before {
+                        content: "";
+                        position: absolute;
+                        top: -100px;
+                        right: -60px;
+                        width: 240px;
+                        height: 240px;
+                        background: radial-gradient(circle, rgba(236, 72, 153, 0.7), transparent 70%);
+                        filter: blur(5px);
+                    }
+
+                    .stage3-container::after {
+                        content: "";
+                        position: absolute;
+                        bottom: -130px;
+                        left: -40px;
+                        width: 260px;
+                        height: 260px;
+                        background: radial-gradient(circle, rgba(56, 189, 248, 0.65), transparent 70%);
+                        filter: blur(5px);
+                    }
+
+                .stage3-badge {
+                    display: inline-block;
+                    padding: 0.3rem 1rem;
+                    border-radius: 999px;
+                    background: linear-gradient(135deg, rgba(236, 72, 153, 0.9), rgba(56, 189, 248, 0.9));
+                    color: white;
+                    font-size: 0.75rem;
+                    letter-spacing: 0.06em;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    box-shadow: 0 0 12px rgba(236, 72, 153, 0.9);
+                }
+
+                .stage3-title {
+                    margin-top: 1rem;
+                    font-size: 1.7rem;
+                    font-weight: 700;
+                    color: #fdf4ff;
+                    text-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+                }
+
+                .stage3-subtitle {
+                    margin-top: 0.4rem;
+                    font-size: 0.9rem;
+                    color: #fce7f3;
+                    opacity: 0.85;
+                }
+
+                .stage3-alert {
+                    margin-top: 1rem;
+                    padding: 0.75rem 1rem;
+                    border-radius: 12px;
+                    background: rgba(236, 72, 153, 0.2);
+                    border: 1px solid rgba(236, 72, 153, 0.6);
+                    color: #fce7f3;
+                    backdrop-filter: blur(6px);
+                }
+
+
+                .btn-neo3-primary {
+                    position: relative;
+                    background: transparent;
+                    border: none;
+                    cursor: pointer;
+                    margin-top: 1.2rem;
+                }
+
+                .btn3-glow {
+                    position: absolute;
+                    inset: -2px;
+                    border-radius: 999px;
+                    background: linear-gradient(135deg, #ec4899, #06b6d4, #a855f7);
+                    filter: blur(6px);
+                    opacity: 0.8;
+                    transition: 0.2s;
+                }
+
+                .btn3-label {
+                    position: relative;
+                    z-index: 1;
+                    padding: 0.65rem 1.6rem;
+                    border-radius: 999px;
+                    background: rgba(14, 14, 22, 0.9);
+                    color: #fdf4ff;
+                    border: 1px solid rgba(168, 85, 247, 0.6);
+                    letter-spacing: 0.06em;
+                    text-transform: uppercase;
+                }
+
+                .btn-neo3-primary:hover .btn3-glow {
+                    opacity: 1;
+                    transform: scale(1.04);
+                }
+
+
+                .data3-card {
+                    margin-top: 2rem;
+                    background: rgba(20, 8, 24, 0.75);
+                    border-radius: 22px;
+                    padding: 1.4rem;
+                    backdrop-filter: blur(12px);
+                    border: 1px solid rgba(236, 72, 153, 0.25);
+                    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+                }
+
+                .data3-card-title {
+                    color: #fdf4ff;
+                }
+
+                .data3-card-subtitle {
+                    color: #e2e8f0;
+                    font-size: 0.8rem;
+                }
+
+                .data3-card-header {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 1rem;
+                }
+
+
+
+                .pill3 {
+                    padding: 0.1rem 0.6rem;
+                    border-radius: 999px;
+                    font-size: 0.7rem;
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    backdrop-filter: blur(6px);
+                }
+
+                .pill3-id {
+                    background: rgba(236, 72, 153, 0.3);
+                    border-color: rgba(236, 72, 153, 0.7);
+                    color: #fdf2f8;
+                }
+
+                .pill3-field {
+                    background: rgba(168, 85, 247, 0.3);
+                    border-color: rgba(168, 85, 247, 0.7);
+                    color: white;
+                }
+
+                .pill3-range {
+                    background: rgba(56, 189, 248, 0.25);
+                    border-color: rgba(56, 189, 248, 0.8);
+                }
+
+                .pill3-stage {
+                    background: rgba(6, 182, 212, 0.25);
+                    border-color: rgba(6, 182, 212, 0.8);
+                }
+
+                .pill3-danger {
+                    background: rgba(244, 63, 94, 0.2);
+                    border-color: rgba(244, 63, 94, 0.8);
+                    color: #ffe4e6;
+                }
+
+                .pill3-ready {
+                    background: rgba(56, 189, 248, 0.95);
+                    color: white;
+                }
+
+                .pill3-normal {
+                    background: rgba(71, 85, 105, 0.6);
+                    color: #e5e7eb;
+                }
+
+
+
+                .data3-table-wrapper {
+                    max-height: 60vh;
+                    overflow: auto;
+                    border-radius: 18px;
+                    border: 1px solid rgba(168, 85, 247, 0.25);
+                    background: rgba(20, 8, 24, 0.55);
+                }
+
+                .neo3-table {
+                    width: 100%;
+                    border-collapse: separate;
+                    border-spacing: 0;
+                    color: #ffe4f7;
+                    font-size: 0.82rem;
+                }
+
+                    .neo3-table thead th {
+                        position: sticky;
+                        top: 0;
+                        background: rgba(22, 0, 30, 0.92);
+                        padding: 0.65rem;
+                        border-bottom: 1px solid rgba(236, 72, 153, 0.4);
+                        font-size: 0.7rem;
+                        text-transform: uppercase;
+                        letter-spacing: 0.08em;
+                    }
+
+                    .neo3-table tbody tr:nth-child(even) {
+                        background: rgba(24, 0, 35, 0.7);
+                    }
+
+                    .neo3-table tbody tr:nth-child(odd) {
+                        background: rgba(18, 0, 26, 0.7);
+                    }
+
+                    .neo3-table tbody tr:hover {
+                        background: rgba(236, 72, 153, 0.18);
+                        transform: translateY(-1px);
+                        transition: 0.12s;
+                        box-shadow: 0 12px 20px rgba(0,0,0,0.9);
+                    }
+
+                    .neo3-table td {
+                        padding: 0.55rem 0.75rem;
+                        border-bottom: 1px solid rgba(236, 72, 153, 0.25);
+                    }
+    </style>

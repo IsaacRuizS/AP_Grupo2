@@ -64,12 +64,22 @@ namespace RF.Login.Controllers
             {
                 if (imageFile != null && imageFile.ContentLength > 0)
                 {
-                    var fileName = FileHelper.GenerateUniqueFileName(imageFile.FileName);
-                    var path = Path.Combine(Server.MapPath("~/Content/Images/Restaurants"), fileName);
+                    var extension = Path.GetExtension(imageFile.FileName);
+                    var timestamp = DateTime.Now.ToString("yyyyMMddHHmmss");
+                    var fileName = $"{timestamp}{extension}";
+                    
+                    var folderPath = Server.MapPath("~/Content/Images/Restaurants");
+                    if (!Directory.Exists(folderPath))
+                    {
+                        Directory.CreateDirectory(folderPath);
+                    }
+                    
+                    var path = Path.Combine(folderPath, fileName);
                     imageFile.SaveAs(path);
                     restaurant.ImageUrl = "/Content/Images/Restaurants/" + fileName;
                 }
 
+                restaurant.CreatedAt = DateTime.Now;
                 RestaurantBusiness.SaveOrUpdate(restaurant);
                 return RedirectToAction("Index");
             }

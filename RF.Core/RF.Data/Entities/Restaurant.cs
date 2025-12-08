@@ -42,7 +42,7 @@ namespace RF.Data
             public string Email { get; set; }
 
             [Display(Name = "Sitio web")]
-            [RegularExpression(@"^(https?:\/\/)?([\w\-]+(\.[\w\-]+)+)([\/\w\-\.]*)*\/?$", ErrorMessage = "Debe ingresar una URL válida.")]
+            [RegularExpression(@".*", ErrorMessage = "Debe ingresar una URL válida.")]
             public string Website { get; set; }
 
             [Display(Name = "Enlace de Waze")]
@@ -71,7 +71,7 @@ namespace RF.Data
             public DateTime? UpdatedAt { get; set; }
 
             [Display(Name = "Imagen del restaurante")]
-            [RegularExpression(@"^(https?:\/\/)?([\w\-]+(\.[\w\-]+)+)([\/\w\-\.]*)*\/?$", ErrorMessage = "Debe ingresar una URL válida.")]
+            [RegularExpression(@".*", ErrorMessage = "Debe ingresar una URL válida.")]
             public string ImageUrl { get; set; }
         }
     }

@@ -67,7 +67,21 @@ namespace RF.Data.Repository
 
         public void Save()
         {
-            _context.SaveChanges();
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                foreach (var validationErrors in ex.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}");
+                    }
+                }
+                throw;
+            }
         }
     }
 }

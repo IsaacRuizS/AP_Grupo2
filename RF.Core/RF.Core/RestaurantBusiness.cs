@@ -34,9 +34,7 @@ namespace RF.Core
 
         public IEnumerable<Restaurant> GetRestaurants(int id)
         {
-            return id <= 0
-                ? _repositoryRestaurant.GetAll()
-                : new List<Restaurant>() { _repositoryRestaurant.GetById(id) };
+            return _repositoryRestaurant.GetRestaurantsComplete(id);
         }
 
         public IEnumerable<Restaurant> GetRestaurantsByUser(int userId)

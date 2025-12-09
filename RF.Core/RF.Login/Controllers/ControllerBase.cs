@@ -13,12 +13,18 @@ namespace RF.Login.Controllers
         protected readonly UserRoleBusiness UserRoleBusiness;
         protected readonly UserBusiness UserBusiness;
         protected readonly RestaurantBusiness RestaurantBusiness;
+        protected readonly ScheduleBusiness ScheduleBusiness;
+        protected readonly MenuBusiness MenuBusiness;
+        protected readonly MenuItemBusiness MenuItemsBusiness;
 
         public ControllerBase()
         {
             UserRoleBusiness = new UserRoleBusiness();
             UserBusiness = new UserBusiness();
             RestaurantBusiness = new RestaurantBusiness();
+            ScheduleBusiness = new ScheduleBusiness();
+            MenuBusiness = new MenuBusiness();
+            MenuItemsBusiness = new MenuItemBusiness();
         }
 
     }

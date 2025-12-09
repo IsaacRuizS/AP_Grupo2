@@ -161,11 +161,83 @@
         // add content to sidebar
 
         function addContentToSidebar(r) {
+
+
+            let horariosHtml = "";
+
+            if (r.Schedules && r.Schedules.length > 0) {
+                horariosHtml = `
+                    <div class="px-4 py-2">
+                        <h5><b>Horarios</b></h5>
+                        <div class="schedule-box">
+                            ${r.Schedules.map(s => `
+                                <div class="schedule-item py-1">
+                                    <span>${getDayName(s.DayOfWeek)}: </span>
+                                    <span>${formatTime(s.OpenTime)} – ${formatTime(s.CloseTime)}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                        } else {
+                            horariosHtml = `
+                    <div class="px-4 py-2">
+                        <h5><b>Horarios</b></h5>
+                        <div class="text-muted">No hay horarios registrados</div>
+                    </div>
+                `;
+            }
+
+            let menusHtml = "";
+
+            if (r.Menus && r.Menus.length > 0) {
+                menusHtml = ` <div class="px-4 py-2">
+                    <h5><b>Menús</b></h5>
+                    <div class="menu-accordion">
+                        ${r.Menus.map(menu => `
+                            <div style="border: 1px solid white; padding: 5px; border-radius: 10px; margin-bottom: 10px;">
+
+                                <!-- Encabezado del menú -->
+                                <div style="cursor: pointer;" onclick="toggleMenu(${menu.MenuID})">
+                                    <span><b>${menu.Name}</b></span>
+                                    <span class="arrow" id="arrow-${menu.MenuID}">▼</span>
+                                </div>
+
+
+                                <!-- Contenido colapsable -->
+                                <div class="menu-body" id="menu-${menu.MenuID}" style="display: none;">
+                                    ${menu.MenuItems && menu.MenuItems.length > 0
+                                        ? menu.MenuItems.map(mi => `
+                                            <hr/>
+                                            <div class="menu-body-item">
+                                                <div><b>${mi.Name}</b></div>
+                                                <div>${mi.Description ?? ""}</div>
+                                                <div>₡${mi.Price?.toLocaleString()}</div>
+                                            </div> 
+                                        `).join("")
+                                : `<div class="text-muted">No hay items</div>`
+                            }
+                                </div>
+                            </div>
+                        `).join("")}
+                    </div>
+                </div>
+             `;} else {
+                    menusHtml = `
+                    <div class="px-4 py-2">
+                        <h5><b>Menús</b></h5>
+                        <div class="text-muted">No hay menús registrados</div>
+                    </div>
+                `;
+            }
+
+
+
             const img = r.ImageUrl ? `<img src="${r.ImageUrl}" alt="${r.Name}" style="width: 100%; padding: 20px; border-radius: 35px;">` : "";
             const rating = r.Rating ? `⭐ ${r.Rating}` : "";
 
             const sidebarTemplate = `
-                <div class="sidebar-content">
+                <div class="sidebar-content" style="overflow: auto;">
                     <h1>${r.Name}</h1>
                     <div>
                         ${img}
@@ -174,15 +246,31 @@
                             <div class="ms-3" style="font-size: 16; font-weigth:bold;">${rating}</div>
                         </div>
                         <div class="px-4 py-2"><b>Descripción: </b>${r.Description ?? ""}</div>
-                        <div class="d-flex-center px-4">
-                            <a href="${r.GoogleMapsLink ?? "#"}" target="_blank" class="btn btn-outline-primary mt-2 w-100">Ver en Google Maps</a>
-                        </div>
-                        <div class="d-flex-center px-4 py-2">
-                            <a href="${r.WazeLink ?? "#"}" target="_blank" class="btn btn-outline-info mt-2 w-100">Ver en Waze Maps</a>
-                        </div>
-                        <div class="d-flex-center px-4">
-                            <a href="${r.Website ?? "#"}" target="_blank" class="btn btn-outline-light mt-2 w-100">Abrir Web</a>
-                        </div>
+                        ${horariosHtml}
+                        <hr/>
+                        ${menusHtml}
+                        <hr/>
+                        ${r.GoogleMapsLink ? `<div class="d-flex-center px-4">
+                                       <a href="${r.GoogleMapsLink}" target="_blank" class="btn btn-outline-primary mt-2 w-100">
+                                           Ver en Google Maps
+                                       </a>
+                                   </div>`
+                        : "" }
+
+                        ${r.WazeLink ? `<div class="d-flex-center px-4 py-2">
+                                    <a href="${r.WazeLink}" target="_blank" class="btn btn-outline-info mt-2 w-100">
+                                        Ver en Waze Maps
+                                    </a>
+                                </div>`
+                        : ""}
+
+                        ${r.Website ? `<div class="d-flex-center px-4">
+                                    <a href="${r.Website}" target="_blank" class="btn btn-outline-light mt-2 w-100">
+                                        Abrir Web
+                                    </a>
+                                </div>`
+                        : ""}
+
                     </div>
                 </div>
             `;
@@ -194,6 +282,34 @@
             boundsMap([r.Latitude, r.Longitude]);
         }
 
+        function getDayName(day) {
+            const days = ["", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+            return days[day] || "N/A";
+        }
+
+        function formatTime(timeString) {
+            if (!timeString) return "";
+
+            const [hour, minute] = timeString.split(":");
+            let h = parseInt(hour, 10);
+            const period = h >= 12 ? "PM" : "AM";
+            h = (h % 12) || 12; // convierte 0 en 12
+
+            return `${String(h).padStart(2, "0")}:${minute} ${period}`;
+        }
+
+        function toggleMenu(id) {
+            const body = document.getElementById(`menu-${id}`);
+            const arrow = document.getElementById(`arrow-${id}`);
+
+            if (body.style.display === "none") {
+                body.style.display = "block";
+                arrow.textContent = "▲";
+            } else {
+                body.style.display = "none";
+                arrow.textContent = "▼";
+            }
+        }
 
         // --------------------------------------------------
         // bounds map when sidebar is open

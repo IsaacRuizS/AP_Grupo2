@@ -28,5 +28,8 @@ namespace RF.Data
         public virtual DbSet<Restaurant> Restaurants { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<MenuItem> MenuItems { get; set; }
+        public virtual DbSet<Menu> Menus { get; set; }
+        public virtual DbSet<Schedule> Schedules { get; set; }
     }
 }

@@ -1,0 +1,63 @@
+﻿@model RF.Data.Menu
+
+@{
+    ViewBag.Title = "Eliminar Menú";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Eliminar Menú</h2>
+    <a href="@Url.Action("Index", new { id = Model.RestaurantID })" class="btn btn-secondary">
+        <i class="fa-solid fa-arrow-left"></i> Volver
+    </a>
+</div>
+
+<div class="card bg-dark border-secondary">
+    <div class="card-header bg-danger text-white">
+        <h5 class="mb-0">¿Está seguro que desea eliminar este menú?</h5>
+    </div>
+
+    <div class="card-body">
+
+        <div class="alert alert-warning">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            Esta acción no se puede deshacer.
+        </div>
+
+        <dl class="row">
+            <dt class="col-sm-3">Nombre</dt>
+            <dd class="col-sm-9">@Model.Name</dd>
+
+            <dt class="col-sm-3">Descripción</dt>
+            <dd class="col-sm-9">@Model.Description</dd>
+
+            <dt class="col-sm-3">Estado</dt>
+            <dd class="col-sm-9">
+                @if (Model.IsActive == true)
+                {
+                    <span class="badge bg-success">Activo</span>
+                }
+                else
+                {
+                    <span class="badge bg-danger">Inactivo</span>
+                }
+            </dd>
+        </dl>
+    </div>
+</div>
+
+@using (Html.BeginForm("Delete", "Menus", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.MenuID)
+    @Html.HiddenFor(m => m.RestaurantID)
+
+    <div class="mt-4 d-flex gap-3">
+        <button type="submit" class="btn btn-danger">
+            <i class="fa-solid fa-trash"></i> Eliminar Menú
+        </button>
+
+        <a href="@Url.Action("Index", new { id = Model.RestaurantID })" class="btn btn-secondary">
+            <i class="fa-solid fa-times"></i> Cancelar
+        </a>
+    </div>
+}

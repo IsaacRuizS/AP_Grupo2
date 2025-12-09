@@ -1,0 +1,91 @@
+﻿@model IEnumerable<RF.Data.Menu>
+
+@{
+    ViewBag.Title = "Menús";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Menús de @ViewBag.RestaurantName</h2>
+    <a href="@Url.Action("Create", new { restaurantId = ViewBag.RestaurantId })" class="btn btn-primary">
+        <i class="fa-solid fa-plus"></i> Nuevo Menú
+    </a>
+</div>
+
+<div class="card bg-dark border-secondary">
+    <div class="card-body p-0">
+        <table class="table table-dark table-hover mb-0">
+            <thead class="table-secondary">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Estado</th>
+                    <th class="text-center">Items</th>
+                    <th class="text-center">Acciones</th>
+                </tr>
+            </thead>    
+            <tbody>
+                @foreach (var m in Model)
+                {
+                    <tr>
+                        <td>@m.Name</td>
+                        <td>@m.Description</td>
+                        <td>
+                            @if (m.IsActive == true)
+                            {
+                                <span class="badge bg-success">Activo</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">Inactivo</span>
+                            }
+                        </td>
+
+                        <td class="text-center">
+                            <button class="btn btn-info btn-sm" onclick="openMenuItems(@m.MenuID)">
+                                <i class="fa-solid fa-list"></i> Items
+                            </button>
+                        </td>
+
+                        <td class="text-center">
+                            <a href="@Url.Action("Edit", new { id = m.MenuID })" class="btn btn-outline-secondary btn-sm">
+                                <i class="fa-solid fa-edit text-primary"></i>
+                            </a>
+
+                            <a href="@Url.Action("Delete", new { id = m.MenuID })" class="btn btn-outline-secondary btn-sm">
+                                <i class="fa-solid fa-trash text-danger"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!-- MODAL -->
+<div class="modal fade" id="menuItemsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content bg-dark text-light">
+            <div class="modal-header">
+                <h5 class="modal-title">Items del Menú</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="menuItemsContainer">
+                <!-- Loaded dynamically -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <script>
+        function openMenuItems(menuId) {
+            $("#menuItemsContainer").load(`/Menus/LoadMenuItems?menuId=${menuId}`, function () {
+                $("#menuItemsModal").modal("show");
+            });
+        }
+    </script>
+}

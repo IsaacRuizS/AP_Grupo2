@@ -1,0 +1,95 @@
+﻿@model IEnumerable<RF.Data.Schedule>
+
+@{
+    ViewBag.Title = "Horarios";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="mb-3">Horarios</h2>
+    </div>
+    <div>
+        <a href="@Url.Action("Create", "Schedules", new { id = ViewBag.RestaurantId })" class="btn btn-primary">
+            <i class="fa-solid fa-plus"></i> Agregar Horario
+        </a>
+    </div>
+</div>
+
+<div class="card bg-dark border-secondary">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-dark table-hover mb-0">
+                <thead class="table-secondary">
+                    <tr>
+                        <th>Restaurante</th>
+                        <th>Día</th>
+                        <th>Hora Apertura</th>
+                        <th>Hora Cierre</th>
+                        <th class="text-center" style="width: 120px;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <strong>@item.Restaurant.Name</strong>
+                            </td>
+
+                            <td>
+                                @{
+                                    string dia = item.DayOfWeek switch
+                                    {
+                                        1 => "Lunes",
+                                        2 => "Martes",
+                                        3 => "Miércoles",
+                                        4 => "Jueves",
+                                        5 => "Viernes",
+                                        6 => "Sábado",
+                                        7 => "Domingo",
+                                        _ => "N/A"
+                                    };
+                                }
+                                @dia
+                            </td>
+
+
+                            <td>
+                                @item.OpenTime.ToString("hh\\:mm")
+                            </td>
+
+                            <td>
+                                @item.CloseTime.ToString("hh\\:mm")
+                            </td>
+                            <td class="text-center">
+                                <div class="btn-group" role="group">
+
+                                    <!-- Editar -->
+                                    <a href="@Url.Action("Edit", "Schedules", new { id = item.ScheduleID })"
+                                       class="btn btn-sm btn-outline-secondary" title="Editar">
+                                        <i class="fa-solid fa-edit text-primary"></i>
+                                    </a>
+
+                                    <!-- Eliminar -->
+                                    <a href="@Url.Action("Delete", "Schedules", new { id = item.ScheduleID })"
+                                       class="btn btn-sm btn-outline-secondary" title="Eliminar">
+                                        <i class="fa-solid fa-trash text-danger"></i>
+                                    </a>
+
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info mt-3" role="alert">
+        <i class="fa-solid fa-info-circle"></i>
+        No hay horarios registrados en el sistema.
+    </div>
+}

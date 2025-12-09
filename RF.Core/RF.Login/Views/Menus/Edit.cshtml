@@ -1,0 +1,83 @@
+﻿@model RF.Data.Menu
+
+@{
+    ViewBag.Title = "Editar Menú";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Editar Menú</h2>
+    <a href="@Url.Action("Index", new { id = Model.RestaurantID })" class="btn btn-secondary">
+        <i class="fa-solid fa-arrow-left"></i> Volver
+    </a>
+</div>
+
+@using (Html.BeginForm("Edit", "Menus", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(m => m.MenuID)
+    @Html.HiddenFor(m => m.RestaurantID)
+    @Html.HiddenFor(m => m.CreatedAt)
+
+    <div class="card bg-dark border-secondary">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Información del Menú</h5>
+        </div>
+
+        <div class="card-body">
+            @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+            <div class="row">
+
+                <!-- NOMBRE -->
+                <div class="col-md-6 mb-3">
+                    @Html.LabelFor(m => m.Name, "Nombre del Menú", new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.Name, new
+                    {
+                        @class = "form-control",
+                        placeholder = "Ej. Menú Principal"
+                    })
+                    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- ESTADO -->
+                <div class="col-md-6 mb-3">
+                    @Html.LabelFor(m => m.IsActive, "Estado", new { @class = "form-label" })
+                    @Html.DropDownListFor(
+                        m => m.IsActive,
+                        new SelectList(new[] {
+                            new { Value = true, Text = "Activo" },
+                            new { Value = false, Text = "Inactivo" }
+                        }, "Value", "Text", Model.IsActive),
+                        "Seleccione un estado",
+                        new { @class = "form-select" }
+                    )
+                    @Html.ValidationMessageFor(m => m.IsActive, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- DESCRIPCIÓN -->
+                <div class="col-md-12 mb-3">
+                    @Html.LabelFor(m => m.Description, "Descripción", new { @class = "form-label" })
+                    @Html.TextAreaFor(m => m.Description, new
+                    {
+                        @class = "form-control",
+                        rows = 3,
+                        placeholder = "Ej. Menú que incluye todos los platos principales…"
+                    })
+                    @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4 d-flex gap-3">
+        <button type="submit" class="btn btn-success">
+            <i class="fa-solid fa-save"></i> Guardar Cambios
+        </button>
+
+        <a href="@Url.Action("Index", new { id = Model.RestaurantID })" class="btn btn-secondary">
+            <i class="fa-solid fa-times"></i> Cancelar
+        </a>
+    </div>
+}

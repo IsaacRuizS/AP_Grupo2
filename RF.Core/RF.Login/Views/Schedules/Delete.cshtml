@@ -1,0 +1,75 @@
+﻿@model RF.Data.Schedule
+
+@{
+    ViewBag.Title = "Eliminar Horario";
+    int restaurantId = Model.RestaurantID;
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Eliminar Horario</h2>
+    <a href="@Url.Action("Index", new { id = restaurantId })" class="btn btn-secondary">
+        <i class="fa-solid fa-arrow-left"></i> Volver
+    </a>
+</div>
+
+<div class="card bg-dark border-secondary">
+    <div class="card-header bg-danger text-white">
+        <h5 class="mb-0">Confirmar Eliminación</h5>
+    </div>
+
+    <div class="card-body">
+
+        <p class="text-light">¿Estás seguro de que deseas eliminar este horario?</p>
+
+        <div class="mb-3">
+            <strong class="text-info">Día:</strong>
+            <span>@GetDay(Model.DayOfWeek)</span>
+        </div>
+
+        <div class="mb-3">
+            <strong class="text-info">Hora Apertura:</strong>
+            <span>@Model.OpenTime.ToString("hh\\:mm")</span>
+        </div>
+
+        <div class="mb-3">
+            <strong class="text-info">Hora Cierre:</strong>
+            <span>@Model.CloseTime.ToString("hh\\:mm")</span>
+        </div>
+
+        <hr />
+
+        @using (Html.BeginForm("Delete", "Schedules", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.ScheduleID)
+            @Html.HiddenFor(m => m.RestaurantID)
+
+            <div class="d-flex gap-3">
+                <button type="submit" class="btn btn-danger">
+                    <i class="fa-solid fa-trash"></i> Eliminar
+                </button>
+
+                <a href="@Url.Action("Index", new { id = restaurantId })" class="btn btn-secondary">
+                    <i class="fa-solid fa-times"></i> Cancelar
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+@functions {
+    private string GetDay(int day)
+    {
+        switch (day)
+        {
+            case 1: return "Lunes";
+            case 2: return "Martes";
+            case 3: return "Miércoles";
+            case 4: return "Jueves";
+            case 5: return "Viernes";
+            case 6: return "Sábado";
+            case 7: return "Domingo";
+            default: return "N/A";
+        }
+    }
+}

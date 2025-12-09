@@ -4,12 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ab32b1d5aa3e4a8e962e2da0e0e78ca5" Name="Diagram1">
+      <Diagram DiagramId="ab32b1d5aa3e4a8e962e2da0e0e78ca5" Name="Diagram1" ZoomLevel="74">
         <EntityTypeShape EntityType="RestaurantFinderModel.Restaurant" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="RestaurantFinderModel.UserRole" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
         <EntityTypeShape EntityType="RestaurantFinderModel.User" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
         <AssociationConnector Association="RestaurantFinderModel.FK__Restauran__UserI__5812160E" ManuallyRouted="false" />
         <AssociationConnector Association="RestaurantFinderModel.FK__Users__RoleID__52593CB8" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="RestaurantFinderModel.MenuItem" Width="1.5" PointX="10.625" PointY="3.75" />
+        <EntityTypeShape EntityType="RestaurantFinderModel.Menu" Width="1.5" PointX="8.375" PointY="4" />
+        <EntityTypeShape EntityType="RestaurantFinderModel.Schedule" Width="1.5" PointX="8.375" PointY="0.5" />
+        <AssociationConnector Association="RestaurantFinderModel.FK__MenuItems__MenuI__10566F31" />
+        <AssociationConnector Association="RestaurantFinderModel.FK__Menus__Restauran__0A9D95DB" />
+        <AssociationConnector Association="RestaurantFinderModel.FK__Schedules__Resta__04E4BC85" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

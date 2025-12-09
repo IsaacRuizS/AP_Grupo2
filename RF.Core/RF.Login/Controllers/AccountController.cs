@@ -167,7 +167,6 @@ namespace RF.Login.Controllers
             return View();
         }
 
-        //
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
@@ -193,6 +192,9 @@ namespace RF.Login.Controllers
                         newUser.FullName = model.UserName;
                         newUser.RoleID = 2; //rol de restaurante
                         newUser.IsActive = true;
+
+                        newUser.CreatedAt = DateTime.Now;
+                        newUser.UpdatedAt = DateTime.Now;
 
                         UserBusiness.SaveOrUpdate(newUser);
                     }

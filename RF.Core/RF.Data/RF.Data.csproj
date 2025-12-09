@@ -55,10 +55,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Entities\MenuItem.cs" />
     <Compile Include="Entities\Restaurant.cs" />
+    <Compile Include="Entities\Menu.cs" />
+    <Compile Include="Entities\Schedule.cs" />
     <Compile Include="Entities\UserRole.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Menu.cs">
+      <DependentUpon>RestauranFinder.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MenuItem.cs">
+      <DependentUpon>RestauranFinder.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repositories\RepositoryMenuItem.cs" />
     <Compile Include="Repositories\RepositoryRestaurant.cs" />
+    <Compile Include="Repositories\RepositoryMenu.cs" />
+    <Compile Include="Repositories\RepositorySchedule.cs" />
     <Compile Include="Repositories\RepositoryUserRole.cs" />
     <Compile Include="Repositories\RepositoryUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,6 +91,9 @@
       <DependentUpon>RestauranFinder.edmx</DependentUpon>
     </Compile>
     <Compile Include="Restaurant.cs">
+      <DependentUpon>RestauranFinder.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Schedule.cs">
       <DependentUpon>RestauranFinder.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">

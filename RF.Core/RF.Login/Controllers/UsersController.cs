@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using RF.Data;
+using Microsoft.AspNet.Identity;
 
 namespace RF.Login.Controllers
 {
@@ -52,6 +53,13 @@ namespace RF.Login.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Hashear la contraseña antes de guardar
+                if (!string.IsNullOrEmpty(user.PasswordHash))
+                {
+                    var hasher = new PasswordHasher();
+                    user.PasswordHash = hasher.HashPassword(user.PasswordHash);
+                }
+
                 user.CreatedAt = DateTime.Now;
                 try
                 {

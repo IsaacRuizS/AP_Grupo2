@@ -25,12 +25,11 @@ namespace FB.Login.Controllers
             {
                 var userBus = new UserDetailBusiness();
 
-                // 👇 Cambia este correo por el usuario con el que quieres entrar
                 var user = userBus.GetByEmail("admin@demo.com");
 
                 if (user == null)
                 {
-                    return Content("El usuario admin@demo.com no existe. Cámbialo por uno válido.");
+                    return Content("El usuario admin@demo.com no existe.");
                 }
 
                 var claims = new[]
@@ -42,18 +41,13 @@ namespace FB.Login.Controllers
 
                 var identity = new ClaimsIdentity(claims, DefaultAuthenticationTypes.ApplicationCookie);
 
-                // Cerrar cualquier sesión previa
                 AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-
-                // Iniciar sesión “como si hubiera pasado por el login”
                 AuthenticationManager.SignIn(new AuthenticationProperties
                 {
-                    IsPersistent = true   // o false si no quieres que recuerde
+                    IsPersistent = true   
                 }, identity);
 
-                // Enviar al dashboard / página principal
                 return RedirectToAction("Index", "Home");
-                // Si tu pantalla principal es otra, cámbiala aquí
             }
             catch (Exception)
             {

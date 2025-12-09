@@ -103,7 +103,7 @@ namespace FB.Core
         {
             try
             {
-                _repository.DeleteByCountry("Russia");
+                _repository.DeleteByCountry("Russian Federation");
                 _repository.DeleteByCountry("China");
 
                 var items = _repository.GetAll().ToList();
@@ -251,7 +251,7 @@ namespace FB.Core
             if (string.IsNullOrWhiteSpace(address)) return address;
             var s = address.Trim();
 
-            // Remover PO Box, AP#, prefijos numéricos, etc.
+            //Remover simbolos con regex
             s = Regex.Replace(s, @"\bP\.?\s*O\.?\s*\.?\s*Box\s*\d+\s*,\s*\d+\s*,?\s*", "", RegexOptions.IgnoreCase);
             s = Regex.Replace(s, @"\bAP\s*#\s*\d[\d\-]*\b", "", RegexOptions.IgnoreCase);
             s = Regex.Replace(s, @"^\s*\d+(-\d+)?\s+", "", RegexOptions.IgnoreCase);

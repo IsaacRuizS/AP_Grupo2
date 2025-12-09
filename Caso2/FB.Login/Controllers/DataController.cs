@@ -22,7 +22,7 @@ namespace FB.Login.Controllers
             return RedirectToAction("Paso1");
         }
 
-        // Paso1 always available
+        // Paso1 
         public ActionResult Paso1()
         {
             SetStageFlags();
@@ -89,7 +89,6 @@ namespace FB.Login.Controllers
             return View(items);
         }
 
-        // POST: /Data/RunStage - executes the stage transformation and persists changes
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult RunStage(int stage, string returnTo = "Paso1")

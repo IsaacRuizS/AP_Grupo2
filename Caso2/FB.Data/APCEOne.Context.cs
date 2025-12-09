@@ -13,10 +13,10 @@ namespace FB.Data
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class APCEOneEntities1 : DbContext
+    public partial class APCEOneEntities : DbContext
     {
-        public APCEOneEntities1()
-            : base("name=APCEOneEntities1")
+        public APCEOneEntities()
+            : base("name=APCEOneEntities")
         {
         }
     

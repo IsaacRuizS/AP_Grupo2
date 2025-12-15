@@ -13,8 +13,29 @@ namespace RF.Login.Controllers
 
         public ActionResult Index()
         {
-            var restaurants = RestaurantBusiness.GetRestaurants(0);
-            return View(restaurants.ToList());
+            var business = new RestaurantBusiness();
+            var restaurants = business.GetRestaurants(0);
+
+            var activeRestaurants = restaurants.Where(r => r.IsActive == true).ToList();
+
+            foreach (var r in activeRestaurants)
+            {
+                if (r.Menus != null)
+                {
+                    var activeMenus = r.Menus.Where(m => m.IsActive == true).ToList();
+
+                    foreach (var m in activeMenus)
+                    {
+                        if (m.MenuItems != null)
+                        {
+                            m.MenuItems = m.MenuItems.Where(mi => mi.IsActive == true).ToList();
+                        }
+                    }
+                    r.Menus = activeMenus;
+                }
+            }
+
+            return View(activeRestaurants);
         }
 
         public ActionResult About()

@@ -99,6 +99,13 @@ namespace RF.Login.Controllers
                 }
                 else
                 {
+                    // Validar si el usuario está inactivo o nulo (coincide con la vista Index que muestra Inactivo si es null)
+                    if (!user.IsActive.GetValueOrDefault())
+                    {
+                        ModelState.AddModelError("", "Tu cuenta ha sido desactivada. Contacta al administrador.");
+                        return View(model);
+                    }
+
                     identity.AddClaim(new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.Role, "Restaurant"));
                 }
                 

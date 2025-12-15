@@ -186,7 +186,7 @@ namespace RF.Login.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    // await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     try
                     {
                         User newUser = new User();
@@ -206,7 +206,8 @@ namespace RF.Login.Controllers
                         UserBusiness.SaveOrUpdate(newUser);
                     }
                     catch { }
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Login", "Account");
+                    //return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
